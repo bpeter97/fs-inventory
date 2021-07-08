@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Define the Inspection model.
 const InspectionSchema = new Schema({
     sections: [],
-    inspectior: {
+    inspector: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: "User"

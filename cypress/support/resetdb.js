@@ -7,14 +7,16 @@ const Note = require("../../src/server/models/Note");
 const Status = require("../../src/server/models/Status");
 const SubSection = require("../../src/server/models/SubSection");
 const Requirement = require("../../src/server/models/Requirement");
+const Section = require("../../src/server/models/Section");
+const Inspection = require("../../src/server/models/Inspection");
 var { seedUsers } = require("../fixtures/seedUsers");
 var seedSettings = require("../fixtures/seedSettings.json");
 var { seedNotes } = require("../fixtures/seedNotes");
 var { seedStatus } = require("../fixtures/seedStatus");
 var { seedSubSections } = require("../fixtures/seedSubSections");
 const { seedRequirements } = require("../fixtures/seedRequirements");
-const Section = require("../../src/server/models/Section");
 const { seedSections } = require("../fixtures/seedSections");
+const { seedInspections } = require("../fixtures/seedInspections");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -104,6 +106,7 @@ Settings.deleteMany({}).then(() => {
                           seedSections[0].notes.push(notes[0]._id);
                           seedSections[0].requirements.push(requirements[0]._id);
 
+                          // Insert the section
                           Section.insertMany(seedSections, (err, sections) => {
                             if(!sections) {
                               console.error("There was an issue saving the sections.");
@@ -111,8 +114,25 @@ Settings.deleteMany({}).then(() => {
                             }  
                             console.log("The sections have been saved.");
 
-                            console.log("Exiting DB Reset Script");
-                            process.exit();
+                            // Delete inspections
+                            Inspection.deleteMany({}).then(() => {
+
+                              // Prepare inspections
+                              seedInspections[0].inspector = user._id;
+                              seedInspections[0].sections.push(sections[0]._id);
+
+                              // Insert inspections
+                              Inspection.insertMany(seedInspections, (err, inspections) => {
+                                if(!inspections) {
+                                  console.error("There was an issue saving the inspections.");
+                                  return process.exit();
+                                }  
+                                console.log("The inspections have been saved.");
+
+                                console.log("Exiting DB Reset Script");
+                                process.exit();
+                              });
+                            });
                           });
                         });
                       });
