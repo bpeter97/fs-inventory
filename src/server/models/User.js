@@ -41,7 +41,7 @@ const UserSchema = new Schema({
   type: {
     type: String,
     required: true,
-    default: "Employee",
+    default: "User",
   },
   settings: {
     type: Schema.Types.ObjectId,

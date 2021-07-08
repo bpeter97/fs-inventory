@@ -3,8 +3,12 @@ const mongoose = require("mongoose");
 
 const User = require("../../src/server/models/User");
 const Settings = require("../../src/server/models/Settings");
-var { seedUsers } = require("../fixtures/seedUsers.js");
+const Note = require("../../src/server/models/Note");
+const Status = require("../../src/server/models/Status");
+var { seedUsers } = require("../fixtures/seedUsers");
 var seedSettings = require("../fixtures/seedSettings.json");
+var { seedNotes } = require("../fixtures/seedNotes");
+var { seedStatus } = require("../fixtures/seedStatus");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -35,9 +39,26 @@ Settings.deleteMany({}).then(() => {
           );
 
         console.log("The settings and user data have been reset for testing.");
-        console.log("Exiting DB Reset Script");
 
-        process.exit();
+        Note.deleteMany({}).then(() => {
+          Note.insertMany(seedNotes, (err, notes) => {
+            if(!notes)
+              return console.error("There was an issue saving the notes documents.");
+
+            console.log("The notes have been saved.");
+
+            Status.deleteMany({}).then(() => {
+              Status.insertMany(seedStatus, (err, statuses) => {
+                if(!statuses)
+                  return console.error("There was an issue saving the status'");
+
+                console.log("The status' have been saved.");
+                console.log("Exiting DB Reset Script");
+                process.exit();
+              });
+            });
+          });
+        });
       });
     });
   });
