@@ -1,9 +1,9 @@
 var newUser = require("../../fixtures/newUser.json");
 
 describe("GET /users", () => {
-  // beforeEach(() => {
-  //   cy.exec("npm run resetdb");
-  // });
+  beforeEach(() => {
+    cy.exec("npm run resetdb");
+  });
 
   it("should return all users registered in the management system.", () => {
     var login_info = {
