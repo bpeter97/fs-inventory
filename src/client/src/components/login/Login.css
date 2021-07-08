@@ -1,0 +1,27 @@
+#loginBox {
+  min-height: 100vh;
+}
+
+a {
+  color: #0059ff;
+}
+
+a:hover {
+  color: #1f6eff;
+}
+
+.btn-success {
+  background-color: #0059ff;
+  border-color: #0042bd;
+  font-size: 18px;
+}
+
+.btn-success:hover {
+  background-color: #0084ff;
+  border-color: #0084ff;
+  font-size: 18px;
+}
+
+.form-control {
+  border-color: #0059ff;
+}

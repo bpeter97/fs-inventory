@@ -1,0 +1,28 @@
+.breadcrumb {
+  margin-top: auto;
+  background-color: transparent;
+}
+
+#sidebarToggleTop {
+  color: #008800;
+}
+
+button#alertsDropdown {
+  -webkit-writing-mode: horizontal-tb !important;
+  writing-mode: horizontal-tb;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  background-color: transparent;
+  font-size: 25px;
+  border: none;
+  padding: 0px !important;
+}
+
+li.nav-item.dropdown.no-arrow {
+  margin-left: 0.1rem !important;
+  margin-right: 0.1rem !important;
+}
