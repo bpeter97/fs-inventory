@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Define the SubSection model.
 const SubSectionSchema = new Schema({
+    label: {
+        type: Schema.Types.String,
+        required: true
+    },
     status: {
         type: Schema.Types.ObjectId,
         required: true,

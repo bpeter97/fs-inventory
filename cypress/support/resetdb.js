@@ -6,11 +6,13 @@ const Settings = require("../../src/server/models/Settings");
 const Note = require("../../src/server/models/Note");
 const Status = require("../../src/server/models/Status");
 const SubSection = require("../../src/server/models/SubSection");
+const Requirement = require("../../src/server/models/Requirement");
 var { seedUsers } = require("../fixtures/seedUsers");
 var seedSettings = require("../fixtures/seedSettings.json");
 var { seedNotes } = require("../fixtures/seedNotes");
 var { seedStatus } = require("../fixtures/seedStatus");
 var { seedSubSections } = require("../fixtures/seedSubSections");
+const { seedRequirements } = require("../fixtures/seedRequirements");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -81,8 +83,19 @@ Settings.deleteMany({}).then(() => {
                     }
 
                     console.log("The subsections have been saved.");
-                    console.log("Exiting DB Reset Script");
-                    process.exit();
+
+                    Requirement.deleteMany({}).then(() => {
+                      Requirement.insertMany(seedRequirements, (err, requirements) => {
+                        if(!requirements) {
+                          console.error("There was an issue saving the requirements.");
+                          return process.exit();
+                        }  
+                        console.log("The requirements have been saved.");
+  
+                        console.log("Exiting DB Reset Script");
+                        process.exit();
+                      });
+                    });
                   });
                 });
               });
