@@ -13,6 +13,8 @@ var { seedNotes } = require("../fixtures/seedNotes");
 var { seedStatus } = require("../fixtures/seedStatus");
 var { seedSubSections } = require("../fixtures/seedSubSections");
 const { seedRequirements } = require("../fixtures/seedRequirements");
+const Section = require("../../src/server/models/Section");
+const { seedSections } = require("../fixtures/seedSections");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -76,6 +78,7 @@ Settings.deleteMany({}).then(() => {
                   seedSubSections[0].notes.push(notes[1]._id);
                   seedSubSections[0].status = statuses[0]._id;
 
+                  // Insert subsections
                   SubSection.insertMany(seedSubSections, (err, subSections) => {
                     if(!subSections) {
                       console.error("There was an issue saving the subsections.");
@@ -84,6 +87,7 @@ Settings.deleteMany({}).then(() => {
 
                     console.log("The subsections have been saved.");
 
+                    // delete and re-insert requirements
                     Requirement.deleteMany({}).then(() => {
                       Requirement.insertMany(seedRequirements, (err, requirements) => {
                         if(!requirements) {
@@ -91,9 +95,26 @@ Settings.deleteMany({}).then(() => {
                           return process.exit();
                         }  
                         console.log("The requirements have been saved.");
-  
-                        console.log("Exiting DB Reset Script");
-                        process.exit();
+                        
+                        // delete any sections
+                        Section.deleteMany({}).then(() => {
+                          
+                          // prepare new section
+                          seedSections[0].sub_sections.push(subSections[0]._id);
+                          seedSections[0].notes.push(notes[0]._id);
+                          seedSections[0].requirements.push(requirements[0]._id);
+
+                          Section.insertMany(seedSections, (err, sections) => {
+                            if(!sections) {
+                              console.error("There was an issue saving the sections.");
+                              return process.exit();
+                            }  
+                            console.log("The sections have been saved.");
+
+                            console.log("Exiting DB Reset Script");
+                            process.exit();
+                          });
+                        });
                       });
                     });
                   });
