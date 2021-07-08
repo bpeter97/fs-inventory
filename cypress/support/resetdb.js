@@ -9,6 +9,8 @@ const SubSection = require("../../src/server/models/SubSection");
 const Requirement = require("../../src/server/models/Requirement");
 const Section = require("../../src/server/models/Section");
 const Inspection = require("../../src/server/models/Inspection");
+const Job = require("../../src/server/models/Job");
+const Client = require("../../src/server/models/Client");
 var { seedUsers } = require("../fixtures/seedUsers");
 var seedSettings = require("../fixtures/seedSettings.json");
 var { seedNotes } = require("../fixtures/seedNotes");
@@ -17,6 +19,8 @@ var { seedSubSections } = require("../fixtures/seedSubSections");
 const { seedRequirements } = require("../fixtures/seedRequirements");
 const { seedSections } = require("../fixtures/seedSections");
 const { seedInspections } = require("../fixtures/seedInspections");
+const { seedJobs } = require("../fixtures/seedJobs");
+const { seedClients } = require("../fixtures/seedClients");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -129,8 +133,36 @@ Settings.deleteMany({}).then(() => {
                                 }  
                                 console.log("The inspections have been saved.");
 
-                                console.log("Exiting DB Reset Script");
-                                process.exit();
+                                // Delete and re-insert clients.
+                                Client.deleteMany({}).then(() => {
+                                  Client.insertMany(seedClients, (err, clients) => {
+                                    if(!clients) {
+                                      console.error("There was an issue saving the clients.");
+                                      return process.exit();
+                                    }  
+                                    console.log("The clients have been saved.");
+
+                                    // Delete jobs
+                                    Job.deleteMany({}).then(() => {
+
+                                      // Prepare jobs
+                                      seedJobs[0].inspections.push(inspections[0]._id);
+                                      seedJobs[0].client = clients[0]._id;
+
+                                      // Insert Jobs
+                                      Job.insertMany(seedJobs, (err, jobs) => {
+                                        if(!jobs) {
+                                          console.error("There was an issue saving the jobs.");
+                                          return process.exit();
+                                        }  
+                                        console.log("The jobs have been saved.");
+
+                                        console.log("Exiting DB Reset Script");
+                                        process.exit();
+                                      });
+                                    });
+                                  });
+                                });
                               });
                             });
                           });

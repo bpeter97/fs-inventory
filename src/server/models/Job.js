@@ -9,7 +9,7 @@ const JobSchema = new Schema({
         required: true,
         ref: "Client"
     },
-    adress: {
+    address: {
         type: String,
         required: true
     },
