@@ -1,6 +1,6 @@
-# GBR Inventory Management System
+# VHI Job Management System
 
-An inventory management system.
+A job management system.
 
 ## Built using the mern-stack with extras.
 
