@@ -194,7 +194,7 @@ exports.patchStatus = (req, res) => {
 // @access  Private
 exports.deleteStatus = (req, res) => {
     let errors = {};
-    
+
     // Check ID
     if (!ObjectID.isValid(req.params.id)) {
         errors.status = "There was no status found";
