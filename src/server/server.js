@@ -13,6 +13,7 @@ const register = require("../server/routes/api/register");
 const notifications = require("../server/routes/api/notifications");
 const settings = require("../server/routes/api/settings");
 const notes = require("../server/routes/api/notes");
+const status = require("../server/routes/api/status");
 
 // middleware
 const authorization = require("./middleware/authroization");
@@ -43,6 +44,7 @@ app.use("/api/users", authorization, users);
 app.use("/api/notifications", authorization, notifications);
 app.use("/api/settings", authorization, settings);
 app.use("/api/notes", authorization, notes);
+app.use("/api/status", authorization, status);
 
 // Connect to the DB.
 mongoose

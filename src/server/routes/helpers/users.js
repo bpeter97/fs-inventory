@@ -179,8 +179,6 @@ exports.postUser = (req, res) => {
         // Create the new user
         var newUser = new User(body);
 
-        var note_data = {};
-
         // Save the new user to the DB, remember, password is hashed and salted in save() method.
         newUser
           .save()

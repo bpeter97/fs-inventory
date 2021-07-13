@@ -9,6 +9,7 @@ const SubSection = require("../../src/server/models/SubSection");
 const Requirement = require("../../src/server/models/Requirement");
 const Section = require("../../src/server/models/Section");
 const Inspection = require("../../src/server/models/Inspection");
+const Notification = require("../../src/server/models/Notification");
 const Job = require("../../src/server/models/Job");
 const Client = require("../../src/server/models/Client");
 var { seedUsers } = require("../fixtures/seedUsers");
@@ -157,8 +158,11 @@ Settings.deleteMany({}).then(() => {
                                         }  
                                         console.log("The jobs have been saved.");
 
-                                        console.log("Exiting DB Reset Script");
-                                        process.exit();
+                                        Notification.deleteMany({}).then(() => {
+                                          console.log("Notifications have been cleared.");
+                                          console.log("Exiting DB Reset Script");
+                                          process.exit();
+                                        })
                                       });
                                     });
                                   });
