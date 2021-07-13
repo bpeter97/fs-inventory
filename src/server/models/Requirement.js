@@ -5,11 +5,13 @@ const Schema = mongoose.Schema;
 const RequirementSchema = new Schema({
   is_boolean: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   is_number: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   label: {
     type: String,
