@@ -7,7 +7,7 @@ const helpers = require("../helpers/notes");
 // @GET     Retrieves all notes.
 // @POST    Creates a new note.
 // @access  public
-router.route("/").get(helpers.getNotes);
+router.route("/").get(helpers.getNotes).post(helpers.postNote);
 // .post(helpers.postNote);
 
 // @route   api/notes/:id
@@ -15,6 +15,6 @@ router.route("/").get(helpers.getNotes);
 // @PATCH   Updates a specific note.
 // @DELETE  Deletes a specific note.
 // @access  public
-// router.route("/:id").get(helpers.getNote).patch(helpers.updateNote).delete(helpers.deleteNote);
+router.route("/:id").get(helpers.getNote).patch(helpers.patchNote).delete(helpers.deleteNote);;
 
 module.exports = router;
