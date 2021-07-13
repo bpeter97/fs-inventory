@@ -394,7 +394,7 @@ describe("PATCH /clients/:id", () => {
     });
 });
 
-describe("DELETE /status/:id", () => {
+describe("DELETE /clients/:id", () => {
     beforeEach(() => {
         cy.exec("npm run resetdb");
     });
@@ -445,7 +445,7 @@ describe("DELETE /status/:id", () => {
         });
     });
 
-    it("should not delete a status with if not logged in.", () => {
+    it("should not delete a client with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
             password: "thePassword",
@@ -478,7 +478,7 @@ describe("DELETE /status/:id", () => {
         });
     });
 
-    it("should not delete a status with incorrect ID.", () => {
+    it("should not delete a client with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
             password: "thePassword",
