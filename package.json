@@ -32,6 +32,7 @@
     "client": "npm start --prefix ./src/client",
     "resetdb": "node ./cypress/support/resetdb.js",
     "cypress:open": "cypress open --config watchForFileChanges=false",
+    "cypress:record": "cypress run --record --key 89a040d4-9c6c-43b4-87b5-43fb56fb4b87",
     "cy:open": "cypress open --config watchForFileChanges=false --browser chrome",
     "prettier": "prettier --write **/*.{ts,js,css,html}"
   },

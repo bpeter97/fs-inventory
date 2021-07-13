@@ -160,7 +160,7 @@ describe("GET /notes/:id", () => {
         });
     });
 
-    it("should note retrieve a note with an incorrect ID.", () => {
+    it("should not retrieve a note with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
             password: "thePassword",
@@ -197,7 +197,7 @@ describe("GET /notes/:id", () => {
                     expect(response.status).to.equal(400);
                     expect(response.body).to.have.property(
                         "note",
-                        "There was no note found."
+                        "There was no note found"
                     );
                 });
             });

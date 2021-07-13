@@ -14,7 +14,6 @@ router.route("/").get(helpers.getStatus).post(helpers.postStatus);
 // @PATCH   Updates a specific note.
 // @DELETE  Deletes a specific note.
 // @access  public
-router.route("/:id").get(helpers.getStatusById)
-// .patch(helpers.patchNote).delete(helpers.deleteNote);;
+router.route("/:id").get(helpers.getStatusById).patch(helpers.patchStatus).delete(helpers.deleteStatus);
 
 module.exports = router;

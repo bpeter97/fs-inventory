@@ -8,7 +8,6 @@ const helpers = require("../helpers/notes");
 // @POST    Creates a new note.
 // @access  public
 router.route("/").get(helpers.getNotes).post(helpers.postNote);
-// .post(helpers.postNote);
 
 // @route   api/notes/:id
 // @GET     Creates a specific note.

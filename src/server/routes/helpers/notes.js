@@ -53,14 +53,14 @@ exports.getNote = (req, res) => {
     let errors = {};
 
     if (!ObjectID.isValid(req.params.id)) {
-        errors.note = "There was no note found.";
+        errors.note = "There was no note found";
         return res.status(400).json(errors);
     }
 
     Note.findById(req.params.id)
         .then((note) => {
             if (!note) {
-                return res.json({ error: "There was no note found." });
+                return res.json({ error: "There was no note found" });
             }
                 res.send(note);
             })
@@ -79,7 +79,7 @@ exports.patchNote = (req, res) => {
 
     // Check ID
     if (!ObjectID.isValid(req.params.id)) {
-        errors.note = "There was no note found.";
+        errors.note = "There was no note found";
         return res.status(400).json(errors);
     }
 
@@ -90,7 +90,7 @@ exports.patchNote = (req, res) => {
     Note.findByIdAndUpdate(req.params.id, update, { new: true })
     .then((note) => {
       if (!note) {
-        return res.json({ error: "There was no note found." });
+        return res.json({ error: "There was no note found" });
       }
       res.send(note);
     })
@@ -98,20 +98,20 @@ exports.patchNote = (req, res) => {
 };
 
 // @route   DELETE api/Notes/:id
-// @desc    Updates a specific note.
+// @desc    Deletes a specific note.
 // @access  Private
 exports.deleteNote = (req, res) => {
 
     // Check ID
     if (!ObjectID.isValid(req.params.id)) {
-        errors.note = "There was no note found.";
+        errors.note = "There was no note found";
         return res.status(400).json(errors);
     }
 
     Note.findByIdAndRemove(req.params.id)
     .then((note) => {
       if (!note) {
-        errors.note = "There was no note found.";
+        errors.note = "There was no note found";
         res.status(404).json(errors);
       }
 
