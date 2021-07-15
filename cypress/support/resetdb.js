@@ -82,7 +82,7 @@ Settings.deleteMany({}).then(() => {
                 SubSection.deleteMany({}).then(() => {
 
                   // Preparing seedSubSections
-                  seedSubSections[0].notes.push(notes[1]._id);
+                  seedSubSections[0].notes.push({note: notes[1]._id});
                   seedSubSections[0].status = statuses[0]._id;
 
                   // Insert subsections

@@ -184,7 +184,7 @@ describe("POST /subsections", () => {
             expect(response.body).to.have.property("success", true);
 
             var newSubsection = {
-                label: "The New subsection",
+                label: null,
                 status: null,
                 notes: [],
                 images: []
@@ -343,7 +343,7 @@ describe("PATCH /subsections/:id", () => {
                 
                 var updateSubsection = {
                     _id: subsections[0]._id,
-                    label: "The New subsection",
+                    label: null,
                     status: subsections[0].status._id,
                     notes: [],
                     images: []

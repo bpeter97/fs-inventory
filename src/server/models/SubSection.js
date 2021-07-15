@@ -9,7 +9,7 @@ const SubSectionSchema = new Schema({
     },
     status: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: "Status"
     },
     notes: [

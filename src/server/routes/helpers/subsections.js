@@ -6,7 +6,6 @@ const { ObjectID } = require("mongodb");
 const SubSection = require("../../models/SubSection");
 const Note = require("../../models/Note");
 const Status = require("../../models/Status");
-const Status = require("../../models/Status");
 const Image = require("../../models/Image");
 const validateSubsectionInput = require("../validation/subsections");
 
@@ -38,7 +37,7 @@ exports.getSubsection = (req, res) => {
         return res.status(400).json(errors);
     }
 
-    Subsection.findById(req.params.id)
+    SubSection.findById(req.params.id)
         .populate({ path: "status", model: Status })
         .populate({ path: "notes.note", model: Note })
         .populate({ path: "images.image", model: Image })
@@ -91,9 +90,6 @@ exports.postSubsection = (req, res) => {
     // Save the new SubSection to the DB, lastly return the SubSection.
     newSubsection
         .save()
-        .populate({ path: "status", model: Status })
-        .populate({ path: "notes.note", model: Note })
-        .populate({ path: "images.image", model: Image })
         .then((subsection) => {
             
             if(subsection) {
@@ -123,6 +119,9 @@ exports.postSubsection = (req, res) => {
                         .catch((err) => console.log(err));
                     });
             }
+            subsection.populate({ path: "status", model: Status }).execPopulate();
+            subsection.populate({ path: "notes.note", model: Note }).execPopulate();
+            subsection.populate({ path: "images.image", model: Image }).execPopulate();
             res.send(subsection);
         })
         .catch(e => res.status(400).json(e));
@@ -170,9 +169,6 @@ exports.patchSubsection = (req, res) => {
 
     // Save the new SubSection to the DB, lastly return the SubSection.
     SubSection.findByIdAndUpdate(req.params.id, update, { new: true })
-        .populate({ path: "status", model: Status })
-        .populate({ path: "notes.note", model: Note })
-        .populate({ path: "images.image", model: Image })
         .then((subsection) => {
             if(!subsection) {
                 return res.json({ error: "There was no subsection found" });
@@ -201,6 +197,9 @@ exports.patchSubsection = (req, res) => {
                         })
                         .catch((err) => console.log(err));
                     });
+                subsection.populate({ path: "status", model: Status }).execPopulate();
+                subsection.populate({ path: "notes.note", model: Note }).execPopulate();
+                subsection.populate({ path: "images.image", model: Image }).execPopulate();
                 res.send(subsection);
             }
         })
