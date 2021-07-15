@@ -31,7 +31,7 @@ module.exports = function validateRequirementInput(data) {
 
     // if boolean and number is false, then value character can't be empty.
     if(!data.is_boolean && !data.is_number) {
-        if(validate.isEmpty(data.value_character)) {
+        if(validator.isEmpty(data.value_character)) {
             errors.value = "The value for the requirement is missing";
         }
     }
