@@ -12,7 +12,14 @@ const SubSectionSchema = new Schema({
         required: true,
         ref: "Status"
     },
-    notes: [],
+    notes: [
+        {
+            note: {
+                type: Schema.Types.ObjectId,
+                ref: "Note"
+            }
+        }
+    ],
     images: [],
 });
 
