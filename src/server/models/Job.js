@@ -3,7 +3,12 @@ const Schema = mongoose.Schema;
 
 // Define the Job model.
 const JobSchema = new Schema({
-    inspections: [],
+    inspections: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Inspection"
+        }
+    ],
     client: {
         type: Schema.Types.ObjectId,
         required: true,
