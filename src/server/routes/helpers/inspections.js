@@ -36,6 +36,9 @@ exports.getInspections = (req, res) => {
             }, {
                 path: "requirements",
                 model: Requirement 
+            }, {
+                path: "notes",
+                model: Note 
             }]
         })
         .populate({ 
@@ -81,6 +84,9 @@ exports.getInspection = (req, res) => {
             }, {
                 path: "requirements",
                 model: Requirement 
+            }, {
+                path: "notes",
+                model: Note 
             }]
         })
         .populate({ 
@@ -178,6 +184,10 @@ exports.postInspection = (req, res) => {
                 {
                     path: "requirements",
                     model: Requirement
+                },
+                {
+                    path: "notes",
+                    model: Note
                 }]
             }).execPopulate();
             inspection.populate({ path: "inspector", model: User }).execPopulate();
@@ -270,6 +280,10 @@ exports.patchInspection = (req, res) => {
                     {
                         path: "requirements",
                         model: Requirement
+                    },
+                    {
+                        path: "notes",
+                        model: Note
                     }]
                 }).execPopulate();
                 inspection.populate({ path: "inspector", model: User }).execPopulate();
