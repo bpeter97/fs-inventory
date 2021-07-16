@@ -3,7 +3,7 @@ const { ObjectID } = require("mongodb");
 var seedSections = [
     {
         _id: new ObjectID(),
-        label: "SubSection Label",
+        label: "Section Label",
         sub_sections: [],
         notes: [],
         requirements: []
