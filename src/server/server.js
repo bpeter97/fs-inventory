@@ -18,6 +18,7 @@ const clients = require("../server/routes/api/clients");
 const requirements = require("../server/routes/api/requirements");
 const subsections = require("../server/routes/api/subsections");
 const sections = require("../server/routes/api/sections");
+const inspections = require("../server/routes/api/inspections");
 
 // middleware
 const authorization = require("./middleware/authroization");
@@ -53,6 +54,7 @@ app.use("/api/clients", authorization, clients);
 app.use("/api/requirements", authorization, requirements);
 app.use("/api/subsections", authorization, subsections);
 app.use("/api/sections", authorization, sections);
+app.use("/api/inspections", authorization, inspections);
 
 // Connect to the DB.
 mongoose
