@@ -7,9 +7,24 @@ const SectionSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    sub_sections: [],
-    notes: [],
-    requirements: [],
+    sub_sections: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "SubSection"
+        }
+    ],
+    notes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Note"
+        }
+    ],
+    requirements: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Requirement"
+        }
+    ],
 });
 
 // Export the Section model.

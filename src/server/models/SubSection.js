@@ -14,14 +14,12 @@ const SubSectionSchema = new Schema({
     },
     notes: [
         {
-            note: {
-                type: Schema.Types.ObjectId,
-                ref: "Note"
-            }
+            type: Schema.Types.ObjectId,
+            ref: "Note"
         }
     ],
     images: [],
 });
 
 // Export the SubSection model.
-module.exports = SubSection = mongoose.model("subsection",SubSectionSchema);
+module.exports = SubSection = mongoose.model("subsection", SubSectionSchema);

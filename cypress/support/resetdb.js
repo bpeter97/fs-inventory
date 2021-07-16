@@ -82,7 +82,7 @@ Settings.deleteMany({}).then(() => {
                 SubSection.deleteMany({}).then(() => {
 
                   // Preparing seedSubSections
-                  seedSubSections[0].notes.push({note: notes[1]._id});
+                  seedSubSections[0].notes.push(notes[1]._id);
                   seedSubSections[0].status = statuses[0]._id;
 
                   // Insert subsections
@@ -108,7 +108,7 @@ Settings.deleteMany({}).then(() => {
                           
                           // prepare new section
                           seedSections[0].sub_sections.push(subSections[0]._id);
-                          seedSections[0].notes.push(notes[0]._id);
+                          seedSections[0].notes.push(notes[1]._id);
                           seedSections[0].requirements.push(requirements[0]._id);
 
                           // Insert the section

@@ -240,13 +240,8 @@ describe("PATCH /subsections/:id", () => {
 
                 let subsections = response.body;
 
-                var updateSubsection = {
-                    _id: subsections[0]._id,
-                    label: "The New subsection",
-                    status: subsections[0].status._id,
-                    notes: [],
-                    images: []
-                }
+                var updateSubsection = subsections[0];
+                updateSubsection.label = "The Updated Subsection";
 
                 let newRequest = {
                     method: "PATCH",

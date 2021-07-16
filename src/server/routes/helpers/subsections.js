@@ -15,8 +15,8 @@ const validateSubsectionInput = require("../validation/subsections");
 exports.getSubsections = (req, res) => {
     SubSection.find({})
         .populate({ path: "status", model: Status })
-        .populate({ path: "notes.note", model: Note })
-        .populate({ path: "images.image", model: Image })
+        .populate({ path: "notes", model: Note })
+        .populate({ path: "images", model: Image })
         .then((subsections) => {
             if(!subsections) {
                 return res.json({ error: "No subsections found" });
@@ -39,8 +39,8 @@ exports.getSubsection = (req, res) => {
 
     SubSection.findById(req.params.id)
         .populate({ path: "status", model: Status })
-        .populate({ path: "notes.note", model: Note })
-        .populate({ path: "images.image", model: Image })
+        .populate({ path: "notes", model: Note })
+        .populate({ path: "images", model: Image })
         .then((subsection) => {
             if (!subsection) {
                 return res.json({ error: "There was no subsection found" });
@@ -66,21 +66,20 @@ exports.postSubsection = (req, res) => {
         "status"
     ]);
 
+    body.notes = [];
+    body.images = [];
+
     // If there are notes, add them to the body.
     if (req.body.notes !== undefined) {
         req.body.notes.forEach((note) => {
-            body.notes.push({
-                note: note.note
-            });
+            body.notes.push(note);
         });
     };
 
     // If there are images, add them to the body.
     if (req.body.images !== undefined) {
         req.body.images.forEach((image) => {
-            body.images.push({
-                image: image.image
-            });
+            body.images.push(image);
         });
     };
 
@@ -120,8 +119,8 @@ exports.postSubsection = (req, res) => {
                     });
             }
             subsection.populate({ path: "status", model: Status }).execPopulate();
-            subsection.populate({ path: "notes.note", model: Note }).execPopulate();
-            subsection.populate({ path: "images.image", model: Image }).execPopulate();
+            subsection.populate({ path: "notes", model: Note }).execPopulate();
+            subsection.populate({ path: "images", model: Image }).execPopulate();
             res.send(subsection);
         })
         .catch(e => res.status(400).json(e));
@@ -149,21 +148,20 @@ exports.patchSubsection = (req, res) => {
         "status"
     ]);
 
+    update.notes = [];
+    update.images = [];
+
     // If there are notes, add them to the body.
     if (req.body.notes !== undefined) {
         req.body.notes.forEach((note) => {
-            body.notes.push({
-                note: note.note
-            });
+            update.notes.push(note);
         });
     };
 
     // If there are images, add them to the body.
     if (req.body.images !== undefined) {
         req.body.images.forEach((image) => {
-            body.images.push({
-                image: image.image
-            });
+            update.images.push(image);
         });
     };
 
@@ -198,8 +196,8 @@ exports.patchSubsection = (req, res) => {
                         .catch((err) => console.log(err));
                     });
                 subsection.populate({ path: "status", model: Status }).execPopulate();
-                subsection.populate({ path: "notes.note", model: Note }).execPopulate();
-                subsection.populate({ path: "images.image", model: Image }).execPopulate();
+                subsection.populate({ path: "notes", model: Note }).execPopulate();
+                subsection.populate({ path: "images", model: Image }).execPopulate();
                 res.send(subsection);
             }
         })

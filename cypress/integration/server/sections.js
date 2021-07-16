@@ -23,8 +23,8 @@ describe("GET /sections", () => {
             cy.request(request).then((response) => {
                 expect(response.body.length).to.not.equal(0);
                 expect(response.body.length).to.equal(1);
-                expect(response.body.sub_section[0].sub_section.label).to.equal("SubSection Label");
-                expect(response.body.requirement[0].requirement.label).to.equal("Section Requirement");
+                expect(response.body[0].sub_sections[0].label).to.equal("SubSection Label");
+                expect(response.body[0].requirements[0].label).to.equal("Section Requirement");
             });
         });
     });
@@ -79,8 +79,8 @@ describe("GET /sections/:id", () => {
 
                 cy.request(newRequest).then((response) => {
                     expect(response.body).to.have.property('label', sections[0].label);
-                    expect(response.body.sub_section[0].sub_section.label).to.equal("SubSection Label");
-                    expect(response.body.requirement[0].requirement.label).to.equal("Section Requirement");
+                    expect(response.body.sub_sections[0].label).to.equal("SubSection Label");
+                    expect(response.body.requirements[0].label).to.equal("Section Requirement");
                 });
             });
         });
