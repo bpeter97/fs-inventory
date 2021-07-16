@@ -3,10 +3,14 @@ const Schema = mongoose.Schema;
 
 // Define the Inspection model.
 const InspectionSchema = new Schema({
-    sections: [],
+    sections: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Section"
+        }
+    ],
     inspector: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "User"
     },
     type: {
@@ -14,16 +18,13 @@ const InspectionSchema = new Schema({
         required: true
     },
     num_of_stories: {
-        type: Number,
-        required: true
+        type: Number
     },
     year_built: {
-        type: Number,
-        required: false
+        type: Number
     },
     people_at_inspection: {
-        type: String,
-        required: true
+        type: String
     },
     date_of_inspection: {
         type: Date,

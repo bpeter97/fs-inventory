@@ -100,7 +100,7 @@ describe("GET /inspections/:id", () => {
 
             var request = {
                 method: "GET",
-                url: "api/isnpections",
+                url: "api/inspections",
                 headers: {
                     authorization: auth,
                 },
@@ -159,7 +159,7 @@ describe("POST /inspections", () => {
 
             var request = {
                 method: "POST",
-                url: "api/sections",
+                url: "api/inspections",
                 headers: {
                     authorization: response.body.token,
                 },
@@ -343,6 +343,7 @@ describe("PATCH /inspections/:id", () => {
                 
                 var update = inspections[0];
                 update.type = null;
+                console.log(update);
 
                 let newRequest = {
                     method: "PATCH",
