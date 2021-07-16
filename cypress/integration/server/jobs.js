@@ -83,7 +83,7 @@ describe("GET /jobs/:id", () => {
                     expect(response.body.address).to.equal("1733 S. Casablanca St");
                     expect(response.body.client.full_name).to.equal("Joe Shmoe");
                     expect(response.body.inspections.length).to.equal(1);
-                    expect(response.bod.inspections[0].type).to.equal("House");
+                    expect(response.body.inspections[0].type).to.equal("House");
                 });
             });
         });

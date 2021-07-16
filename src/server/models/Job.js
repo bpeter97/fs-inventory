@@ -11,24 +11,19 @@ const JobSchema = new Schema({
     ],
     client: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "Client"
     },
     address: {
-        type: String,
-        required: true
+        type: String
     },
     city: {
-        type: String,
-        required: true
+        type: String
     },
     state: {
-        type: String,
-        required: true
+        type: String
     },
     zipcode: {
-        type: String,
-        required: true
+        type: String
     },
     date_created: {
         type: Date,
