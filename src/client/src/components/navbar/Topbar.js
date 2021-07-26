@@ -46,7 +46,7 @@ class Topbar extends React.Component {
           <button
             id="sidebarToggleTop"
             onClick={this.toggleSidebar}
-            className="btn btn-link d-md-none rounded-circle mr-3"
+            className="btn btn-link rounded-circle mr-3"
           >
             <i className="fa fa-bars"></i>
           </button>
@@ -109,7 +109,7 @@ class Topbar extends React.Component {
                   })}
                   {/* eslint-disable-next-line */}
                   <a
-                    className="dropdown-item text-center small gbr-green"
+                    className="dropdown-item text-center small"
                     href="/notifications"
                   >
                     Show All Notifications
@@ -131,7 +131,7 @@ class Topbar extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span className="mr-2 d-none d-lg-inline gbr-green">
+                <span className="mr-2 d-none d-lg-inline">
                   <strong>
                     {user.first_name} {user.last_name}{" "}
                     {user.suffix ? user.suffix + "." : ""}

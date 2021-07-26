@@ -3,25 +3,25 @@
 }
 
 a {
-  color: #0059ff;
+  color: #006EB9;
 }
 
 a:hover {
-  color: #1f6eff;
+  color: #005c99;
 }
 
 .btn-success {
-  background-color: #0059ff;
-  border-color: #0042bd;
+  background-color: #006EB9;
+  border-color: #005c99;
   font-size: 18px;
 }
 
 .btn-success:hover {
-  background-color: #0084ff;
-  border-color: #0084ff;
+  background-color: #007fd4;
+  border-color: #0069af;
   font-size: 18px;
 }
 
 .form-control {
-  border-color: #0059ff;
+  border-color: #582E91;
 }
