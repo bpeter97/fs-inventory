@@ -8,15 +8,15 @@ import Spinner from "./../common/Spinner";
 import Table from "./../common/Table";
 import Alert from "./../common/Alert";
 
-// import { getProducts } from "./../../redux/actions/productActions";
+import { getJobs } from "./../../redux/actions/jobsActions";
 
 class Home extends React.Component {
   componentDidMount() {
-    // this.props.getProducts();
+    this.props.getJobs();
   }
 
   render() {
-    // const { products } = this.props.products;
+    const { jobs } = this.props.jobs;
 
     var crumbs = [
       {
@@ -62,6 +62,8 @@ class Home extends React.Component {
     let below_limits = 0;
     let alerts = [];
 
+    var total_jobs = jobs.length;
+
     // products.forEach((product) => {
     //   total_products += product.quantity;
 
@@ -104,15 +106,15 @@ class Home extends React.Component {
             <div className="row">
               {/* <!-- Earnings (Monthly) Card Example --> */}
               <div className="col-xl-3 col-md-6 mb-4">
-                <div className="card border-left-success shadow h-100 py-2">
+                <div className="card border-left-purple shadow h-100 py-2">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2">
-                        <div className="text-xs font-weight-bold gbr-green text-uppercase mb-1">
-                          Total Products
+                        <div className="text-xs font-weight-bold text-uppercase mb-1">
+                          Total Jobs
                         </div>
                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                          {total_products}
+                          {total_jobs}
                         </div>
                       </div>
                       <div className="col-auto">
@@ -125,7 +127,7 @@ class Home extends React.Component {
 
               {/* <!-- Earnings (Annual) Card Example --> */}
               <div className="col-xl-3 col-md-6 mb-4">
-                <div className="card border-left-success shadow h-100 py-2">
+                <div className="card border-left-purple shadow h-100 py-2">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
                       {
@@ -195,30 +197,30 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-12">
+            {/* <div className="row"> */}
+              {/* <div className="col-12"> */}
                 {/* <!-- DataTales Example --> */}
-                <div className="card shadow mb-4">
-                  <div className="card-header py-3">
-                    <h4 className="m-0 font-weight-bold gbr-green text-center">
-                      Inventory
-                    </h4>
-                  </div>
-                  <div className="card-body text-center">
-                    <div class="table-responsive">
+                {/* <div className="card shadow mb-4"> */}
+                  {/* <div className="card-header py-3"> */}
+                    {/* <h4 className="m-0 font-weight-bold gbr-green text-center"> */}
+                      {/* Inventory */}
+                    {/* </h4> */}
+                  {/* </div> */}
+                  {/* <div className="card-body text-center"> */}
+                    {/* <div class="table-responsive"> */}
                       {/* Below should be this.props.item.loading */}
-                    {false ? (
-                      <Spinner />
-                    ) : (
-                      <div className="table-responsive">
-                        <Table columns={columns} data={products} />
-                      </div>
-                    )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    {/* {false ? ( */}
+                      {/* <Spinner /> */}
+                    {/* ) : ( */}
+                      {/* <div className="table-responsive"> */}
+                        {/* <Table columns={columns} data={products} /> */}
+                      {/* </div> */}
+                    {/* )} */}
+                    {/* </div> */}
+                  {/* </div> */}
+                {/* </div> */}
+              {/* </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
@@ -227,8 +229,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  products: state.products,
+  jobs: state.jobs,
 });
 
-// export default connect(mapStateToProps, { getProducts })(Home);
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, { getJobs })(Home);

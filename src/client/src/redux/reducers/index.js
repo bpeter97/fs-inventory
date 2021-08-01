@@ -6,6 +6,7 @@ import notificationReducer from "./notificationReducer";
 import errorReducer from "./errorReducer";
 import settingsReducer from "./settingsReducer";
 import userReducer from "./userReducer";
+import jobsReducer from "./jobsReducer";
 
 export default (history) =>
   combineReducers({
@@ -15,4 +16,5 @@ export default (history) =>
     settings: settingsReducer,
     notifications: notificationReducer,
     users: userReducer,
+    jobs: jobsReducer,
   });
