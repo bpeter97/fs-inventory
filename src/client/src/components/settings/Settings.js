@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./Settings.css";
 
 import Breadcrumb from "./../common/Breadcrumb";
+import Alert from "./../common/Alert";
 
 import {
   updateSettings,
@@ -60,6 +61,8 @@ class Settings extends React.Component {
 
   render() {
     let checked;
+    console.log(this.props.success);
+    var success_alert = this.props.success;
     
     if (this.state.notifications === true) {
       checked = true;
@@ -94,8 +97,9 @@ class Settings extends React.Component {
                     </h4>
                   </div>
                   <div className="card-body text-center">
+                    { success_alert ? <Alert type="success" message={success_alert} /> : ""} 
                     <form onSubmit={this.onSubmit}>
-                      <div className="d-flex">
+                      <div className="d-flex pt-3">
                         <div className="col">
                           <span className="">
                             Notifications
@@ -142,6 +146,7 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   user: state.user,
   settings: state.settings.settings,
+  success: state.settings.success
 });
 
 export default connect(mapStateToProps, { updateSettings, getSettings })(
