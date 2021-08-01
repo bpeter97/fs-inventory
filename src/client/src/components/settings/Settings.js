@@ -89,7 +89,7 @@ class Settings extends React.Component {
                 {/* <!-- DataTales Example --> */}
                 <div className="card shadow mb-4">
                   <div className="card-header py-3">
-                    <h4 className="m-0 font-weight-bold gbr-green text-center">
+                    <h4 className="m-0 font-weight-bold vhi-purple text-center">
                       Settings
                     </h4>
                   </div>

@@ -10443,6 +10443,14 @@ a:focus {
   color: #008800 !important;
 }
 
+.vhi-purple {
+  color: #582E91 !important;
+}
+
+.vhi-blue {
+  color: #006EB9 !important;
+}
+
 .text-gray-100 {
   color: #f8f9fc !important;
 }
@@ -10683,8 +10691,8 @@ a:focus {
 }
 
 .topbar .dropdown-list .dropdown-header {
-  background-color: #008800;
-  border: 1px solid #006400;
+  background-color: #582E91;
+  border: 1px solid #006E91;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #fff;

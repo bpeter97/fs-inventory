@@ -10,7 +10,7 @@ const Notification = ({ description, date, user }) => {
           </div>
         </div>
         <div>
-          <div className="small gbr-green">
+          <div className="small">
             {date}
             {date.toLocaleDateString}
           </div>
