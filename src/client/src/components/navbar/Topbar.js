@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./Topbar.css";
 
 // import { getProducts } from "../../redux/actions/productActions"
@@ -32,6 +33,18 @@ class Topbar extends React.Component {
     document.getElementById("accordionSidebar").classList.toggle("toggled");
   };
 
+  adminOption = () => {
+    return (
+    <div>
+      <a className="dropdown-item" href="/admin">
+      <i className="fas fa-unlock-alt mr-2 text-gray-400"></i>
+        Admin
+      </a>
+      <div className="dropdown-divider"></div>
+    </div>
+    );
+  }
+
   render() {
     const notifications = this.props.notifications.notifications.filter((e) => {
       return e.read === false;
@@ -51,7 +64,7 @@ class Topbar extends React.Component {
             <i className="fa fa-bars"></i>
           </button>
           <ol className="breadcrumb mb-4 mr-auto" id="topNavBreadCrumb">
-            <li className="breadcrumb-item title">Inventory Management</li>
+            <li className="breadcrumb-item title">VHI Job Management</li>
           </ol>
 
           {/* <!-- Topbar Navbar --> */}
@@ -149,6 +162,7 @@ class Topbar extends React.Component {
                   Settings
                 </a>
                 <div className="dropdown-divider"></div>
+                {user.type == 'Admin' ? this.adminOption() : ""}
                 <button
                   className="dropdown-item"
                   data-toggle="modal"
