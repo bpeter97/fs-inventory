@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import store from "../redux/store";
 import { Provider } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Router } from "react-router-dom";
 // import PrivateRoute from "./../components/common/PrivateRoute"
-import { ConnectedRouter as Router } from "connected-react-router";
+// import { ConnectedRouter as Router } from "connected-react-router";
 import PrivateRoute from "./../components/common/PrivateRoute";
 
 import jwt_decode from "jwt-decode";
@@ -14,6 +14,7 @@ import Sidebar from "../components/navbar/Sidebar";
 import Topbar from "../components/navbar/Topbar";
 import Footer from "../components/footer/Footer";
 import Home from "../components/home/Home";
+import Admin from "../components/admin/Admin";
 import Login from "../components/login/Login";
 import Register from "../components/registration/Register";
 import NotFound from "../components/notfound/NotFound";
@@ -59,6 +60,7 @@ class App extends Component {
                   component={Notifications}
                 />
                 <PrivateRoute exact path="/settings" component={Settings} />
+                <PrivateRoute exact path="/admin" component={Admin} />
                 <PrivateRoute exact path="/users" component={Users} />
                 <PrivateRoute exact path="/users/create" component={CreateUser} />
                 <Route component={NotFound} />

@@ -1,10 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Sidebar.css";
 
 class Sidebar extends React.Component {
+
+  adminOption = () => {
+    return (
+    <div>
+      {/* <!-- Divider --> */}
+      <hr className="sidebar-divider my-3" />
+      <li className="nav-item">
+      <a className="nav-link" href="/admin">
+        <i className="fas fa-unlock-alt mr-2"></i>
+          Admin
+      </a>
+      </li>
+    </div>
+    );
+  }
+
   render() {
+    const { user } = this.props.auth;
+
     return (
       <ul
         className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
@@ -143,8 +162,16 @@ class Sidebar extends React.Component {
             </div>
           </div>
         </li>
+      
+        {user.type === 'Admin' ? this.adminOption() : ""}
+        
       </ul>
     );
   }
 }
-export default Sidebar;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Sidebar);

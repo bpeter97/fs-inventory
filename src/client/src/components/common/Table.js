@@ -10,7 +10,7 @@ function DefaultColumnFilter({
   return (
     <input
       type="text"
-      class="form-control mt-3"
+      className="form-control mt-3"
       value={filterValue || ''}
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely

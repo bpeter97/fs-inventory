@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./Topbar.css";
 
 // import { getProducts } from "../../redux/actions/productActions"
@@ -162,7 +161,7 @@ class Topbar extends React.Component {
                   Settings
                 </a>
                 <div className="dropdown-divider"></div>
-                {user.type == 'Admin' ? this.adminOption() : ""}
+                {user.type === 'Admin' ? this.adminOption() : ""}
                 <button
                   className="dropdown-item"
                   data-toggle="modal"
