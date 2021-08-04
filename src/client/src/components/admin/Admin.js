@@ -7,11 +7,11 @@ import "./Admin.css";
 import Breadcrumb from "../common/Breadcrumb";
 import Spinner from "../common/Spinner";
 import Table from "../common/Table";
-import Alert from "../common/Alert";
 import CreateStatusForm from "../status/CreateStatusForm";
 
 import { getJobs } from "../../redux/actions/jobsActions";
 import { getStatuses } from "../../redux/actions/statusActions";
+import { getSubSections } from "../../redux/actions/subSectionActions";
 
 class Admin extends React.Component {
   constructor(props) {
@@ -29,6 +29,7 @@ class Admin extends React.Component {
   componentDidMount() {
     this.props.getJobs();
     this.props.getStatuses();
+    this.props.getSubSections();
   }
 
   render() {
@@ -186,16 +187,25 @@ class Admin extends React.Component {
                 <div className="card shadow mb-4">
                   <div className="card-header py-3">
                     <h4 className="m-0 font-weight-bold vhi-blue text-center">
-                      Dashboard
+                      System Configuration
                     </h4>
                   </div>
                   <div className="card-body text-center">
                     <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                       <li className="nav-item" role="presentation">
-                        <a className="nav-link active" href="#pills-home" data-toggle="tab" role="tab">Home</a>
+                        <a className="nav-link active" href="#pills-profile" data-toggle="tab" role="tab">Jobs</a>
                       </li>
                       <li className="nav-item" role="presentation">
-                        <a className="nav-link" href="#pills-profile" data-toggle="tab" role="tab">Profile</a>
+                        <a className="nav-link" href="#pills-profile" data-toggle="tab" role="tab">Inspections</a>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <a className="nav-link" href="#pills-profile" data-toggle="tab" role="tab">Sections</a>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <a className="nav-link" href="#pills-profile" data-toggle="tab" role="tab">Section Requirements</a>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <a className="nav-link" href="#pills-profile" data-toggle="tab" role="tab">Sub Sections</a>
                       </li>
                       <li className="nav-item" role="presentation">
                         <a className="nav-link" href="#pills-status" data-toggle="tab" role="tab">Status</a>
@@ -222,7 +232,7 @@ class Admin extends React.Component {
                           Create Status
                         </Button>
                         </div>
-                        
+
                         <Modal show={this.state.createStatusModal} dialogClassName="modal-lg">
                           <Modal.Header closeButton onClick={() => this.handleCreateStatusModal()}>
                             <Modal.Title>Create a Status</Modal.Title>
@@ -230,14 +240,6 @@ class Admin extends React.Component {
                           <Modal.Body>
                             <CreateStatusForm history={this.props.history} />
                           </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={() => this.handleCreateStatusModal()}>
-                                Close
-                            </Button>
-                            <Button variant="primary" onClick={() => this.handleCreateStatusModal()}>
-                                Save Changes
-                            </Button>
-                          </Modal.Footer>
                         </Modal>
                         {/* <button type="button" className="btn btn-primary mb-3" onClick={this.handleCreateStatusModal()}>Create Status</button> */}
                       </div>
@@ -269,4 +271,4 @@ const mapStateToProps = (state) => ({
   status: state.status,
 });
 
-export default connect(mapStateToProps, { getJobs, getStatuses })(Admin);
+export default connect(mapStateToProps, { getJobs, getStatuses, getSubSections })(Admin);
