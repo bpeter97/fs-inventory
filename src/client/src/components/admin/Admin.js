@@ -12,6 +12,7 @@ import CreateStatusForm from "../status/CreateStatusForm";
 import { getJobs } from "../../redux/actions/jobsActions";
 import { getStatuses } from "../../redux/actions/statusActions";
 import { getSubSections } from "../../redux/actions/subSectionActions";
+import { getInspections } from "../../redux/actions/inspectionActions";
 
 class Admin extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class Admin extends React.Component {
     this.props.getJobs();
     this.props.getStatuses();
     this.props.getSubSections();
+    this.props.getInspections();
   }
 
   render() {
@@ -271,4 +273,4 @@ const mapStateToProps = (state) => ({
   status: state.status,
 });
 
-export default connect(mapStateToProps, { getJobs, getStatuses, getSubSections })(Admin);
+export default connect(mapStateToProps, { getJobs, getStatuses, getSubSections, getInspections })(Admin);
