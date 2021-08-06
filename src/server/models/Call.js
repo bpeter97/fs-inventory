@@ -13,6 +13,9 @@ const CallSchema = new Schema({
     client_name: {
         type: String
     },
+    phone_number: {
+        type: String
+    },
     address: {
         type: String
     },

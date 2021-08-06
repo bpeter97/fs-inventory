@@ -49,6 +49,8 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
   const {
     getTableProps,
     getTableBodyProps,
+    getHeaderProps,
+    getCellProps,
     headerGroups,
     prepareRow,
     page, // Instead of using 'rows', we'll use page,

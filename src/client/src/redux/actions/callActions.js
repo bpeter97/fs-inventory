@@ -14,9 +14,15 @@ export const getCalls = (id) => (dispatch) => {
   axios
     .get(`/api/calls`)
     .then((res) => {
+      let calls = res.data.map((element) => {
+        return {
+          ...element,
+          full_address: element.address + ', ' + element.state + ', ' + element.zipcode
+        }
+      });
       dispatch({
         type: GET_CALLS,
-        payload: res.data,
+        payload: calls,
       });
       dispatch({
         type: SET_SUCCESS,

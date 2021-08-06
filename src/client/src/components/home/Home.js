@@ -11,6 +11,11 @@ import Alert from "./../common/Alert";
 import { getJobs } from "./../../redux/actions/jobsActions";
 import { getCalls } from "./../../redux/actions/callActions";
 
+function toCurrency(num) {
+  let number = num;
+  return number.$numberDecimal.toLocaleString('USD');
+}
+
 class Home extends React.Component {
   componentDidMount() {
     this.props.getJobs();
@@ -18,7 +23,14 @@ class Home extends React.Component {
   }
 
   render() {
+    Date.prototype.formatMMDDYYYY = function(){
+      return (this.getMonth() + 1) + 
+      "/" +  this.getDate() +
+      "/" +  this.getFullYear();
+    }
+
     const { jobs } = this.props.jobs;
+    const { calls } = this.props.calls;
 
     var crumbs = [
       {
@@ -26,35 +38,109 @@ class Home extends React.Component {
       },
     ];
 
-    var columns = [
+    var callColumns = [
       {
-        Header: "Product",
-        accessor: "name",
+        Header: "Date",
+        accessor: "date",
         width: 150,
+        Cell: prop => {
+          let date = new Date(prop.value);
+          return date.formatMMDDYYYY();
+        }
       },
       {
-        Header: "Quantity",
-        accessor: "quantity",
+        Header: "Follow Up",
+        accessor: "follow_up",
         width: 150,
+        Cell: prop => {
+          let date = new Date(prop.value);
+          return date.formatMMDDYYYY();
+        }
       },
       {
-        Header: "Measurement",
-        accessor: "measurement",
-        width: 150,
-      },
-      {
-        Header: "Supplier",
-        accessor: "supplier.name",
-        width: 150,
-      },
-      {
-        Header: "Account #",
-        accessor: "supplier.account_number",
+        Header: "Client Name",
+        accessor: "client_name",
         width: 150,
       },
       {
         Header: "Phone Number",
-        accessor: "supplier.phone_number",
+        accessor: "phone_number",
+        width: 150,
+      },
+      {
+        Header: "Address",
+        accessor: "full_address",
+        minWidth: 500,
+      },
+      {
+        Header: "SQ FT",
+        accessor: "square_foot",
+        width: 20,
+      },
+      {
+        Header: "RES INS",
+        accessor: "home_inspection",
+        width: 20,
+        Cell: props => {
+          if(props.value) {
+            return "Yes";
+          } else {
+            return "No";
+          }
+        }
+      },
+      {
+        Header: "Crawl",
+        accessor: "crawl",
+        width: 20,
+        Cell: props => {
+          if(props.value) {
+            return "Yes";
+          } else {
+            return "No";
+          }
+        }
+      },
+      {
+        Header: "Multi",
+        accessor: "multi_story",
+        width: 20,
+        Cell: props => {
+          if(props.value) {
+            return "Yes";
+          } else {
+            return "No";
+          }
+        }
+      },
+      {
+        Header: "Pool/Spa",
+        accessor: "pool_spa",
+        width: 20,
+        Cell: props => {
+          if(props.value) {
+            return "Yes";
+          } else {
+            return "No";
+          }
+        }
+      },
+      {
+        Header: "Deck",
+        accessor: "deck",
+        width: 20,
+        Cell: props => {
+          if(props.value) {
+            return "Yes";
+          } else {
+            return "No";
+          }
+        }
+      },
+      {
+        Header: "Quote",
+        accessor: "quote",
+        Cell: props => <div> {toCurrency(props.value)} </div>,
         width: 150,
       },
     ];
@@ -64,6 +150,7 @@ class Home extends React.Component {
     let below_limits = 0;
     let alerts = [];
 
+    var total_calls = calls.length;
     var total_jobs = jobs.length;
 
     // products.forEach((product) => {
@@ -127,30 +214,21 @@ class Home extends React.Component {
                 </div>
               </div>
 
-              {/* <!-- Earnings (Annual) Card Example --> */}
+              {/* <!-- Tasks Card Example --> */}
               <div className="col-xl-3 col-md-6 mb-4">
                 <div className="card border-left-purple shadow h-100 py-2">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
-                      {
-                        // eslint-disable-next-line
-                        products.map((product) => {
-                          if (product.name === "Lockbox") {
-                            return (
-                              <div className="col mr-2" key={Math.random(10)}>
-                                <div className="text-xs font-weight-bold gbr-green text-uppercase mb-1">
-                                  {product.name}es
-                                </div>
-                                <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                  {product.quantity}
-                                </div>
-                              </div>
-                            );
-                          }
-                        })
-                      }
+                      <div className="col mr-2">
+                        <div className="text-xs font-weight-bold text-uppercase mb-1">
+                          Calls This Month
+                        </div>
+                        <div className="h5 mb-0 font-weight-bold text-gray-800">
+                          {total_calls}
+                        </div>
+                      </div>
                       <div className="col-auto">
-                        <i className="fa fa-th fa-2x text-gray-300"></i>
+                        <i class="fa fa-phone fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -199,30 +277,30 @@ class Home extends React.Component {
                 </div>
               </div>
             </div>
-            {/* <div className="row"> */}
-              {/* <div className="col-12"> */}
+            <div className="row">
+              <div className="col-12">
                 {/* <!-- DataTales Example --> */}
-                {/* <div className="card shadow mb-4"> */}
-                  {/* <div className="card-header py-3"> */}
-                    {/* <h4 className="m-0 font-weight-bold gbr-green text-center"> */}
-                      {/* Inventory */}
-                    {/* </h4> */}
-                  {/* </div> */}
-                  {/* <div className="card-body text-center"> */}
-                    {/* <div class="table-responsive"> */}
+                <div className="card shadow mb-4">
+                  <div className="card-header py-3">
+                    <h4 className="m-0 font-weight-bold vhi-blue text-center">
+                      Call Log
+                    </h4>
+                  </div>
+                  <div className="card-body text-center">
+                    <div class="table-responsive">
                       {/* Below should be this.props.item.loading */}
-                    {/* {false ? ( */}
-                      {/* <Spinner /> */}
-                    {/* ) : ( */}
-                      {/* <div className="table-responsive"> */}
-                        {/* <Table columns={columns} data={products} /> */}
-                      {/* </div> */}
-                    {/* )} */}
-                    {/* </div> */}
-                  {/* </div> */}
-                {/* </div> */}
-              {/* </div> */}
-            {/* </div> */}
+                      {false ? (
+                        <Spinner />
+                      ) : (
+                        <div className="table-responsive">
+                          <Table columns={callColumns} data={calls} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
