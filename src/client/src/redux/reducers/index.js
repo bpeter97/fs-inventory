@@ -10,6 +10,8 @@ import jobsReducer from "./jobsReducer";
 import statusReducer from "./statusReducer";
 import subSectionReducer from "./subSectionReducer";
 import inspectionReducer from "./inspectionReducer";
+import callReducer from "./callReducer";
+import successReducer from "./successReducer";
 
 export default (history) =>
   combineReducers({
@@ -23,4 +25,6 @@ export default (history) =>
     status: statusReducer,
     subsections: subSectionReducer,
     inspections: inspectionReducer,
+    calls: callReducer,
+    success: successReducer,
   });

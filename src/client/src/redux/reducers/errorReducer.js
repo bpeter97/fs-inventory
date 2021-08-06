@@ -4,11 +4,6 @@ const initialState = {};
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    // case SET_ERRORS: {
-    // 	return {
-    // 		error: action.payload
-    // 	};
-    // }
     case GET_ERRORS: {
       return action.payload;
     }

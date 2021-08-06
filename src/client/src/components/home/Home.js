@@ -9,10 +9,12 @@ import Table from "./../common/Table";
 import Alert from "./../common/Alert";
 
 import { getJobs } from "./../../redux/actions/jobsActions";
+import { getCalls } from "./../../redux/actions/callActions";
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.getJobs();
+    this.props.getCalls();
   }
 
   render() {
@@ -230,6 +232,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => ({
   jobs: state.jobs,
+  calls: state.calls,
 });
 
-export default connect(mapStateToProps, { getJobs })(Home);
+export default connect(mapStateToProps, { getJobs, getCalls })(Home);
