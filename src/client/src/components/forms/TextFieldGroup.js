@@ -25,7 +25,7 @@ const TextFieldGroup = ({
   let newLabel = null;
 
   if (help) {
-    smallText = <small className="form-text text-muted">{help}</small>;
+    smallText = <small className="form-text text-muted input-group-sm small-text">{help}</small>;
   }
 
   if(prepend) {

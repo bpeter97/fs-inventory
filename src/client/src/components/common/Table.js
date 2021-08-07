@@ -86,7 +86,9 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())} {...column.getHeaderProps({
+                  style: { minWidth: column.minWidth, width: column.width },
+                })}>
                   {column.render("Header")}
                   <span>
                     {column.isSorted

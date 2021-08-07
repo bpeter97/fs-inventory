@@ -1,4 +1,7 @@
 .input-group-text {
-  border-color: #008800;
   font-weight: bold;
+}
+
+.small-text {
+  font-size: 80% !important;
 }

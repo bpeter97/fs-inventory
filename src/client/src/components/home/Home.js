@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Button, Modal} from 'react-bootstrap';
 
 import "./Home.css";
 
@@ -10,6 +11,7 @@ import Alert from "./../common/Alert";
 
 import { getJobs } from "./../../redux/actions/jobsActions";
 import { getCalls } from "./../../redux/actions/callActions";
+import CreateCallForm from "../call/CreateCallForm";
 
 function toCurrency(num) {
   let number = num;
@@ -17,9 +19,21 @@ function toCurrency(num) {
 }
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      createCallModal: false
+    }
+  }
+
   componentDidMount() {
     this.props.getJobs();
     this.props.getCalls();
+  }
+
+  handleNewCallModal() {
+    this.setState({ createCallModal: !this.state.createCallModal });
   }
 
   render() {
@@ -42,16 +56,16 @@ class Home extends React.Component {
       {
         Header: "Date",
         accessor: "date",
-        width: 150,
+        width: 20,
         Cell: prop => {
           let date = new Date(prop.value);
           return date.formatMMDDYYYY();
         }
       },
       {
-        Header: "Follow Up",
+        Header: "F/U Date",
         accessor: "follow_up",
-        width: 150,
+        width: 20,
         Cell: prop => {
           let date = new Date(prop.value);
           return date.formatMMDDYYYY();
@@ -70,7 +84,7 @@ class Home extends React.Component {
       {
         Header: "Address",
         accessor: "full_address",
-        minWidth: 500,
+        minWidth: 250,
       },
       {
         Header: "SQ FT",
@@ -78,7 +92,7 @@ class Home extends React.Component {
         width: 20,
       },
       {
-        Header: "RES INS",
+        Header: "Res Ins",
         accessor: "home_inspection",
         width: 20,
         Cell: props => {
@@ -141,7 +155,7 @@ class Home extends React.Component {
         Header: "Quote",
         accessor: "quote",
         Cell: props => <div> {toCurrency(props.value)} </div>,
-        width: 150,
+        width: 100,
       },
     ];
 
@@ -228,7 +242,7 @@ class Home extends React.Component {
                         </div>
                       </div>
                       <div className="col-auto">
-                        <i class="fa fa-phone fa-2x text-gray-300"></i>
+                        <i className="fa fa-phone fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
@@ -287,7 +301,22 @@ class Home extends React.Component {
                     </h4>
                   </div>
                   <div className="card-body text-center">
-                    <div class="table-responsive">
+                    <div className="mb-3 text-left">
+                      <Button variant="primary" onClick={() => this.handleNewCallModal()}>
+                        New Call
+                      </Button>
+                    </div>
+                    
+                    <Modal show={this.state.createCallModal} dialogClassName="modal-lg">
+                          <Modal.Header closeButton onClick={() => this.handleNewCallModal()}>
+                            <Modal.Title>New Call</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <CreateCallForm history={this.props.history} />
+                          </Modal.Body>
+                        </Modal>
+
+                    <div className="table-responsive">
                       {/* Below should be this.props.item.loading */}
                       {false ? (
                         <Spinner />
