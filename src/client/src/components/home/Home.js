@@ -23,7 +23,8 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      createCallModal: false
+      createCallModal: false,
+      showFilters: false
     }
   }
 
@@ -34,6 +35,10 @@ class Home extends React.Component {
 
   handleNewCallModal() {
     this.setState({ createCallModal: !this.state.createCallModal });
+  }
+
+  handleFilterShow() {
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   render() {
@@ -159,7 +164,6 @@ class Home extends React.Component {
       },
     ];
 
-    let total_products = 0;
     let above_limits = 0;
     let below_limits = 0;
     let alerts = [];
@@ -167,35 +171,6 @@ class Home extends React.Component {
     var total_calls = calls.length;
     var total_jobs = jobs.length;
 
-    // products.forEach((product) => {
-    //   total_products += product.quantity;
-
-    //   if (product.quantity > product.upper_limit) {
-    //     above_limits++;
-
-    //     let m = product.name;
-    //     m += " is over the upper limit by ";
-    //     m += product.quantity - product.upper_limit;
-    //     m += ".";
-
-    //     alerts.push(<Alert type="warning" key={Math.random(10)} message={m} />);
-    //   } else if (product.quantity < product.lower_limit) {
-    //     below_limits++;
-
-    //     let m = product.name;
-    //     m += " is under the below limit by ";
-    //     m += product.lower_limit - product.quantity;
-    //     m += ".";
-
-    //     alerts.push(<Alert type="danger" key={Math.random(10)} message={m} />);
-    //   }
-    // });
-    let products = [
-      {
-        name: "car",
-        quantity: 1
-      }
-    ]
     return (
       <div>
         <div className="container-fluid">
@@ -301,10 +276,17 @@ class Home extends React.Component {
                     </h4>
                   </div>
                   <div className="card-body text-center">
-                    <div className="mb-3 text-left">
+                    <div className="mb-3 d-flex justify-content-between">
+                      <div className="d-inline mr-auto">
                       <Button variant="primary" onClick={() => this.handleNewCallModal()}>
                         New Call
                       </Button>
+                      </div>
+                      <div className="d-inline ml-auto">
+                      <Button variant="primary" onClick={() => this.handleFilterShow()}>
+                        Search
+                      </Button>
+                      </div>
                     </div>
                     
                     <Modal show={this.state.createCallModal} dialogClassName="modal-lg">
@@ -321,9 +303,26 @@ class Home extends React.Component {
                       {false ? (
                         <Spinner />
                       ) : (
-                        <div className="table-responsive">
-                          <Table columns={callColumns} data={calls} />
-                        </div>
+
+                        this.state.showFilters ? (
+                          <div>
+                            <div className="table-search-input-show">
+                              <Table columns={callColumns} data={calls} filterShow={true} />
+                            </div>
+                            <div className="table-search-input-hide">
+                            <Table columns={callColumns} data={calls} filterShow={false} />
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <div className="table-search-input-hide">
+                              <Table columns={callColumns} data={calls} filterShow={true} />
+                            </div>
+                            <div className="table-search-input-show">
+                            <Table columns={callColumns} data={calls} filterShow={false} />
+                            </div>
+                          </div>
+                        )
                       )}
                     </div>
                   </div>

@@ -8,7 +8,7 @@ var seedStatus = [
     },
     {
         _id: new ObjectID(),
-        label: "Note Inspected",
+        label: "Not Inspected",
         initials: "NI"
     },
     {

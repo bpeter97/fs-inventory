@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTable, usePagination, useFilters, useSortBy } from "react-table";
 import "./Table.css";
 
@@ -10,7 +10,7 @@ function DefaultColumnFilter({
   return (
     <input
       type="text"
-      className="form-control mt-3"
+      className="form-control mt-3 table-search-input-show"
       value={filterValue || ''}
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
@@ -20,7 +20,25 @@ function DefaultColumnFilter({
   )
 }
 
-function Table({ columns, data, showSelect=true, pagination=true }) {
+function DefaultColumnFilterHide({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length
+
+  return (
+    <input
+      type="text"
+      className="form-control mt-3 table-search-input-hide"
+      value={filterValue || ''}
+      onChange={e => {
+        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  )
+}
+
+function Table({ columns, data, showSelect=true, pagination=true, tableReference=null, filterShow=true}) {
   const filterTypes = React.useMemo(
     () => ({
       text: (rows, id, filterValue) => {
@@ -37,10 +55,12 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
     []
   )
 
+  let shouldFilterShow = filterShow;
+
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
+      Filter: shouldFilterShow ? DefaultColumnFilter : DefaultColumnFilterHide,
     }),
     []
   )
@@ -81,7 +101,7 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
   // Render the UI for your table
   return (
     <>
-      <table className="table" {...getTableProps()}>
+      <table ref={tableReference} className="table" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -120,6 +140,7 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
       </table>
 
       {
+        data.length > pageSize ? (
         pagination ? (
           <ul className="pagination justify-content-center w-100">
             <li className="page-item">
@@ -159,6 +180,7 @@ function Table({ columns, data, showSelect=true, pagination=true }) {
               </button>
             </li>
           </ul>
+        ) : ""
         ) : ""
       }
       {
