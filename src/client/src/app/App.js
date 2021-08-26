@@ -22,6 +22,7 @@ import Notifications from "../components/notifications/Notifications";
 import Settings from "../components/settings/Settings";
 import Users from "../components/users/Users";
 import CreateUser from "../components/users/CreateUser";
+import NewCall from "../components/call/NewCall";
 
 const createHistory = require("history").createBrowserHistory;
 
@@ -61,6 +62,7 @@ class App extends Component {
                 />
                 <PrivateRoute exact path="/settings" component={Settings} />
                 <PrivateRoute exact path="/admin" component={Admin} />
+                <PrivateRoute exact path="/newcall" component={NewCall} />
                 <PrivateRoute exact path="/users" component={Users} />
                 <PrivateRoute exact path="/users/create" component={CreateUser} />
                 <Route component={NotFound} />

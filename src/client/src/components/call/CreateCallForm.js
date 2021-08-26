@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Button } from 'react-bootstrap';
 
 import TextFieldGroup from "./../forms/TextFieldGroup";
 import Alert from "../common/Alert";
@@ -27,7 +28,20 @@ class CreateCallForm extends React.Component {
       multi_story: false,
       pool_spa: false,
       deck: false,
+      year_built: 1999,
+      age: 0,
       quote: 0,
+      prices: {
+          grand_total: 0.00,
+          less_5: 0.00,
+          less_10: 0.00,
+          less_15: 0.00,
+          less_20: 0.00,
+          less_30: 0.00,
+          less_40: 0.00,
+          less_50: 0.00,
+          minus_50: 0.00,
+      }
     }
   }
 
@@ -37,6 +51,8 @@ class CreateCallForm extends React.Component {
     }
     return null;
   }
+
+  
 
   onSubmit = e => {
     this.state.errors = null;
@@ -68,6 +84,30 @@ class CreateCallForm extends React.Component {
       }
     }, 1000);
   };
+
+    calculateFees = e => {
+        this.state.errors = null;
+
+        // Need to set up price settings
+        let base = 268.00;
+        let grand_total = base * 25;
+
+        let prices = {
+            grand_total,
+            less_5: grand_total-(grand_total*0.05),
+            less_10: grand_total-(grand_total*0.10),
+            less_15: grand_total-(grand_total*0.15),
+            less_20: grand_total-(grand_total*0.20),
+            less_30: grand_total-(grand_total*0.30),
+            less_40: grand_total-(grand_total*0.40),
+            less_50: grand_total-(grand_total*0.50),
+            minus_50: grand_total-50.00,
+        }
+
+        this.setState({ prices });
+
+        console.log(this.state.prices);
+    }
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
@@ -103,7 +143,7 @@ class CreateCallForm extends React.Component {
     return (
       <form onSubmit={this.onSubmit}>
         <div className="form-row">
-          <div className="form-group col-md-6 text-left">
+          <div className="form-group col-md-4 text-left">
             <DateFieldGroup 
                 date={this.state.date} 
                 onChange={this.onDateChange} 
@@ -111,7 +151,7 @@ class CreateCallForm extends React.Component {
                 help="The date the call was received."
             />
           </div>
-          <div className="form-group col-md-6 text-left">
+          <div className="form-group col-md-4 text-left">
             <DateFieldGroup 
                 date={this.state.follow_up} 
                 onChange={this.onDateChange} 
@@ -121,7 +161,7 @@ class CreateCallForm extends React.Component {
           </div>
         </div>
         <div className="form-row">
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-4 text-left">
                 <TextFieldGroup
                     label="Name"
                     placeholder="John Doe"
@@ -132,7 +172,7 @@ class CreateCallForm extends React.Component {
                     error={errors.client_name}
                 />
             </div>
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-4 text-left">
                 <TextFieldGroup
                     label="Phone Number"
                     placeholder="555-555-5555"
@@ -145,7 +185,7 @@ class CreateCallForm extends React.Component {
             </div>
         </div>
         <div className="form-row">
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
                     label="Address"
                     placeholder="1234 S Some Street"
@@ -156,7 +196,7 @@ class CreateCallForm extends React.Component {
                     error={errors.address}
                 />
             </div>
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
                     label="City"
                     placeholder="City"
@@ -167,9 +207,7 @@ class CreateCallForm extends React.Component {
                     error={errors.city}
                 />
             </div>
-        </div>
-        <div className="form-row">
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
                     label="State"
                     placeholder="CA"
@@ -181,7 +219,7 @@ class CreateCallForm extends React.Component {
                     error={errors.state}
                 />
             </div>
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
                     label="Zipcode"
                     placeholder="Zipcode"
@@ -194,7 +232,7 @@ class CreateCallForm extends React.Component {
             </div>
         </div>
         <div className="form-row">
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
                     label="Square Feet"
                     placeholder="ex. 1700"
@@ -205,21 +243,19 @@ class CreateCallForm extends React.Component {
                     error={errors.square_foot}
                 />
             </div>
-            <div className="form-group col-md-6 text-left">
+            <div className="form-group col-md-3 text-left">
                 <TextFieldGroup
-                    label="Quote"
-                    divClass="input-group"
-                    placeholder="1234.97"
-                    prepend="$"
-                    name="quote"
-                    type="number"
-                    help="The client's quote."
+                    label="Year Built"
+                    placeholder="ex. 1982"
+                    name="year_built"
+                    type="text"
+                    help="The year the property was built."
                     onChange={this.onChange}
-                    error={errors.quote}
+                    error={errors.year_built}
                 />
             </div>
         </div>
-        <div className="form-row mt-2">
+        <div className="form-row mt-4">
             <div className="form-group col-md-3 text-center">
                 <label className="text-center">Res Insp.</label>
                 <label className="switch switch-left-right">
@@ -297,7 +333,25 @@ class CreateCallForm extends React.Component {
                 </label>
             </div>
         </div>
-        <div className="text-center pt-4">
+        <div className="form-row">
+            <div className="form-group col-md-4 text-left">
+                <TextFieldGroup
+                    label="Quote"
+                    divClass="input-group"
+                    placeholder="1234.97"
+                    prepend="$"
+                    name="quote"
+                    type="number"
+                    help="The client's quote."
+                    onChange={this.onChange}
+                    error={errors.quote}
+                />
+            </div>
+        </div>
+        <div className="text-center pt-4 d-flex justify-content-between">
+            <Button variant="primary" onClick={() => this.calculateFees()}>
+                Calculate Quote
+            </Button>
             <button type="submit" className="btn btn-success">Create</button>
         </div>
       </form>

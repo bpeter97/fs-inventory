@@ -278,25 +278,25 @@ class Home extends React.Component {
                   <div className="card-body text-center">
                     <div className="mb-3 d-flex justify-content-between">
                       <div className="d-inline mr-auto">
-                      <Button variant="primary" onClick={() => this.handleNewCallModal()}>
-                        New Call
-                      </Button>
+                        <Button variant="primary" onClick={() => this.handleNewCallModal()}>
+                          New Call
+                        </Button>
                       </div>
                       <div className="d-inline ml-auto">
-                      <Button variant="primary" onClick={() => this.handleFilterShow()}>
-                        Search
-                      </Button>
+                        <Button variant="primary" onClick={() => this.handleFilterShow()}>
+                          Search
+                        </Button>
                       </div>
                     </div>
                     
                     <Modal show={this.state.createCallModal} dialogClassName="modal-lg">
-                          <Modal.Header closeButton onClick={() => this.handleNewCallModal()}>
-                            <Modal.Title>New Call</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            <CreateCallForm history={this.props.history} />
-                          </Modal.Body>
-                        </Modal>
+                      <Modal.Header closeButton onClick={() => this.handleNewCallModal()}>
+                        <Modal.Title>New Call</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <CreateCallForm history={this.props.history} />
+                      </Modal.Body>
+                    </Modal>
 
                     <div className="table-responsive">
                       {/* Below should be this.props.item.loading */}

@@ -34,6 +34,10 @@ class Admin extends React.Component {
     var crumbs = [
       {
         title: "Dashboard",
+        link: "/",
+      },
+      {
+        title: "Admin",
       },
     ];
 
