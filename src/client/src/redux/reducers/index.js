@@ -5,6 +5,7 @@ import authReducer from "./authReducer";
 import notificationReducer from "./notificationReducer";
 import errorReducer from "./errorReducer";
 import settingsReducer from "./settingsReducer";
+import systemSettingsReducer from "./systemSettingsReducer";
 import userReducer from "./userReducer";
 import jobsReducer from "./jobsReducer";
 import statusReducer from "./statusReducer";
@@ -19,6 +20,7 @@ export default (history) =>
     errors: errorReducer,
     auth: authReducer,
     settings: settingsReducer,
+    system_settings: systemSettingsReducer,
     notifications: notificationReducer,
     users: userReducer,
     jobs: jobsReducer,

@@ -6,9 +6,15 @@ import "./NewCall.css";
 import Breadcrumb from "../common/Breadcrumb";
 import CreateCallForm from "../call/CreateCallForm";
 
-class Admin extends React.Component {
+import { getSystemSettings } from "./../../redux/actions/systemSettingsActions";
+
+class NewCall extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.getSystemSettings();
   }
 
   render() {
@@ -60,6 +66,7 @@ class Admin extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  system_settings: state.system_settings
 });
 
-export default connect(mapStateToProps, {})(Admin);
+export default connect(mapStateToProps, { getSystemSettings })(NewCall);
