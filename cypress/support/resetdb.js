@@ -10,6 +10,7 @@ const Requirement = require("../../src/server/models/Requirement");
 const Section = require("../../src/server/models/Section");
 const Inspection = require("../../src/server/models/Inspection");
 const Notification = require("../../src/server/models/Notification");
+const SystemSetting = require("../../src/server/models/SystemSetting");
 const Job = require("../../src/server/models/Job");
 const Client = require("../../src/server/models/Client");
 const Call = require("../../src/server/models/Call");
@@ -25,6 +26,7 @@ const { seedJobs } = require("../fixtures/seedJobs");
 const { seedClients } = require("../fixtures/seedClients");
 const { seedCalls } = require("../fixtures/seedCalls");
 const calls = require("../../src/server/routes/validation/calls");
+const { seedSystemSettings } = require("../fixtures/seedSystemSetting");
 
 // Grab the URI for the DB.
 const db = process.env.DEV_DB_URI;
@@ -171,8 +173,20 @@ Settings.deleteMany({}).then(() => {
                                             console.log("The calls have been saved.");
                                             Notification.deleteMany({}).then(() => {
                                               console.log("Notifications have been cleared.");
-                                              console.log("Exiting DB Reset Script");
-                                              process.exit();
+
+                                              SystemSetting.deleteMany({}).then(() => {
+
+                                                SystemSetting.insertMany(seedSystemSettings, (err, systemSettings) => {
+
+                                                  if(!systemSettings) {
+                                                    console.error("There was an issue saving the system settings.");
+                                                    return process.exit();
+                                                  }
+                                                  console.log("The system settings have been saved.");
+                                                  console.log("Exiting DB Reset Script");
+                                                  process.exit();
+                                                });
+                                              })
                                             })
                                           })
                                         })

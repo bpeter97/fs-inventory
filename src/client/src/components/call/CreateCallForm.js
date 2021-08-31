@@ -88,8 +88,9 @@ class CreateCallForm extends React.Component {
     calculateFees = e => {
         this.state.errors = null;
 
-        // Need to set up price settings
+        // Base will be pulled from SystemSettings
         let base = 268.00;
+
         let grand_total = base * 25;
 
         let prices = {

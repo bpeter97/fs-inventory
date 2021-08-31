@@ -1,0 +1,3 @@
+C:\Coding\vhi-jm-master\obj\Debug\Victory Management System.njsprojAssemblyReference.cache
+C:\Coding\vhi-jm-master\obj\Debug\Victory Management System.njsproj.CoreCompileInputs.cache
+C:\Coding\vhi-jm-master\bin\Microsoft.NodejsTools.WebRole.dll
