@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
         <div className="sidebar-heading">Pages</div>
 
         {/* <!-- Nav Item --> */}
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
           <i className="fas fa-fw fa-cog"></i>
             <span>Products</span>
@@ -125,21 +125,21 @@ class Sidebar extends React.Component {
               </Link>
             </div>
           </div>
-        </li>
+        </li> */}
 
         <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee" aria-expanded="true" aria-controls="collapseEmployee">
             <i className="fa fa-fw fa-users"></i> 
-            <span>Employee</span>
+            <span>Calls</span>
           </a>
           <div id="collapseEmployee" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Employee Pages</h6>
-              <Link className="collapse-item" key={Math.random(10)} to="/employees">
-                View Employees
+              <h6 className="collapse-header">Call Pages</h6>
+              <Link className="collapse-item" key={Math.random(10)} to="/">
+                View Call Log
               </Link>
-              <Link className="collapse-item" key={Math.random(10)} to="/employees/create">
-                Create Employee
+              <Link className="collapse-item" key={Math.random(10)} to="/calls/new">
+                Create New Call
               </Link>
             </div>
           </div>

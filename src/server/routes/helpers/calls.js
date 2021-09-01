@@ -22,6 +22,28 @@ exports.getCalls = (req, res) => {
     .catch(e => res.status(404).json(e));
 };
 
+// @route   GET api/Call/:id
+// @desc    Retrieves a single Call.
+// @access  Private
+exports.getCall = (req, res) => {
+    let errors = {};
+
+    if (!ObjectID.isValid(req.params.id)) {
+        errors.client = "There was no Call found";
+        return res.status(400).json(errors);
+    }
+
+    Call.findById(req.params.id)
+        .then((call) => {
+            if (!call) {
+                return res.json({ error: "There was no call found" });
+            }
+            res.send(call);
+    })
+    .catch((e) => res.status(404).json(e));
+};
+
+
 // @route   POST api/call/
 // @desc    Creates a call.
 // @access  Private
@@ -42,9 +64,11 @@ exports.postCall = (req, res) => {
         "city",
         "state",
         "zipcode",
+        "year_built",
         "square_foot",
         "home_inspection",
         "crawl",
+        "discount",
         "multi_story",
         "pool_spa",
         "deck",
@@ -89,6 +113,45 @@ exports.postCall = (req, res) => {
     })
     .catch(e => res.status(400).json(e));
 };
+
+// @route   PATCH api/call/:id
+// @desc    Updates the system settings
+// @access  Private
+exports.updateCall = (req, res) => {
+    var errors = {};
+  
+    let update = _.pick(req.body, 
+      [
+        "date",
+        "follow_up",
+        "client_name",
+        "phone_number",
+        "address",
+        "city",
+        "state",
+        "zipcode",
+        "year_built",
+        "square_foot",
+        "home_inspection",
+        "crawl",
+        "discount",
+        "multi_story",
+        "pool_spa",
+        "deck",
+        "quote"
+      ]
+    );
+    
+    Call.findByIdAndUpdate(req.params.id, update, { new: true })
+      .then((call) => {
+        if (!call) {
+          return res.json({ error: "No call was found." });
+        }
+        res.send(call);
+      })
+      .catch((e) => res.status(404).json(e));
+};
+  
 
 // @route   DELETE api/calls/:id
 // @desc    Deletes a specific call.

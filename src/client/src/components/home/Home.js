@@ -37,7 +37,7 @@ class Home extends React.Component {
   }
 
   handleNewCallModal() {
-    this.props.history.push("/newcall");
+    this.props.history.push("/calls/new");
   }
 
   handleFilterShow() {
@@ -45,8 +45,11 @@ class Home extends React.Component {
   }
 
   editCall(id) {
-    console.log("Edit call");
-    console.log(id);
+    const location = {
+      pathname: "/calls/edit",
+      state: { id: id }
+    };
+    this.props.history.push(location);
   }
 
   deleteCall(id) {
@@ -127,6 +130,11 @@ class Home extends React.Component {
       {
         Header: "SQ FT",
         accessor: "square_foot",
+        width: 20,
+      },
+      {
+        Header: "Year",
+        accessor: "year_built",
         width: 20,
       },
       // {

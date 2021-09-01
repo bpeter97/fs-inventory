@@ -28,6 +28,9 @@ const CallSchema = new Schema({
     zipcode: {
         type: String
     },
+    year_built: {
+        type: String
+    },
     square_foot: {
         type: Number,
     },
@@ -45,6 +48,9 @@ const CallSchema = new Schema({
     },
     deck: {
         type: Boolean
+    },
+    discount: {
+        type: Decimal128
     },
     quote: {
         type: Decimal128

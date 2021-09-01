@@ -22,7 +22,6 @@ class EditSystemSettingsForm extends React.Component {
   }
 
   componentDidMount() {
-      console.log(this.props.systemSettings);
       this.fillForm(this.props.systemSettings);
       this.forceUpdate();
   }
