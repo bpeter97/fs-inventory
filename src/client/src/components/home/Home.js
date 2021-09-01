@@ -50,6 +50,7 @@ class Home extends React.Component {
 
     const { jobs } = this.props.jobs;
     const { calls } = this.props.calls;
+    const success = this.props.success;
 
     var crumbs = [
       {
@@ -96,18 +97,18 @@ class Home extends React.Component {
         accessor: "square_foot",
         width: 20,
       },
-      {
-        Header: "Res Ins",
-        accessor: "home_inspection",
-        width: 20,
-        Cell: props => {
-          if(props.value) {
-            return "Yes";
-          } else {
-            return "No";
-          }
-        }
-      },
+      // {
+      //   Header: "Res Ins",
+      //   accessor: "home_inspection",
+      //   width: 20,
+      //   Cell: props => {
+      //     if(props.value) {
+      //       return "Yes";
+      //     } else {
+      //       return "No";
+      //     }
+      //   }
+      // },
       {
         Header: "Crawl",
         accessor: "crawl",
@@ -120,18 +121,18 @@ class Home extends React.Component {
           }
         }
       },
-      {
-        Header: "Multi",
-        accessor: "multi_story",
-        width: 20,
-        Cell: props => {
-          if(props.value) {
-            return "Yes";
-          } else {
-            return "No";
-          }
-        }
-      },
+      // {
+      //   Header: "Multi",
+      //   accessor: "multi_story",
+      //   width: 20,
+      //   Cell: props => {
+      //     if(props.value) {
+      //       return "Yes";
+      //     } else {
+      //       return "No";
+      //     }
+      //   }
+      // },
       {
         Header: "Pool/Spa",
         accessor: "pool_spa",
@@ -167,6 +168,10 @@ class Home extends React.Component {
     let above_limits = 0;
     let below_limits = 0;
     let alerts = [];
+
+    if(success.status) {
+      alerts.push(<Alert type="success" message={success.message} />);
+    }
 
     var total_calls = calls.length;
     var total_jobs = jobs.length;
@@ -339,6 +344,7 @@ class Home extends React.Component {
 const mapStateToProps = (state) => ({
   jobs: state.jobs,
   calls: state.calls,
+  success: state.success
 });
 
 export default connect(mapStateToProps, { getJobs, getCalls })(Home);

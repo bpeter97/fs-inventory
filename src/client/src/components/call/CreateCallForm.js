@@ -8,7 +8,7 @@ import DateFieldGroup from "../forms/DateFieldGroup";
 import "./CreateCallForm.css";
 import Spinner from "./../common/Spinner";
 
-// import { createCall } from "./../../redux/actions/callActions";
+import { createCall } from "./../../redux/actions/callActions";
 import checkEmpty from "./../../validation/checkEmpty";
 import axios from "axios";
 
@@ -89,8 +89,8 @@ class CreateCallForm extends React.Component {
       quote: this.state.quote,
     };
 
-    console.log(callData);
-    // this.props.createCall(callData);
+    // console.log(callData);
+    this.props.createCall(callData);
     setTimeout(() => {
       if (checkEmpty(this.state.errors)) {
         this.props.history.push("/");
@@ -126,13 +126,13 @@ class CreateCallForm extends React.Component {
             }
             // Get the distance between the two coordinates.
             axios(newConfig).then((res) => {
-                console.log(res);
+
+                // Convert yards into miles.
                 let yards = new Number(res.data.features[0].properties.summary.distance);
                 let miles = new Number(parseFloat(yards/1760).toFixed(2));
-                let newMiles = miles * 2;
 
-                console.log(`Miles: ${miles}`);
-                console.log(`Miles x2: ${newMiles}`);
+                // Make it a round trip!
+                let newMiles = miles * 2;
                 
                 this.setState({miles: newMiles});
             })
@@ -554,10 +554,10 @@ class CreateCallForm extends React.Component {
                 <TextFieldGroup
                     label="Quote"
                     divClass="input-group"
-                    placeholder="1234.97"
+                    placeholder=""
                     prepend="$"
                     name="quote"
-                    type="number"
+                    type="text"
                     help="The client's quote."
                     onChange={this.onChange}
                     error={errors.quote}
@@ -581,4 +581,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { })(CreateCallForm);
+export default connect(mapStateToProps, { createCall })(CreateCallForm);

@@ -3,6 +3,7 @@ import axios from "axios";
 // import types
 import {
   GET_CALLS,
+  CREATE_CALL,
   CALLS_LOADING
 } from "../types/callTypes";
 
@@ -24,10 +25,6 @@ export const getCalls = (id) => (dispatch) => {
         type: GET_CALLS,
         payload: calls,
       });
-      dispatch({
-        type: SET_SUCCESS,
-        payload: "Successfully retrieved the call list."
-      })
     })
     .catch((err) =>
       dispatch({
@@ -36,6 +33,28 @@ export const getCalls = (id) => (dispatch) => {
       })
     );
 };
+
+export const createCall = (data) => (dispatch) => {
+  dispatch(setCallsLoading());
+  axios
+    .post("/api/calls", data)
+    .then((res) => {
+      dispatch({
+        type: CREATE_CALL,
+        payload: res.data,
+      })
+      dispatch({
+        type: SET_SUCCESS,
+        payload: "Successfully created the call."
+      })
+    })
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+}
 
 export const setCallsLoading = () => {
   return {
