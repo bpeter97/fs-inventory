@@ -38,8 +38,8 @@ exports.updateSystemSettings = (req, res) => {
       "crawlspace_charge",
     ]
   );
-
-  Settings.findByIdAndUpdate(req.params.id, update, { new: true })
+  
+  SystemSetting.findByIdAndUpdate(req.params.id, update, { new: true })
     .then((systemSetting) => {
       if (!systemSetting) {
         return res.json({ error: "No system setting were found." });

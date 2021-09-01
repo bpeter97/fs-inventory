@@ -8,6 +8,7 @@ import {
 } from "../types/settingsTypes";
 
 import { GET_ERRORS } from "../types/errorTypes";
+import { SET_SUCCESS } from "../types/successTypes";
 
 export const getSystemSettings = () => (dispatch) => {
   dispatch(setSystemSettingsLoading());
@@ -35,6 +36,10 @@ export const updateSystemSettings = (data) => (dispatch) => {
       dispatch({
         type: UPDATE_SYSTEM_SETTINGS,
         payload: res.data,
+      });
+      dispatch({
+        type: SET_SUCCESS,
+        payload: "Successfully updated the system settings."
       });
     })
     .catch((err) =>
