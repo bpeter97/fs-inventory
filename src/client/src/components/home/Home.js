@@ -65,6 +65,7 @@ class Home extends React.Component {
 
   deleteTheCall() {
     this.props.deleteCall(this.state.deleteId);
+    this.setState({deleteVerification: !this.state.deleteVerification});
     setTimeout(() => {
       if (checkEmpty(this.state.errors)) {
         this.props.history.push("/");
