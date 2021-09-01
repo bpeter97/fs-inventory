@@ -7,7 +7,7 @@ const Section = require("../../models/Section");
 const Note = require("../../models/Note");
 const Requirement = require("../../models/Requirement");
 const Status = require("../../models/Status");
-const validateSectionInput = require("../validation/Sections");
+const validateSectionInput = require("../validation/sections");
 
 // @route   GET api/sections/
 // @desc    Retrieves all sections.
