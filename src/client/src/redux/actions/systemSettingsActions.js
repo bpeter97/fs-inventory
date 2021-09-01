@@ -12,7 +12,7 @@ import { GET_ERRORS } from "../types/errorTypes";
 export const getSystemSettings = () => (dispatch) => {
   dispatch(setSystemSettingsLoading());
   axios
-    .get(`/api/systemsettings/`)
+    .get(`/api/systemsettings`)
     .then((res) => {
       dispatch({
         type: GET_SYSTEM_SETTINGS,

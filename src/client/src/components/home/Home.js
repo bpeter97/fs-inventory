@@ -34,7 +34,7 @@ class Home extends React.Component {
   }
 
   handleNewCallModal() {
-    this.setState({ createCallModal: !this.state.createCallModal });
+    this.props.history.push("/newcall");
   }
 
   handleFilterShow() {

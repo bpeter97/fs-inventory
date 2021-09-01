@@ -52,7 +52,7 @@ class NewCall extends React.Component {
                   </div>
                   <div className="card-body text-center">
                     <div className="table-responsive">
-                        <CreateCallForm history={this.props.history} />
+                      <CreateCallForm history={this.props.history} settings={this.props.system_settings.system_settings} maps={this.props.maps} />
                     </div>
                   </div>
                 </div>

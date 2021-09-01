@@ -6,9 +6,11 @@ import TextFieldGroup from "./../forms/TextFieldGroup";
 import Alert from "../common/Alert";
 import DateFieldGroup from "../forms/DateFieldGroup";
 import "./CreateCallForm.css";
+import Spinner from "./../common/Spinner";
 
 // import { createCall } from "./../../redux/actions/callActions";
 import checkEmpty from "./../../validation/checkEmpty";
+import axios from "axios";
 
 class CreateCallForm extends React.Component {
   constructor() {
@@ -31,6 +33,8 @@ class CreateCallForm extends React.Component {
       year_built: 1999,
       age: 0,
       quote: 0,
+      discount: 0,
+      miles: 0,
       prices: {
           grand_total: 0.00,
           less_5: 0.00,
@@ -41,7 +45,17 @@ class CreateCallForm extends React.Component {
           less_40: 0.00,
           less_50: 0.00,
           minus_50: 0.00,
-      }
+      },
+      charges: {
+          base_inspection_charge: 0,
+          distance_charge: 0,
+          property_size_charge: 0,
+          property_age_charge: 0,
+          ancillary_charges: 0,
+          discounts: 0
+      },
+      loaded: false,
+      loading: false
     }
   }
 
@@ -51,8 +65,6 @@ class CreateCallForm extends React.Component {
     }
     return null;
   }
-
-  
 
   onSubmit = e => {
     this.state.errors = null;
@@ -68,6 +80,7 @@ class CreateCallForm extends React.Component {
       state: this.state.state,
       zipcode: this.state.zipcode,
       square_foot: this.state.square_foot,
+      discount: this.state.discount,
       home_inspection: this.state.home_inspection,
       crawl: this.state.crawl,
       multi_story: this.state.multi_story,
@@ -85,29 +98,136 @@ class CreateCallForm extends React.Component {
     }, 1000);
   };
 
+    getDistance = destination => {
+        let token = '5b3ce3597851110001cf6248ede48b86cd9243b5aee182415086cc61';
+        
+        // Set default coordinates.
+        let start_coords = `-119.26739628519907,36.3169857958443`;
+
+        // Set the geocode URL
+        let geocode_url = `https://api.openrouteservice.org/geocode/search?api_key=${token}&text=${destination}&size=1`;
+    
+        // Get new address' coordinates.
+        var config = {
+            method: 'get',
+            url: geocode_url,
+            headers: {}
+        };
+    
+        axios(config).then((res) => {
+            // Set the end coordinates and new URL
+            let end_coords = `${res.data.features[0].geometry.coordinates[0]},${res.data.features[0].geometry.coordinates[1]}`;
+            let dir_url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${token}&start=${start_coords}&end=${end_coords}`
+    
+            let newConfig = {
+                method: 'get',
+                url: dir_url,
+                headers: {}
+            }
+            // Get the distance between the two coordinates.
+            axios(newConfig).then((res) => {
+                console.log(res);
+                let yards = new Number(res.data.features[0].properties.summary.distance);
+                let miles = new Number(parseFloat(yards/1760).toFixed(2));
+                let newMiles = miles * 2;
+
+                console.log(`Miles: ${miles}`);
+                console.log(`Miles x2: ${newMiles}`);
+                
+                this.setState({miles: newMiles});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     calculateFees = e => {
+        this.setState({loading: true});
+
+        // Erase the errors
         this.state.errors = null;
 
-        // Base will be pulled from SystemSettings
-        let base = 268.00;
+        // Set the settings variable
+        let settings = this.props.settings;
 
-        let grand_total = base * 25;
+        // Base is pulled from SystemSettings.
+        let base = parseFloat(settings.base_inspection_charge.$numberDecimal);
 
-        let prices = {
-            grand_total,
-            less_5: grand_total-(grand_total*0.05),
-            less_10: grand_total-(grand_total*0.10),
-            less_15: grand_total-(grand_total*0.15),
-            less_20: grand_total-(grand_total*0.20),
-            less_30: grand_total-(grand_total*0.30),
-            less_40: grand_total-(grand_total*0.40),
-            less_50: grand_total-(grand_total*0.50),
-            minus_50: grand_total-50.00,
-        }
+        // Get the property size charge, square footage multiplied by square_footage_modifier.
+        let property_size_charge = parseFloat(this.props.settings.square_footage_modifier.$numberDecimal * this.state.square_foot);
 
-        this.setState({ prices });
+        // Calculate additional charges (pool, deck, crawlspace, etc.)
+        let ancillary_charges = 0;
 
-        console.log(this.state.prices);
+        if(this.state.crawl)
+            ancillary_charges = ancillary_charges + new Number(settings.crawlspace_charge.$numberDecimal);
+        if(this.state.pool_spa)
+            ancillary_charges = ancillary_charges + new Number(settings.pool_spa_charge.$numberDecimal);
+        if(this.state.deck)
+            ancillary_charges = ancillary_charges + new Number(settings.deck_charge.$numberDecimal);
+
+        // Calculate the property age charge, adjusted for size and age).
+        let age = (new Number(new Date().getFullYear()) - new Number(new Date(this.state.year_built).getFullYear()) - 1);
+        let modified_age = age * settings.age_modifier.$numberDecimal;
+        let property_age_charge = (property_size_charge*modified_age/100);
+
+        // Get driving distance
+        let destination = `${this.state.address}, ${this.state.city}, ${this.state.state}, ${this.state.zipcode}`;
+        this.getDistance(destination);
+        
+        setTimeout(() => {
+            let distance_charge = 0;
+            
+            if(this.state.miles <= 10) {
+                distance_charge = 10;
+            } else {
+                distance_charge = (this.state.miles * settings.distance_modifier.$numberDecimal);
+            }
+
+            // Calculate the grand total tax.
+            let grand_total = (
+                base + 
+                distance_charge +
+                property_size_charge + 
+                property_age_charge +
+                ancillary_charges -
+                new Number(this.state.discount)
+            );
+    
+            // Set the prices.
+            let prices = {
+                grand_total: grand_total,
+                less_5: grand_total-(grand_total*0.05),
+                less_10: grand_total-(grand_total*0.10),
+                less_15: grand_total-(grand_total*0.15),
+                less_20: grand_total-(grand_total*0.20),
+                less_30: grand_total-(grand_total*0.30),
+                less_40: grand_total-(grand_total*0.40),
+                less_50: grand_total-(grand_total*0.50),
+                minus_50: grand_total-50.00,
+            }
+
+            let charges = {
+                base_inspection_charge: base,
+                distance_charge: distance_charge,
+                property_size_charge: property_size_charge,
+                property_age_charge: property_age_charge,
+                ancillary_charges: ancillary_charges,
+                discounts: new Number(this.state.discount),
+            }
+    
+            this.setState(
+                { 
+                    prices: prices,
+                    loading: false,
+                    loaded: true,
+                    charges: charges
+                }
+            );
+        }, 2000);
     }
 
     onChange = e => {
@@ -257,26 +377,22 @@ class CreateCallForm extends React.Component {
             </div>
         </div>
         <div className="form-row mt-4">
-            <div className="form-group col-md-3 text-center">
-                <label className="text-center">Res Insp.</label>
-                <label className="switch switch-left-right">
-                    <input
-                        type="checkbox"
-                        className="switch-input"
-                        id="home_inspection"
-                        onChange={this.handleChecked}
-                        checked={this.state.home_inspection}
-                        name="home_inspection"
-                    />
-                    <span
-                        className="switch-label"
-                        data-on="Yes"
-                        data-off="No"
-                    ></span>{" "}
-                    <span className="switch-handle"></span>
-                </label>
+            <div className="form-group col-md-3 text-left">
+                <TextFieldGroup
+                    label="Discounts"
+                    divClass="input-group"
+                    placeholder="ex. 50"
+                    name="discount"
+                    prepend="$"
+                    type="number"
+                    help='The discount given to a customer (do not include the "-").'
+                    onChange={this.onChange}
+                    error={errors.discount}
+                />
             </div>
-            <div className="form-group col-md-3 text-center">
+        </div>
+        <div className="form-row mt-4">
+            <div className="form-group col-md-4 text-center">
                 <label className="text-center">Crawl Space</label>
                 <label className="switch switch-left-right">
                     <input
@@ -295,16 +411,16 @@ class CreateCallForm extends React.Component {
                     <span className="switch-handle"></span>
                 </label>
             </div>
-            <div className="form-group col-md-3 text-center">
-                <label className="text-center">Multi-Story</label>
+            <div className="form-group col-md-4 text-center">
+                <label className="text-center">Deck</label>
                 <label className="switch switch-left-right">
                     <input
                         type="checkbox"
                         className="switch-input"
-                        id="multi_story"
+                        id="deck"
                         onChange={this.handleChecked}
-                        checked={this.state.multi_story}
-                        name="multi_story"
+                        checked={this.state.deck}
+                        name="deck"
                     />
                     <span
                         className="switch-label"
@@ -314,7 +430,7 @@ class CreateCallForm extends React.Component {
                     <span className="switch-handle"></span>
                 </label>
             </div>
-            <div className="form-group col-md-3 text-center">
+            <div className="form-group col-md-4 text-center">
                 <label className="text-center">Pool/Spa</label>
                 <label className="switch switch-left-right">
                     <input
@@ -334,6 +450,105 @@ class CreateCallForm extends React.Component {
                 </label>
             </div>
         </div>
+        <div className="form-row">
+            <div className="form-group col-md-6 text-left">
+                {this.state.loading ? (
+                    <Spinner />
+                ) : (
+                    this.state.loaded ? (
+                        <div className="table-responsive">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Charge</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Base Inspection</td>
+                                        <td>${this.state.charges.base_inspection_charge.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Property Size Charge</td>
+                                        <td>${this.state.charges.property_size_charge.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Distance Charge ({this.state.miles} miles roundtrip)</td>
+                                        <td>${this.state.charges.distance_charge.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Property Age (Adjusted for size and age)</td>
+                                        <td>${this.state.charges.property_age_charge.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ancillary Charges</td>
+                                        <td>${this.state.charges.ancillary_charges.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discounts</td>
+                                        <td>(${this.state.charges.discounts.toFixed(2)})</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (<div></div>)
+                )}
+            </div>
+            <div className="form-group col-md-6 text-left">
+                {this.state.loading ? (
+                    <Spinner />
+                ) : (
+                    this.state.loaded ? (
+                        <div className="table-responsive">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Pricing</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Grand Total</td>
+                                        <td>${this.state.prices.grand_total.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 5%)</td>
+                                        <td>${this.state.prices.less_5.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 10%)</td>
+                                        <td>${this.state.prices.less_10.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 15%)</td>
+                                        <td>${this.state.prices.less_15.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 20%)</td>
+                                        <td>${this.state.prices.less_20.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 30%)</td>
+                                        <td>${this.state.prices.less_30.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 40%)</td>
+                                        <td>${this.state.prices.less_40.toFixed(2)}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grand Total (less 50%)</td>
+                                        <td>${this.state.prices.less_50.toFixed(2)}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (<div></div>)
+                )}
+            </div>
+        </div>        
+
         <div className="form-row">
             <div className="form-group col-md-4 text-left">
                 <TextFieldGroup
@@ -362,7 +577,8 @@ class CreateCallForm extends React.Component {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   status: state.status,
-  errors: state.errors
+  system_settings: state.system_settings,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { })(CreateCallForm);
