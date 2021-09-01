@@ -89,3 +89,52 @@ exports.postCall = (req, res) => {
     })
     .catch(e => res.status(400).json(e));
 };
+
+// @route   DELETE api/calls/:id
+// @desc    Deletes a specific call.
+// @access  Private
+exports.deleteCall = (req, res) => {
+    let errors = {};
+
+    // Check ID
+    if (!ObjectID.isValid(req.params.id)) {
+        errors.call = "There was no call found";
+        return res.status(400).json(errors);
+    }
+
+    Call.findByIdAndRemove(req.params.id)
+        .then((call) => {
+            if (!call) {
+                errors.call = "There was no call found";
+                res.status(404).json(errors);
+            }
+
+            // Save a new notification
+            let note_data = {
+                description: `A new call (${call.client_name}) has been deleted.`,
+                users_read: []
+            };
+
+            // Get user ID
+            User.findByToken(req.headers.authorization).then((user) => {
+                note_data.created_by = user._id;
+                note_data.date = new Date();
+            
+                // Save the notification
+                let notification = new Notification(note_data);
+            
+                notification
+                    .save()
+                    .then((note) => {
+                    note.users_read.push(user._id);
+                    note
+                        .save()
+                        .catch((err) => console.log(err));
+                    })
+                    .catch((err) => console.log(err));
+                });
+
+            res.json(call);
+        })
+        .catch((e) => res.status(400).send(e));
+};

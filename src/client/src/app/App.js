@@ -26,7 +26,7 @@ import NewCall from "../components/call/NewCall";
 
 const createHistory = require("history").createBrowserHistory;
 
-const history = createHistory();
+const history = createHistory({forceRefresh:true});
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);

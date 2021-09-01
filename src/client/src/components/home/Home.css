@@ -5,3 +5,12 @@
 .table-search-input-hide {
     display: none !important;
 }
+
+.btn-success {
+    background-color: green !important;
+    border-color: green !important;
+}
+
+.btn-sm {
+    font-size: 0.875rem !important;
+}

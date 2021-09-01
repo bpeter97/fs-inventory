@@ -15,5 +15,6 @@ router.route("/").get(helpers.getCalls).post(helpers.postCall);
 // @DELETE  Deletes a specific Call.
 // @access  public
 // router.route("/:id").get(helpers.getCall).patch(helpers.patchCall).delete(helpers.deleteCall);
+router.route("/:id").delete(helpers.deleteCall);
 
 module.exports = router;

@@ -1,7 +1,8 @@
 import {
     GET_CALLS,
     CALLS_LOADING,
-    CREATE_CALL
+    CREATE_CALL,
+    DELETE_CALL
   } from "../types/callTypes";
   
   const initialState = {
@@ -19,7 +20,14 @@ import {
       case CREATE_CALL:
         return {
           ...state,
-          call: action.payload
+          call: action.payload,
+          loading: false,
+        }
+      case DELETE_CALL:
+        return {
+          ...state,
+          call: action.payload,
+          loading: false,
         }
       case GET_CALLS:
         return {

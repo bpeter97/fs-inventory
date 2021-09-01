@@ -10,8 +10,9 @@ import Table from "./../common/Table";
 import Alert from "./../common/Alert";
 
 import { getJobs } from "./../../redux/actions/jobsActions";
-import { getCalls } from "./../../redux/actions/callActions";
+import { getCalls, deleteCall } from "./../../redux/actions/callActions";
 import CreateCallForm from "../call/CreateCallForm";
+import checkEmpty from "./../../validation/checkEmpty";
 
 function toCurrency(num) {
   let number = num;
@@ -24,7 +25,9 @@ class Home extends React.Component {
 
     this.state = {
       createCallModal: false,
-      showFilters: false
+      showFilters: false,
+      deleteVerification: false,
+      deleteId: null,
     }
   }
 
@@ -39,6 +42,34 @@ class Home extends React.Component {
 
   handleFilterShow() {
     this.setState({ showFilters: !this.state.showFilters });
+  }
+
+  editCall(id) {
+    console.log("Edit call");
+    console.log(id);
+  }
+
+  deleteCall(id) {
+    this.setState({
+      deleteVerification: !this.state.deleteVerification,
+      deleteId: id
+    });
+  }
+
+  closeCall() {
+    this.setState({
+      deleteVerification: !this.state.deleteVerification,
+      deleteId: null
+    });
+  }
+
+  deleteTheCall() {
+    this.props.deleteCall(this.state.deleteId);
+    setTimeout(() => {
+      if (checkEmpty(this.state.errors)) {
+        this.props.history.push("/");
+      }
+    }, 1000);
   }
 
   render() {
@@ -162,7 +193,34 @@ class Home extends React.Component {
         accessor: "quote",
         Cell: props => <div> {toCurrency(props.value)} </div>,
         width: 100,
-      },
+      },{
+				Header: "Actions",
+				id: "edit",
+				accessor: "_id",
+				width: 150,
+				Cell: ({ value }) => (
+					<div>
+          <button
+            className="btn btn-success btn-sm mx-1"
+            onClick={this.deleteCall.bind(this, value)}
+          >
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+            <button
+						className="btn btn-warning btn-sm mx-1"
+						onClick={this.editCall.bind(this, value)}
+					>
+						<i class="fas fa-pen-square"></i>
+					</button>
+          <button
+            className="btn btn-danger btn-sm mx-1"
+            onClick={this.deleteCall.bind(this, value)}
+          >
+            <i class="fas fa-minus-square"></i>
+          </button>
+          </div>
+				)
+			}
     ];
 
     let above_limits = 0;
@@ -336,6 +394,28 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+
+        <Modal show={this.state.deleteVerification} dialogClassName="modal-lg">
+          <Modal.Header closeButton onClick={() => this.deleteCall()}>
+            <Modal.Title>Just double checking!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Are you sure you want to delete the call?
+            <br/>
+            <button
+            className="btn btn-success mr-3 mt-5"
+            onClick={this.deleteTheCall.bind(this, this.state.deleteId)}
+          >
+            Delete The Call
+          </button>
+          <button
+            className="btn btn-danger mx-3 mt-5"
+            onClick={this.closeCall.bind(this)}
+          >
+            Cancel
+          </button>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }
@@ -347,4 +427,4 @@ const mapStateToProps = (state) => ({
   success: state.success
 });
 
-export default connect(mapStateToProps, { getJobs, getCalls })(Home);
+export default connect(mapStateToProps, { getJobs, getCalls, deleteCall })(Home);

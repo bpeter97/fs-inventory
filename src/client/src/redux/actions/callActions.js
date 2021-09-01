@@ -4,7 +4,8 @@ import axios from "axios";
 import {
   GET_CALLS,
   CREATE_CALL,
-  CALLS_LOADING
+  CALLS_LOADING,
+  DELETE_CALL
 } from "../types/callTypes";
 
 import { GET_ERRORS } from "../types/errorTypes";
@@ -54,6 +55,28 @@ export const createCall = (data) => (dispatch) => {
         payload: err.response.data,
       })
     );
+}
+
+export const deleteCall = (id) => (dispatch) => {
+  dispatch(setCallsLoading());
+  axios
+    .delete(`/api/calls/${id}`)
+    .then((res) => {
+      dispatch({
+        type: DELETE_CALL,
+        payload: res.data,
+      })
+      dispatch({
+        type: SET_SUCCESS,
+        payload: "Successfully deleted the call."
+      })
+    })
+    .catch((err) =>
+    dispatch({
+      type: GET_ERRORS,
+      payload: err.response.data,
+    })
+  );
 }
 
 export const setCallsLoading = () => {
