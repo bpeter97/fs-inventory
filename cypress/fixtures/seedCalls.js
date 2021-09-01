@@ -15,6 +15,8 @@ var seedCalls = [
     zipcode: "93292",
     square_foot: "1700",
     home_inspection: true,
+    year_built: "1956",
+    discount: 50.00,
     crawl: true,
     multi_story: false,
     pool_spa: true,

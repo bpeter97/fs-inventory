@@ -6,7 +6,7 @@ var seedUsers = [
   {
     _id: userOneId,
     username: "blpsr",
-    password: "thePassword",
+    password: "Victory2021!",
     first_name: "Brian",
     last_name: "Peter",
     suffix: "Sr",
