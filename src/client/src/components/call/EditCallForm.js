@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Button } from 'react-bootstrap';
 
 import TextFieldGroup from "./../forms/TextFieldGroup";
-import Alert from "../common/Alert";
 import DateFieldGroup from "../forms/DateFieldGroup";
 import "./CreateCallForm.css";
 import Spinner from "./../common/Spinner";
@@ -94,7 +93,7 @@ class CreateCallForm extends React.Component {
     }
 
   onSubmit = e => {
-    this.state.errors = null;
+    this.setState({errors: null});
     e.preventDefault();
 
     const callData = {
@@ -155,7 +154,9 @@ class CreateCallForm extends React.Component {
             axios(newConfig).then((res) => {
 
                 // Convert yards into miles.
+                // eslint-disable-next-line
                 let yards = new Number(res.data.features[0].properties.summary.distance);
+                // eslint-disable-next-line
                 let miles = new Number(parseFloat(yards/1760).toFixed(2));
 
                 // Make it a round trip!
@@ -175,7 +176,7 @@ class CreateCallForm extends React.Component {
         this.setState({loading: true});
 
         // Erase the errors
-        this.state.errors = null;
+        this.setState({errors: null});
 
         // Set the settings variable
         let settings = this.props.settings;
@@ -190,13 +191,17 @@ class CreateCallForm extends React.Component {
         let ancillary_charges = 0;
 
         if(this.state.crawl)
+        // eslint-disable-next-line
             ancillary_charges = ancillary_charges + new Number(settings.crawlspace_charge.$numberDecimal);
         if(this.state.pool_spa)
+        // eslint-disable-next-line
             ancillary_charges = ancillary_charges + new Number(settings.pool_spa_charge.$numberDecimal);
         if(this.state.deck)
+        // eslint-disable-next-line
             ancillary_charges = ancillary_charges + new Number(settings.deck_charge.$numberDecimal);
 
         // Calculate the property age charge, adjusted for size and age).
+        // eslint-disable-next-line
         let age = (new Number(new Date().getFullYear()) - new Number(new Date(this.state.year_built).getFullYear()) - 1);
         let modified_age = age * settings.age_modifier.$numberDecimal;
         let property_age_charge = (property_size_charge*modified_age/100);
@@ -221,6 +226,7 @@ class CreateCallForm extends React.Component {
                 property_size_charge + 
                 property_age_charge +
                 ancillary_charges -
+                // eslint-disable-next-line
                 new Number(this.state.discount)
             );
     
@@ -243,6 +249,7 @@ class CreateCallForm extends React.Component {
                 property_size_charge: property_size_charge,
                 property_age_charge: property_age_charge,
                 ancillary_charges: ancillary_charges,
+                // eslint-disable-next-line
                 discounts: new Number(this.state.discount),
             }
     
@@ -363,7 +370,6 @@ class CreateCallForm extends React.Component {
                 <TextFieldGroup
                     label="State"
                     placeholder="CA"
-                    value="CA"
                     value={this.state.state}
                     name="state"
                     type="text"

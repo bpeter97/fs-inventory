@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTable, usePagination, useFilters, useSortBy } from "react-table";
 import "./Table.css";
 
@@ -39,6 +39,7 @@ function DefaultColumnFilterHide({
 }
 
 function Table({ columns, data, showSelect=true, pagination=true, tableReference=null, filterShow=true}) {
+  // eslint-disable-next-line
   const filterTypes = React.useMemo(
     () => ({
       text: (rows, id, filterValue) => {
@@ -57,11 +58,13 @@ function Table({ columns, data, showSelect=true, pagination=true, tableReference
 
   let shouldFilterShow = filterShow;
 
+  // eslint-disable-next-line
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
       Filter: shouldFilterShow ? DefaultColumnFilter : DefaultColumnFilterHide,
     }),
+    // eslint-disable-next-line
     []
   )
 
@@ -69,8 +72,6 @@ function Table({ columns, data, showSelect=true, pagination=true, tableReference
   const {
     getTableProps,
     getTableBodyProps,
-    getHeaderProps,
-    getCellProps,
     headerGroups,
     prepareRow,
     page, // Instead of using 'rows', we'll use page,

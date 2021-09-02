@@ -1,21 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import "./NewCall.css";
-
 import Breadcrumb from "../common/Breadcrumb";
-import CreateCallForm from "./CreateCallForm";
-
 import { getSystemSettings } from "../../redux/actions/systemSettingsActions";
 import { getCall } from "../../redux/actions/callActions";
-
 import EditCallForm from "./EditCallForm";
 import Spinner from "../common/Spinner";
 
 class EditCall extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getSystemSettings();

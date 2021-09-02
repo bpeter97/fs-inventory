@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import TextFieldGroup from "../forms/TextFieldGroup";
-import SelectInput from "../forms/SelectInput";
 
 import { updateSystemSettings } from "../../redux/actions/systemSettingsActions";
 import checkEmpty from "../../validation/checkEmpty";
@@ -38,12 +37,20 @@ class EditSystemSettingsForm extends React.Component {
 
     const priceData = {
         _id: this.props.systemSettings._id,
+        // Leaving new Number as a constructor to ensure that the values are passed as a number rather than a text string.
+        // eslint-disable-next-line
         base_inspection_charge: new Number(this.state.base_inspection_charge),
+        // eslint-disable-next-line
         distance_modifier: new Number(this.state.distance_modifier),
+        // eslint-disable-next-line
         age_modifier: new Number(this.state.age_modifier),
+        // eslint-disable-next-line
         square_footage_modifier: new Number(this.state.square_footage_modifier),
+        // eslint-disable-next-line
         pool_spa_charge: new Number(this.state.pool_spa_charge),
+        // eslint-disable-next-line
         deck_charge: new Number(this.state.deck_charge),
+        // eslint-disable-next-line
         crawlspace_charge: new Number(this.state.crawlspace_charge),
     };
 

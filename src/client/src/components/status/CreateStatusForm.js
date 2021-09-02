@@ -24,7 +24,7 @@ class CreateStatusForm extends React.Component {
   }
 
   onSubmit = e => {
-    this.state.errors = null;
+    this.setState({errors: null});
     e.preventDefault();
 
     const statusData = {

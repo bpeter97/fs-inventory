@@ -9,9 +9,6 @@ import CreateCallForm from "../call/CreateCallForm";
 import { getSystemSettings } from "./../../redux/actions/systemSettingsActions";
 
 class NewCall extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getSystemSettings();

@@ -77,6 +77,7 @@ class Home extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line
     Date.prototype.formatMMDDYYYY = function(){
       return (this.getMonth() + 1) + 
       "/" +  this.getDate() +
@@ -213,19 +214,19 @@ class Home extends React.Component {
             className="btn btn-success btn-sm mx-1"
             onClick={this.deleteCall.bind(this, value)}
           >
-            <i class="fas fa-exchange-alt"></i>
+            <i className="fas fa-exchange-alt"></i>
           </button>
             <button
 						className="btn btn-warning btn-sm mx-1"
 						onClick={this.editCall.bind(this, value)}
 					>
-						<i class="fas fa-pen-square"></i>
+						<i className="fas fa-pen-square"></i>
 					</button>
           <button
             className="btn btn-danger btn-sm mx-1"
             onClick={this.deleteCall.bind(this, value)}
           >
-            <i class="fas fa-minus-square"></i>
+            <i className="fas fa-minus-square"></i>
           </button>
           </div>
 				)

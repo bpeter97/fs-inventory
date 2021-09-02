@@ -128,6 +128,7 @@ class Sidebar extends React.Component {
         </li> */}
 
         <li className="nav-item">
+          {/* eslint-disable-next-line */}
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee" aria-expanded="true" aria-controls="collapseEmployee">
             <i className="fa fa-fw fa-users"></i> 
             <span>Calls</span>
@@ -146,6 +147,7 @@ class Sidebar extends React.Component {
         </li>
 
         <li className="nav-item">
+          {/* eslint-disable-next-line */}
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
             <i className="fa fa-fw fa-user"></i> 
             <span>Users</span>
