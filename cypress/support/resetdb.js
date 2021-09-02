@@ -25,7 +25,6 @@ const { seedInspections } = require("../fixtures/seedInspections");
 const { seedJobs } = require("../fixtures/seedJobs");
 const { seedClients } = require("../fixtures/seedClients");
 const { seedCalls } = require("../fixtures/seedCalls");
-const calls = require("../../src/server/routes/validation/calls");
 const { seedSystemSettings } = require("../fixtures/seedSystemSetting");
 
 // Grab the URI for the DB.
@@ -36,8 +35,6 @@ mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("DB Connected"))
   .catch((err) => console.error("DB Error", err));
-
-mongoose.set("useFindAndModify", false);
 
 // Delete settings, re-insert new settings.
 Settings.deleteMany({}).then(() => {
@@ -185,31 +182,31 @@ Settings.deleteMany({}).then(() => {
                                                   console.log("The system settings have been saved.");
                                                   console.log("Exiting DB Reset Script");
                                                   process.exit();
-                                                });
-                                              })
-                                            })
-                                          })
-                                        })
-                                      });
-                                    });
-                                  });
-                                });
-                              });
-                            });
-                          });
-                        });
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    });
-  });
-});
+                                                }).catch(e => console.log(e));
+                                              }).catch(e => console.log(e));
+                                            }).catch(e => console.log(e));
+                                          }).catch(e => console.log(e));
+                                        }).catch(e => console.log(e));
+                                      }).catch(e => console.log(e));
+                                    }).catch(e => console.log(e));
+                                  }).catch(e => console.log(e));
+                                }).catch(e => console.log(e));
+                              }).catch(e => console.log(e));
+                            }).catch(e => console.log(e));
+                          }).catch(e => console.log(e));
+                        }).catch(e => console.log(e));
+                      }).catch(e => console.log(e));
+                    }).catch(e => console.log(e));
+                  }).catch(e => console.log(e));
+                }).catch(e => console.log(e));
+              }).catch(e => console.log(e));
+            }).catch(e => console.log(e));
+          }).catch(e => console.log(e));
+        }).catch(e => console.log(e));
+      }).catch(e => console.log(e));
+    }).catch(e => console.log(e));
+  }).catch(e => console.log(e));
+}).catch(e => console.log(e));
 
 module.exports = {
   seedUsers,

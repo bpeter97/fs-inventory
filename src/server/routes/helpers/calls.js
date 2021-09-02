@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Call = require("../../models/Call");
 const validateCallInput = require("../validation/calls");
 
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // @route   GET api/Call/
 // @desc    Retrieves all Call.

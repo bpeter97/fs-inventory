@@ -6,7 +6,7 @@ describe("GET /inspections", () => {
     it("should return all inspections.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -49,7 +49,7 @@ describe("GET /inspections/:id", () => {
     it("should return a specific inspection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -90,7 +90,7 @@ describe("GET /inspections/:id", () => {
     it("should note retrieve a specific isnpection with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -140,7 +140,7 @@ describe("POST /inspections", () => {
     it("should create a new inspection if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -154,7 +154,7 @@ describe("POST /inspections", () => {
                 year_built: 2020,
                 people_at_inspection: "Buyer(s) and Agent",
                 inspector: null,
-                date_of_inspection: Date()
+                date_of_inspection: new Date()
             }
 
             var request = {
@@ -185,7 +185,7 @@ describe("POST /inspections", () => {
     it("should not create a new inspection if data is missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -230,7 +230,7 @@ describe("PATCH /inspections/:id", () => {
     it("should update a inspection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -273,7 +273,7 @@ describe("PATCH /inspections/:id", () => {
     it("should not update a inspection with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -320,7 +320,7 @@ describe("PATCH /inspections/:id", () => {
     it("should not update a inspection with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -375,7 +375,7 @@ describe("DELETE /inspections/:id", () => {
     it("should delete a inspection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -421,7 +421,7 @@ describe("DELETE /inspections/:id", () => {
     it("should not delete a inspection with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -454,7 +454,7 @@ describe("DELETE /inspections/:id", () => {
     it("should not delete a inspection with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

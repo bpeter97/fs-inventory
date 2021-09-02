@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Client = require("../../models/Client");
 const validateClientInput = require("../validation/clients");
 
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // @route   GET api/Clients/
 // @desc    Retrieves all Clients.

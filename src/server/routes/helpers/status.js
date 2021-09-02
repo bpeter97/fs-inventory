@@ -1,11 +1,10 @@
 const _ = require("lodash");
-const mongoose = require("mongoose");
 
 // Require models
 const Status = require("../../models/Status");
 const validateStatusInput = require("../validation/status");
 
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // @route   GET api/Status/
 // @desc    Retrieves all Status.

@@ -6,7 +6,7 @@ describe("GET /requirements", () => {
     it("should return all requirements.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -46,7 +46,7 @@ describe("GET /requirements/:id", () => {
     it("should return a specific requirement.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -85,7 +85,7 @@ describe("GET /requirements/:id", () => {
     it("should note retrieve a specific requirement with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -135,7 +135,7 @@ describe("POST /requirements", () => {
     it("should create a new requirement if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -178,7 +178,7 @@ describe("POST /requirements", () => {
     it("should not create a new requirement if data is missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -222,7 +222,7 @@ describe("PATCH /requirements/:id", () => {
     it("should update a requirement.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -272,7 +272,7 @@ describe("PATCH /requirements/:id", () => {
     it("should not update a requirement with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -327,7 +327,7 @@ describe("PATCH /requirements/:id", () => {
     it("should not update a client with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -388,7 +388,7 @@ describe("DELETE /requirements/:id", () => {
     it("should delete a requirement.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -434,7 +434,7 @@ describe("DELETE /requirements/:id", () => {
     it("should not delete a requirement with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -467,7 +467,7 @@ describe("DELETE /requirements/:id", () => {
     it("should not delete a status with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

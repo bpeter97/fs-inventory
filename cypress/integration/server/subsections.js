@@ -6,7 +6,7 @@ describe("GET /subsections", () => {
     it("should return all subsections.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -46,7 +46,7 @@ describe("GET /subsections/:id", () => {
     it("should return a specific subsection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -86,7 +86,7 @@ describe("GET /subsections/:id", () => {
     it("should note retrieve a specific subsection with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -136,7 +136,7 @@ describe("POST /subsections", () => {
     it("should create a new subsection if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -177,7 +177,7 @@ describe("POST /subsections", () => {
     it("should not create a new subsection if data is missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -219,7 +219,7 @@ describe("PATCH /subsections/:id", () => {
     it("should update a subsection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -262,7 +262,7 @@ describe("PATCH /subsections/:id", () => {
     it("should not update a subsection with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -315,7 +315,7 @@ describe("PATCH /subsections/:id", () => {
     it("should not update a subsection with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -374,7 +374,7 @@ describe("DELETE /subsections/:id", () => {
     it("should delete a subsection.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -420,7 +420,7 @@ describe("DELETE /subsections/:id", () => {
     it("should not delete a subsection with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -453,7 +453,7 @@ describe("DELETE /subsections/:id", () => {
     it("should not delete a status with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

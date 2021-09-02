@@ -14,7 +14,7 @@ import inspectionReducer from "./inspectionReducer";
 import callReducer from "./callReducer";
 import successReducer from "./successReducer";
 
-export default (history) =>
+const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     errors: errorReducer,
@@ -30,3 +30,5 @@ export default (history) =>
     calls: callReducer,
     success: successReducer,
   });
+
+  export default rootReducer;

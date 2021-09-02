@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 var seedSubSections = [
     {

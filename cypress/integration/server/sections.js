@@ -6,7 +6,7 @@ describe("GET /sections", () => {
     it("should return all sections.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -48,7 +48,7 @@ describe("GET /sections/:id", () => {
     it("should return a specific section.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -89,7 +89,7 @@ describe("GET /sections/:id", () => {
     it("should note retrieve a specific section with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -139,7 +139,7 @@ describe("POST /sections", () => {
     it("should create a new section if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -180,7 +180,7 @@ describe("POST /sections", () => {
     it("should not create a new section if data is missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -222,7 +222,7 @@ describe("PATCH /sections/:id", () => {
     it("should update a section.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -265,7 +265,7 @@ describe("PATCH /sections/:id", () => {
     it("should not update a section with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -312,7 +312,7 @@ describe("PATCH /sections/:id", () => {
     it("should not update a section with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -366,7 +366,7 @@ describe("DELETE /sections/:id", () => {
     it("should delete a section.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -412,7 +412,7 @@ describe("DELETE /sections/:id", () => {
     it("should not delete a section with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -445,7 +445,7 @@ describe("DELETE /sections/:id", () => {
     it("should not delete a status with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

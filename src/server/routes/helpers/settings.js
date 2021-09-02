@@ -1,11 +1,6 @@
 const _ = require("lodash");
-const mongoose = require("mongoose");
-
-// Require models
 const Settings = require("../../models/Settings");
-const User = require("../../models/User");
-
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // @route   GET api/settings/:id
 // @desc    Retrieves all notifications.

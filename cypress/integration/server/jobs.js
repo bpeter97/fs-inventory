@@ -6,7 +6,7 @@ describe("GET /jobs", () => {
     it("should return all jobs.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -50,7 +50,7 @@ describe("GET /jobs/:id", () => {
     it("should return a specific job.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -92,7 +92,7 @@ describe("GET /jobs/:id", () => {
     it("should note retrieve a specific job with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -142,7 +142,7 @@ describe("POST /jobs", () => {
     it("should create a new job if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -192,7 +192,7 @@ describe("PATCH /jobs/:id", () => {
     it("should update a job.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -235,7 +235,7 @@ describe("PATCH /jobs/:id", () => {
     it("should not update a job with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -289,7 +289,7 @@ describe("DELETE /jobs/:id", () => {
     it("should delete a job.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -335,7 +335,7 @@ describe("DELETE /jobs/:id", () => {
     it("should not delete a job with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -368,7 +368,7 @@ describe("DELETE /jobs/:id", () => {
     it("should not delete a job with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

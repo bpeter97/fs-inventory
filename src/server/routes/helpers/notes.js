@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Note = require("../../models/Note");
 const validateNoteInput = require("../validation/notes");
 
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // @route   GET api/Notes/
 // @desc    Retrieves all Notes.

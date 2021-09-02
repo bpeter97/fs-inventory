@@ -5,8 +5,6 @@ const mongoose = require("mongoose");
 const Notification = require("../../models/Notification");
 const User = require("../../models/User");
 
-const { ObjectID } = require("mongodb");
-
 // @route   POST api/notifications/
 // @desc    Creates a new notification.
 // @access  Private

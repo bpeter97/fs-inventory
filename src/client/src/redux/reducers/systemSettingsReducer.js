@@ -9,7 +9,7 @@ const initialState = {
   loading: false,
 };
 
-export default function (state = initialState, action) {
+const systemSettingsReducer = function (state = initialState, action) {
   switch (action.type) {
     case SYSTEM_SETTINGS_LOADING:
       return {
@@ -33,3 +33,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default systemSettingsReducer;

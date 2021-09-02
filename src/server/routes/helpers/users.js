@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const bcrypt = require("bcryptjs");
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // Require Models
 const User = require("../../models/User");

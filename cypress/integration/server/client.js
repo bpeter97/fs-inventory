@@ -6,7 +6,7 @@ describe("GET /clients", () => {
     it("should return all clients.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -46,7 +46,7 @@ describe("POST /clients", () => {
     it("should create a new client if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -85,7 +85,7 @@ describe("POST /clients", () => {
     it("should not create a new client if the client already exists.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -119,7 +119,7 @@ describe("POST /clients", () => {
     it("should not create a new client if data is missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -159,7 +159,7 @@ describe("GET /clients/:id", () => {
     it("should return a specific clients.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -198,7 +198,7 @@ describe("GET /clients/:id", () => {
     it("should note retrieve a specific clients with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -248,7 +248,7 @@ describe("PATCH /clients/:id", () => {
     it("should update a client.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -294,7 +294,7 @@ describe("PATCH /clients/:id", () => {
     it("should not update a client with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -345,7 +345,7 @@ describe("PATCH /clients/:id", () => {
     it("should not update a client with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -402,7 +402,7 @@ describe("DELETE /clients/:id", () => {
     it("should delete a client.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -448,7 +448,7 @@ describe("DELETE /clients/:id", () => {
     it("should not delete a client with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -481,7 +481,7 @@ describe("DELETE /clients/:id", () => {
     it("should not delete a client with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

@@ -6,7 +6,7 @@ describe("GET /notes", () => {
     it("should return all notes registered.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -56,7 +56,7 @@ describe("POST /notes", () => {
     it("should create a new note and return the newly created note.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -84,7 +84,7 @@ describe("POST /notes", () => {
     it("should not create a new note if missing data.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -124,7 +124,7 @@ describe("GET /notes/:id", () => {
     it("should retrieve a note within the database if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -163,7 +163,7 @@ describe("GET /notes/:id", () => {
     it("should not retrieve a note with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -208,7 +208,7 @@ describe("GET /notes/:id", () => {
 
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -249,7 +249,7 @@ describe("PATCH /notes/:id", () => {
     it("should update a note that is already within the database.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -292,7 +292,7 @@ describe("PATCH /notes/:id", () => {
     it("should not update a note if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -325,7 +325,7 @@ describe("PATCH /notes/:id", () => {
     it("should not update a note if missing data.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -379,7 +379,7 @@ describe("DELETE /notes/:id", () => {
     it("should delete a note that is already within the database.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -425,7 +425,7 @@ describe("DELETE /notes/:id", () => {
     it("should not delete a note if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

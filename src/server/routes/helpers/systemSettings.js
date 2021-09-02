@@ -1,8 +1,5 @@
 const _ = require("lodash");
-
-// Require models
 const SystemSetting = require("../../models/SystemSetting");
-const { ObjectID } = require("mongodb");
 
 // @route   GET api/systemsettings/
 // @desc    Retrieves all system settings.

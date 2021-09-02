@@ -6,7 +6,7 @@ describe("GET /status", () => {
     it("should return all status registered.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -46,7 +46,7 @@ describe("POST /status", () => {
     it("should create a new status if logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -85,7 +85,7 @@ describe("POST /status", () => {
     it("should not create a new status if the label already exists.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -119,7 +119,7 @@ describe("POST /status", () => {
     it("should not create a new status if the initials already exists.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -153,7 +153,7 @@ describe("POST /status", () => {
     it("should not create a new status if label or initials are missing", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -193,7 +193,7 @@ describe("GET /status/:id", () => {
     it("should return a specific status.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -232,7 +232,7 @@ describe("GET /status/:id", () => {
     it("should note retrieve a specific status with an incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -282,7 +282,7 @@ describe("PATCH /status/:id", () => {
     it("should update a status.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -328,7 +328,7 @@ describe("PATCH /status/:id", () => {
     it("should not update a status with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -379,7 +379,7 @@ describe("PATCH /status/:id", () => {
     it("should not update a status with incorrect fields.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -430,7 +430,7 @@ describe("PATCH /status/:id", () => {
     it("should not update a status to one that has a label that already exists.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -481,7 +481,7 @@ describe("PATCH /status/:id", () => {
     it("should not update a status to one that has initials that already exists.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -538,7 +538,7 @@ describe("DELETE /status/:id", () => {
     it("should delete a status.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -584,7 +584,7 @@ describe("DELETE /status/:id", () => {
     it("should not delete a status with if not logged in.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {
@@ -617,7 +617,7 @@ describe("DELETE /status/:id", () => {
     it("should not delete a status with incorrect ID.", () => {
         var login_info = {
             username: "blpsr",
-            password: "thePassword",
+            password: "Victory2021!",
         };
 
         cy.request("POST", "api/login", login_info).then((response) => {

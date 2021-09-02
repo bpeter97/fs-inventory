@@ -5,7 +5,7 @@ const initialState = {
     message: null,
 };
 
-export default function (state = initialState, action) {
+const successReducer = function (state = initialState, action) {
   switch (action.type) {
     case SET_SUCCESS: {
       return {
@@ -21,3 +21,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default successReducer;

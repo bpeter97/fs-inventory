@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // Models
 const Inspection = require("../../models/Inspection");
@@ -225,7 +225,7 @@ exports.patchInspection = (req, res) => {
     update.sections = [];
 
     // If there are sections, add them to the update.
-    if (req.body.sections !== undefined) {
+    if (req.body.sections !== null) {
         req.body.sections.forEach((section) => {
             update.sections.push(section);
         });

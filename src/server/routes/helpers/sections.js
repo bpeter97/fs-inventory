@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 // Require models
 const SubSection = require("../../models/SubSection");

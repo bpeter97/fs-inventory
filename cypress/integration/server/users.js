@@ -8,7 +8,7 @@ describe("GET /users", () => {
   it("should return all users registered in the management system.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((response) => {
@@ -48,7 +48,7 @@ describe("DELETE /users/:id", () => {
   it("should delete the user with the provided ID.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((login) => {
@@ -81,7 +81,7 @@ describe("DELETE /users/:id", () => {
   it("should not delete the user without being logged in.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((login) => {
@@ -117,7 +117,7 @@ describe("GET /users/:id", () => {
   it("should retrieve a specific user with the provided ID.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((login) => {
@@ -151,7 +151,7 @@ describe("GET /users/:id", () => {
   it("should not retrieve a specific user without being logged in.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((login) => {
@@ -187,7 +187,7 @@ describe("PATCH /users/:id", () => {
   it("should update a specific user with the provided ID.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     // Login
@@ -206,7 +206,7 @@ describe("PATCH /users/:id", () => {
       cy.request(request).then((users) => {
         let new_body = {
           username: "blpsr",
-          password: "thePassword",
+          password: "Victory2021!",
           first_name: "Brian - Patched",
           last_name: "Peter",
           suffix: "Sr",
@@ -238,7 +238,7 @@ describe("PATCH /users/:id", () => {
   it("should not update a user without being logged in.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     // Login
@@ -257,7 +257,7 @@ describe("PATCH /users/:id", () => {
       cy.request(request).then((users) => {
         let new_body = {
           username: "blpsr",
-          password: "thePassword",
+          password: "Victory2021!",
           first_name: "Brian - Patched",
           last_name: "Peter",
           suffix: "Sr",
@@ -283,7 +283,7 @@ describe("PATCH /users/:id", () => {
   it("should not update with validation errors.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     // Login
@@ -367,7 +367,7 @@ describe("POST /register", () => {
     });
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((response) => {
@@ -482,7 +482,7 @@ describe("POST /login", () => {
   it("should return the success property if logs in successfully.", () => {
     var login_info = {
       username: "blpsr",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/login", login_info).then((response) => {
@@ -493,7 +493,7 @@ describe("POST /login", () => {
   it("should not allow a non-approved user to log in.", () => {
     var login_info = {
       username: "blpj",
-      password: "thePassword",
+      password: "Victory2021!",
     };
 
     cy.request("POST", "api/register", newUser).then((response) => {

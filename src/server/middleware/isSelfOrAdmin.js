@@ -1,5 +1,5 @@
 const jwt_decode = require("jwt-decode");
-const { ObjectID } = require("mongodb");
+const ObjectID = require('mongoose').Types.ObjectId;
 
 const isSelfOrAdmin = (req, res, next) => {
   let errors = {
