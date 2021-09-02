@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 // Require Helper
-const helpers = require("../helpers/Jobs");
+const helpers = require("../helpers/jobs");
 
 // @route   api/Jobs
 // @GET     Retrieves all Jobs.
