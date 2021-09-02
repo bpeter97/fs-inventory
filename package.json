@@ -25,11 +25,11 @@
     "prettier": "2.0.5"
   },
   "scripts": {
-    "start": "set NODE_ENV=development&& concurrently \"npm run server\" \"npm run client\"",
+    "start": "node src/server/server.js",
     "server": "node src/server/server.js",
     "heroku-postbuild": "cd src/client && npm install && npm run build",
     "dev": "set NODE_ENV=development&& concurrently \"npm run server\" \"npm run client\"",
-    "client": "npm start --prefix ./src/client",
+    "client": "npm start --prefix src/client",
     "resetdb": "node ./cypress/support/resetdb.js",
     "cypress:open": "cypress open --config watchForFileChanges=false",
     "cy:record": "cypress run --record --key 89a040d4-9c6c-43b4-87b5-43fb56fb4b87",
