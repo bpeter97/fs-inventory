@@ -40,16 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 // Initialize express into a variable called app
 const app = express();
 
-// app.use(express.static(path.join(__dirname, './../client/build')));
-
-// if (process.env.NODE_ENV === 'production') {
-// 	// static folder
-// 	app.use(express.static(__dirname + './../client/build'));
-
-// 	app.get(/.*/, (req, res) =>
-// 		res.sendFile(__dirname + './../client/build/index.html'),
-// 	);
-// }
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Middleware for body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -79,14 +70,5 @@ mongoose
 	.catch((err) => console.error('DB Error', err));
 
 const port = process.env.PORT || 5000;
-
-// check if production
-// if (process.env.NODE_ENV === 'production') {
-// 	app.enable('trust proxy');
-// 	app.use((req, res, next) => {
-// 		if (req.secure) next();
-// 		else res.redirect(`https://'${req.headers.host}${req.url}`);
-// 	});
-// }
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
