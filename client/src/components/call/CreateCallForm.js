@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
-import TextFieldGroup from "./../forms/TextFieldGroup";
-import DateFieldGroup from "../forms/DateFieldGroup";
-import "./CreateCallForm.css";
-import Spinner from "./../common/Spinner";
+import TextFieldGroup from './../forms/TextFieldGroup';
+import DateFieldGroup from '../forms/DateFieldGroup';
+import './CreateCallForm.css';
+import Spinner from './../common/Spinner';
 
-import { createCall } from "./../../redux/actions/callActions";
-import checkEmpty from "./../../validation/checkEmpty";
-import axios from "axios";
+import { createCall } from './../../redux/actions/callActions';
+import checkEmpty from './../../validation/checkEmpty';
+import axios from 'axios';
 
 class CreateCallForm extends React.Component {
 	constructor() {
@@ -17,12 +17,12 @@ class CreateCallForm extends React.Component {
 		this.state = {
 			date: new Date(),
 			follow_up: new Date(),
-			client_name: "",
-			phone_number: "",
-			address: "",
-			city: "",
-			state: "CA",
-			zipcode: "",
+			client_name: '',
+			phone_number: '',
+			address: '',
+			city: '',
+			state: 'CA',
+			zipcode: '',
 			square_foot: 0,
 			home_inspection: false,
 			crawl: false,
@@ -78,6 +78,7 @@ class CreateCallForm extends React.Component {
 			city: this.state.city,
 			state: this.state.state,
 			zipcode: this.state.zipcode,
+			year_built: this.state.year_built,
 			square_foot: this.state.square_foot,
 			discount: this.state.discount,
 			home_inspection: this.state.home_inspection,
@@ -92,13 +93,13 @@ class CreateCallForm extends React.Component {
 		this.props.createCall(callData);
 		setTimeout(() => {
 			if (checkEmpty(this.state.errors)) {
-				this.props.history.push("/");
+				this.props.history.push('/');
 			}
 		}, 1000);
 	};
 
 	getDistance = (destination) => {
-		let token = "5b3ce3597851110001cf6248ede48b86cd9243b5aee182415086cc61";
+		let token = '5b3ce3597851110001cf6248ede48b86cd9243b5aee182415086cc61';
 
 		// Set default coordinates.
 		let start_coords = `-119.26739628519907,36.3169857958443`;
@@ -108,7 +109,7 @@ class CreateCallForm extends React.Component {
 
 		// Get new address' coordinates.
 		var config = {
-			method: "get",
+			method: 'get',
 			url: geocode_url,
 			headers: {},
 		};
@@ -120,7 +121,7 @@ class CreateCallForm extends React.Component {
 				let dir_url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${token}&start=${start_coords}&end=${end_coords}`;
 
 				let newConfig = {
-					method: "get",
+					method: 'get',
 					url: dir_url,
 					headers: {},
 				};
@@ -130,11 +131,11 @@ class CreateCallForm extends React.Component {
 						// Convert yards into miles.
 						// eslint-disable-next-line
 						let yards = new Number(
-							res.data.features[0].properties.summary.distance
+							res.data.features[0].properties.summary.distance,
 						);
 						// eslint-disable-next-line
 						let miles = new Number(
-							parseFloat(yards / 1760).toFixed(2)
+							parseFloat(yards / 1760).toFixed(2),
 						);
 
 						// Make it a round trip!
@@ -166,7 +167,7 @@ class CreateCallForm extends React.Component {
 		// Get the property size charge, square footage multiplied by square_footage_modifier.
 		let property_size_charge = parseFloat(
 			this.props.settings.square_footage_modifier.$numberDecimal *
-				this.state.square_foot
+				this.state.square_foot,
 		);
 
 		// Calculate additional charges (pool, deck, crawlspace, etc.)
@@ -259,9 +260,9 @@ class CreateCallForm extends React.Component {
 	};
 
 	onDateChange = (newDate, whichDate) => {
-		if (whichDate === "date") {
+		if (whichDate === 'date') {
 			this.setState({ date: newDate });
-		} else if (whichDate === "follow-up") {
+		} else if (whichDate === 'follow-up') {
 			this.setState({ follow_up: newDate });
 		}
 	};
@@ -289,7 +290,7 @@ class CreateCallForm extends React.Component {
 					<div className="form-group col-md-4 text-left">
 						<DateFieldGroup
 							date={this.state.date}
-							onChange={(e) => this.onDateChange(e, "date")}
+							onChange={(e) => this.onDateChange(e, 'date')}
 							label="Call Date"
 							help="The date the call was received."
 						/>
@@ -297,7 +298,7 @@ class CreateCallForm extends React.Component {
 					<div className="form-group col-md-4 text-left">
 						<DateFieldGroup
 							date={this.state.follow_up}
-							onChange={(e) => this.onDateChange(e, "follow-up")}
+							onChange={(e) => this.onDateChange(e, 'follow-up')}
 							label="Follow-Up Date"
 							help="The date to place the follow-up call."
 						/>
@@ -429,7 +430,7 @@ class CreateCallForm extends React.Component {
 								className="switch-label"
 								data-on="Yes"
 								data-off="No"
-							></span>{" "}
+							></span>{' '}
 							<span className="switch-handle"></span>
 						</label>
 					</div>
@@ -448,7 +449,7 @@ class CreateCallForm extends React.Component {
 								className="switch-label"
 								data-on="Yes"
 								data-off="No"
-							></span>{" "}
+							></span>{' '}
 							<span className="switch-handle"></span>
 						</label>
 					</div>
@@ -467,7 +468,7 @@ class CreateCallForm extends React.Component {
 								className="switch-label"
 								data-on="Yes"
 								data-off="No"
-							></span>{" "}
+							></span>{' '}
 							<span className="switch-handle"></span>
 						</label>
 					</div>
@@ -491,7 +492,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.charges.base_inspection_charge.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -500,7 +501,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.charges.property_size_charge.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -513,7 +514,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.charges.distance_charge.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -525,7 +526,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.charges.property_age_charge.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -534,7 +535,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.charges.ancillary_charges.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -543,7 +544,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												($
 												{this.state.charges.discounts.toFixed(
-													2
+													2,
 												)}
 												)
 											</td>
@@ -573,7 +574,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.grand_total.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -582,7 +583,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_5.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -591,7 +592,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_10.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -600,7 +601,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_15.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -609,7 +610,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_20.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -618,7 +619,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_30.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -627,7 +628,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_40.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
@@ -636,7 +637,7 @@ class CreateCallForm extends React.Component {
 											<td>
 												$
 												{this.state.prices.less_50.toFixed(
-													2
+													2,
 												)}
 											</td>
 										</tr>
