@@ -16,7 +16,7 @@ import { SET_SUCCESS } from '../types/successTypes';
 export const getCalls = () => (dispatch) => {
 	dispatch(setCallsLoading());
 	axios
-		.get(`${process.env.API_URI}/calls`)
+		.get(`https://vhi-jm.herokuapp.com/api/calls`)
 		.then((res) => {
 			let calls = res.data.map((element) => {
 				return {
@@ -45,7 +45,7 @@ export const getCalls = () => (dispatch) => {
 export const getCall = (id) => (dispatch) => {
 	dispatch(setCallsLoading());
 	axios
-		.get(`${process.env.API_URI}/calls/${id}`)
+		.get(`https://vhi-jm.herokuapp.com/api/calls/${id}`)
 		.then((res) => {
 			dispatch({
 				type: GET_CALL,
@@ -63,7 +63,7 @@ export const getCall = (id) => (dispatch) => {
 export const createCall = (data) => (dispatch) => {
 	dispatch(setCallsLoading());
 	axios
-		.post(`${process.env.API_URI}/calls`, data)
+		.post(`https://vhi-jm.herokuapp.com/api/calls`, data)
 		.then((res) => {
 			dispatch({
 				type: CREATE_CALL,
@@ -85,7 +85,7 @@ export const createCall = (data) => (dispatch) => {
 export const updateCall = (id, data) => (dispatch) => {
 	dispatch(setCallsLoading());
 	axios
-		.patch(`${process.env.API_URI}/calls/${id}`, data)
+		.patch(`https://vhi-jm.herokuapp.com/api/calls/${id}`, data)
 		.then((res) => {
 			dispatch({
 				type: UPDATE_CALL,
@@ -107,7 +107,7 @@ export const updateCall = (id, data) => (dispatch) => {
 export const deleteCall = (id) => (dispatch) => {
 	dispatch(setCallsLoading());
 	axios
-		.delete(`${process.env.API_URI}/calls/${id}`)
+		.delete(`https://vhi-jm.herokuapp.com/api/calls/${id}`)
 		.then((res) => {
 			dispatch({
 				type: DELETE_CALL,

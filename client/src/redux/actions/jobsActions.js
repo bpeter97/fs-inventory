@@ -8,7 +8,7 @@ import { GET_ERRORS } from './../types/errorTypes';
 export const getJobs = (id) => (dispatch) => {
 	dispatch(setJobsLoading());
 	axios
-		.get(`${process.env.API_URI}/jobs`)
+		.get(`https://vhi-jm.herokuapp.com/api/jobs`)
 		.then((res) => {
 			dispatch({
 				type: GET_JOBS,

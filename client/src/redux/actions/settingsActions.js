@@ -12,7 +12,7 @@ import { GET_ERRORS } from './../types/errorTypes';
 export const getSettings = (id) => (dispatch) => {
 	dispatch(setSettingsLoading());
 	axios
-		.get(`${process.env.API_URI}/settings/${id}`)
+		.get(`https://vhi-jm.herokuapp.com/api/settings/${id}`)
 		.then((res) => {
 			dispatch({
 				type: GET_SETTINGS,
@@ -30,7 +30,7 @@ export const getSettings = (id) => (dispatch) => {
 export const updateSettings = (data) => (dispatch) => {
 	dispatch(setSettingsLoading());
 	axios
-		.patch(`${process.env.API_URI}/settings/${data._id}`, data)
+		.patch(`https://vhi-jm.herokuapp.com/api/settings/${data._id}`, data)
 		.then((res) => {
 			dispatch({
 				type: UPDATE_SETTINGS,

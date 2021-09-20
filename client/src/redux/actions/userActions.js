@@ -15,7 +15,7 @@ import { clearErrors } from './../actions/errorActions';
 export const getUsers = () => (dispatch) => {
 	dispatch(setUsersLoading());
 	axios
-		.get(`${process.env.API_URI}/users`)
+		.get(`https://vhi-jm.herokuapp.com/api/users`)
 		.then((res) => {
 			dispatch({
 				type: GET_USERS,
@@ -33,7 +33,7 @@ export const getUsers = () => (dispatch) => {
 export const createUser = (userData) => (dispatch) => {
 	dispatch(clearErrors());
 	axios
-		.post(`${process.env.API_URI}/users`, userData)
+		.post(`https://vhi-jm.herokuapp.com/api/users`, userData)
 		.then((res) => {
 			dispatch({
 				type: CREATE_USER,
@@ -51,7 +51,7 @@ export const createUser = (userData) => (dispatch) => {
 export const activateUser = (id) => (dispatch) => {
 	dispatch(setUsersLoading());
 	axios
-		.post(`${process.env.API_URI}/users/activate`, id)
+		.post(`https://vhi-jm.herokuapp.com/api/users/activate`, id)
 		.then((res) => {
 			dispatch({
 				type: ACTIVATE_USER,

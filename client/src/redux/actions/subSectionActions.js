@@ -11,7 +11,7 @@ import { GET_ERRORS } from './../types/errorTypes';
 export const getSubSections = (id) => (dispatch) => {
 	dispatch(setSubSectionLoading());
 	axios
-		.get(`${process.env.API_URI}/subsections`)
+		.get(`https://vhi-jm.herokuapp.com/api/subsections`)
 		.then((res) => {
 			dispatch({
 				type: GET_SUBSECTIONS,

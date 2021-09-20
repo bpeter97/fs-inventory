@@ -12,7 +12,7 @@ import { GET_ERRORS } from './../types/errorTypes';
 export const getNotifications = () => (dispatch) => {
 	dispatch(setNotificationsLoading());
 	axios
-		.get(`${process.env.API_URI}/notifications`)
+		.get(`https://vhi-jm.herokuapp.com/api/notifications`)
 		.then((res) => {
 			dispatch({
 				type: GET_NOTIFICATIONS,
@@ -34,7 +34,7 @@ export const getNotifications = () => (dispatch) => {
 export const markNotificationsRead = () => (dispatch) => {
 	dispatch(setNotificationsLoading());
 	axios
-		.patch(`${process.env.API_URI}/notifications/read/`)
+		.patch(`https://vhi-jm.herokuapp.com/api/notifications/read/`)
 		.then((res) => {
 			dispatch({
 				type: MARK_NOTIFICATION_READ,

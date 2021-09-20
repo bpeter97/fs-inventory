@@ -13,7 +13,7 @@ import { SET_SUCCESS } from '../types/successTypes';
 export const getSystemSettings = () => (dispatch) => {
 	dispatch(setSystemSettingsLoading());
 	axios
-		.get(`${process.env.API_URI}/systemsettings`)
+		.get(`https://vhi-jm.herokuapp.com/api/systemsettings`)
 		.then((res) => {
 			dispatch({
 				type: GET_SYSTEM_SETTINGS,
@@ -31,7 +31,10 @@ export const getSystemSettings = () => (dispatch) => {
 export const updateSystemSettings = (data) => (dispatch) => {
 	dispatch(setSystemSettingsLoading());
 	axios
-		.patch(`${process.env.API_URI}/systemsettings/${data._id}`, data)
+		.patch(
+			`https://vhi-jm.herokuapp.com/api/systemsettings/${data._id}`,
+			data,
+		)
 		.then((res) => {
 			dispatch({
 				type: UPDATE_SYSTEM_SETTINGS,

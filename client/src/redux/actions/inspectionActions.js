@@ -11,7 +11,7 @@ import { GET_ERRORS } from './../types/errorTypes';
 export const getInspections = (id) => (dispatch) => {
 	dispatch(setInspectionsLoading());
 	axios
-		.get(`${process.env.API_URI}/inspections`)
+		.get(`https://vhi-jm.herokuapp.com/api/inspections`)
 		.then((res) => {
 			dispatch({
 				type: GET_INSPECTIONS,

@@ -12,7 +12,7 @@ import { GET_ERRORS } from '../types/errorTypes';
 export const getStatuses = (id) => (dispatch) => {
 	dispatch(setStatusLoading());
 	axios
-		.get(`${process.env.API_URI}/status`)
+		.get(`https://vhi-jm.herokuapp.com/api/status`)
 		.then((res) => {
 			dispatch({
 				type: GET_STATUSES,
@@ -30,7 +30,7 @@ export const getStatuses = (id) => (dispatch) => {
 export const createStatus = (data) => (dispatch) => {
 	dispatch(setStatusLoading());
 	axios
-		.post(`${process.env.API_URI}/status`, data)
+		.post(`https://vhi-jm.herokuapp.com/api/status`, data)
 		.then((res) => {
 			dispatch({
 				type: CREATE_STATUS,
