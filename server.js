@@ -42,14 +42,14 @@ const app = express();
 
 // app.use(express.static(path.join(__dirname, './../client/build')));
 
-if (process.env.NODE_ENV === 'production') {
-	// static folder
-	app.use(express.static(__dirname + './../client/build'));
+// if (process.env.NODE_ENV === 'production') {
+// 	// static folder
+// 	app.use(express.static(__dirname + './../client/build'));
 
-	app.get(/.*/, (req, res) =>
-		res.sendFile(__dirname + './../client/build/index.html'),
-	);
-}
+// 	app.get(/.*/, (req, res) =>
+// 		res.sendFile(__dirname + './../client/build/index.html'),
+// 	);
+// }
 
 // Middleware for body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
