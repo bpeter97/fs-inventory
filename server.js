@@ -8,21 +8,21 @@ const path = require('path');
 require('es6-object-assign').polyfill();
 
 // Require the routes
-const users = require('../server/routes/api/users');
-const login = require('../server/routes/api/login');
-const register = require('../server/routes/api/register');
-const notifications = require('../server/routes/api/notifications');
-const settings = require('../server/routes/api/settings');
+const users = require('./routes/api/users');
+const login = require('./routes/api/login');
+const register = require('./routes/api/register');
+const notifications = require('./routes/api/notifications');
+const settings = require('./routes/api/settings');
 const systemSettings = require('./routes/api/systemSettings');
-const notes = require('../server/routes/api/notes');
-const status = require('../server/routes/api/status');
-const clients = require('../server/routes/api/clients');
-const requirements = require('../server/routes/api/requirements');
-const subsections = require('../server/routes/api/subsections');
-const sections = require('../server/routes/api/sections');
-const inspections = require('../server/routes/api/inspections');
-const jobs = require('../server/routes/api/jobs');
-const calls = require('../server/routes/api/calls');
+const notes = require('./routes/api/notes');
+const status = require('./routes/api/status');
+const clients = require('./routes/api/clients');
+const requirements = require('./routes/api/requirements');
+const subsections = require('./routes/api/subsections');
+const sections = require('./routes/api/sections');
+const inspections = require('./routes/api/inspections');
+const jobs = require('./routes/api/jobs');
+const calls = require('./routes/api/calls');
 
 // middleware
 const authorization = require('./middleware/authroization');
