@@ -23,10 +23,12 @@ class Home extends React.Component {
 		super(props);
 
 		this.state = {
+			noteModal: false,
 			createCallModal: false,
 			showFilters: false,
 			deleteVerification: false,
 			deleteId: null,
+			notes: '',
 		};
 	}
 
@@ -62,6 +64,12 @@ class Home extends React.Component {
 		this.setState({
 			deleteVerification: !this.state.deleteVerification,
 			deleteId: null,
+		});
+	}
+	handleNoteModal(note) {
+		this.setState({
+			noteModal: !this.state.noteModal,
+			notes: note,
 		});
 	}
 
@@ -214,7 +222,7 @@ class Home extends React.Component {
 				Header: 'Actions',
 				id: 'edit',
 				accessor: '_id',
-				width: 150,
+				width: 200,
 				Cell: ({ value }) => (
 					<div>
 						<button
@@ -234,6 +242,22 @@ class Home extends React.Component {
 							onClick={this.deleteCall.bind(this, value)}
 						>
 							<i className="fas fa-minus-square"></i>
+						</button>
+					</div>
+				),
+			},
+			{
+				Header: 'Notes',
+				id: 'notes',
+				accessor: 'notes',
+				width: 10,
+				Cell: ({ value }) => (
+					<div>
+						<button
+							className="btn btn-primary btn-sm mx-1"
+							onClick={this.handleNoteModal.bind(this, value)}
+						>
+							<i class="fas fa-sticky-note"></i>
 						</button>
 					</div>
 				),
@@ -481,6 +505,24 @@ class Home extends React.Component {
 							onClick={this.closeCall.bind(this)}
 						>
 							Cancel
+						</button>
+					</Modal.Body>
+				</Modal>
+				<Modal show={this.state.noteModal} dialogClassName="modal-lg">
+					<Modal.Header
+						closeButton
+						onClick={() => this.handleNoteModal()}
+					>
+						<Modal.Title>Notes</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{this.state.notes}
+						<br />
+						<button
+							className="btn btn-danger mx-3 mt-5"
+							onClick={this.handleNoteModal.bind(this)}
+						>
+							Close
 						</button>
 					</Modal.Body>
 				</Modal>

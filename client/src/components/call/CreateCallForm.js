@@ -23,6 +23,7 @@ class CreateCallForm extends React.Component {
 			city: '',
 			state: 'CA',
 			zipcode: '',
+			notes: '',
 			square_foot: 0,
 			home_inspection: false,
 			crawl: false,
@@ -79,6 +80,7 @@ class CreateCallForm extends React.Component {
 			state: this.state.state,
 			zipcode: this.state.zipcode,
 			year_built: this.state.year_built,
+			notes: this.state.notes,
 			square_foot: this.state.square_foot,
 			discount: this.state.discount,
 			home_inspection: this.state.home_inspection,
@@ -663,6 +665,18 @@ class CreateCallForm extends React.Component {
 							onChange={this.onChange}
 							error={errors.quote}
 						/>
+					</div>
+				</div>
+				<div className="form-row">
+					<div className="form-group col-md-12 text-left">
+						<label for="notes">Notes</label>
+						<textarea
+							class="form-control"
+							name="notes"
+							id="notes"
+							value={this.state.notes}
+							onChange={this.onChange}
+						></textarea>
 					</div>
 				</div>
 				<div className="text-center pt-4 d-flex justify-content-between">
