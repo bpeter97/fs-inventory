@@ -81,12 +81,12 @@ mongoose
 const port = process.env.PORT || 5000;
 
 // check if production
-if (process.env.NODE_ENV === 'production') {
-	app.enable('trust proxy');
-	app.use((req, res, next) => {
-		if (req.secure) next();
-		else res.redirect(`https://'${req.headers.host}${req.url}`);
-	});
-}
+// if (process.env.NODE_ENV === 'production') {
+// 	app.enable('trust proxy');
+// 	app.use((req, res, next) => {
+// 		if (req.secure) next();
+// 		else res.redirect(`https://'${req.headers.host}${req.url}`);
+// 	});
+// }
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
