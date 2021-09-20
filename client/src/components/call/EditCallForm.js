@@ -268,8 +268,12 @@ class CreateCallForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    onDateChange = newDate => {
-        this.setState({ date: newDate });
+    onDateChange = (newDate, whichDate) => {
+        if (whichDate === "date") {
+			this.setState({ date: newDate });
+		} else if (whichDate === "follow-up") {
+			this.setState({ follow_up: newDate });
+		}
     }
 
     onFollowUpChange = newDate => {
@@ -301,7 +305,7 @@ class CreateCallForm extends React.Component {
           <div className="form-group col-md-4 text-left">
             <DateFieldGroup 
                 date={this.state.date} 
-                onChange={this.onDateChange} 
+                onChange={(e) => this.onDateChange(e, "date")} 
                 label="Call Date"
                 help="The date the call was received."
             />
@@ -309,7 +313,7 @@ class CreateCallForm extends React.Component {
           <div className="form-group col-md-4 text-left">
             <DateFieldGroup 
                 date={this.state.follow_up} 
-                onChange={this.onDateChange} 
+                onChange={(e) => this.onDateChange(e, "follow-up")} 
                 label="Follow-Up Date" 
                 help="The date to place the follow-up call."
             />
