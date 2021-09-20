@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
 // Initialize express into a variable called app
 const app = express();
 
-app.use(express.static(path.join(__dirname, './../client/build')));
+// app.use(express.static(path.join(__dirname, './../client/build')));
 
 if (process.env.NODE_ENV === 'production') {
 	// static folder
