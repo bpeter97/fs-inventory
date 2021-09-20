@@ -1,18 +1,26 @@
-import axios from 'axios';
+import axios from "axios";
 
 // import types
 import {
 	GET_SETTINGS,
 	SETTINGS_LOADING,
 	UPDATE_SETTINGS,
-} from './../types/settingsTypes';
+} from "./../types/settingsTypes";
 
-import { GET_ERRORS } from './../types/errorTypes';
+import { GET_ERRORS } from "./../types/errorTypes";
+
+var url;
+
+if (process.env.NODE_ENV === "production") {
+	url = "https://vhi-jm.herokuapp.com/api";
+} else {
+	url = "http://localhost:5000/api";
+}
 
 export const getSettings = (id) => (dispatch) => {
 	dispatch(setSettingsLoading());
 	axios
-		.get(`https://vhi-jm.herokuapp.com/api/settings/${id}`)
+		.get(`${url}/settings/${id}`)
 		.then((res) => {
 			dispatch({
 				type: GET_SETTINGS,
@@ -23,14 +31,14 @@ export const getSettings = (id) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			}),
+			})
 		);
 };
 
 export const updateSettings = (data) => (dispatch) => {
 	dispatch(setSettingsLoading());
 	axios
-		.patch(`https://vhi-jm.herokuapp.com/api/settings/${data._id}`, data)
+		.patch(`${url}/settings/${data._id}`, data)
 		.then((res) => {
 			dispatch({
 				type: UPDATE_SETTINGS,
@@ -41,7 +49,7 @@ export const updateSettings = (data) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			}),
+			})
 		);
 };
 

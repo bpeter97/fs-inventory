@@ -1,17 +1,25 @@
-import axios from 'axios';
+import axios from "axios";
 
 // import types
 import {
 	GET_SUBSECTIONS,
 	SUBSECTION_LOADING,
-} from './../types/subSectionTypes';
+} from "./../types/subSectionTypes";
 
-import { GET_ERRORS } from './../types/errorTypes';
+import { GET_ERRORS } from "./../types/errorTypes";
+
+var url;
+
+if (process.env.NODE_ENV === "production") {
+	url = "https://vhi-jm.herokuapp.com/api";
+} else {
+	url = "http://localhost:5000/api";
+}
 
 export const getSubSections = (id) => (dispatch) => {
 	dispatch(setSubSectionLoading());
 	axios
-		.get(`https://vhi-jm.herokuapp.com/api/subsections`)
+		.get(`${url}/subsections`)
 		.then((res) => {
 			dispatch({
 				type: GET_SUBSECTIONS,
@@ -22,7 +30,7 @@ export const getSubSections = (id) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			}),
+			})
 		);
 };
 

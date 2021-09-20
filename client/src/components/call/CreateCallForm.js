@@ -266,10 +266,6 @@ class CreateCallForm extends React.Component {
 		}
 	};
 
-	onFollowUpChange = (newDate) => {
-		this.setState({ follow_up: newDate });
-	};
-
 	handleChecked = (e) => {
 		const state = this.state;
 

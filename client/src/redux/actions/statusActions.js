@@ -1,18 +1,26 @@
-import axios from 'axios';
+import axios from "axios";
 
 // import types
 import {
 	GET_STATUSES,
 	CREATE_STATUS,
 	STATUS_LOADING,
-} from '../types/statusTypes';
+} from "../types/statusTypes";
 
-import { GET_ERRORS } from '../types/errorTypes';
+import { GET_ERRORS } from "../types/errorTypes";
+
+var url;
+
+if (process.env.NODE_ENV === "production") {
+	url = "https://vhi-jm.herokuapp.com/api";
+} else {
+	url = "http://localhost:5000/api";
+}
 
 export const getStatuses = (id) => (dispatch) => {
 	dispatch(setStatusLoading());
 	axios
-		.get(`https://vhi-jm.herokuapp.com/api/status`)
+		.get(`${url}/status`)
 		.then((res) => {
 			dispatch({
 				type: GET_STATUSES,
@@ -23,14 +31,14 @@ export const getStatuses = (id) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			}),
+			})
 		);
 };
 
 export const createStatus = (data) => (dispatch) => {
 	dispatch(setStatusLoading());
 	axios
-		.post(`https://vhi-jm.herokuapp.com/api/status`, data)
+		.post(`${url}/status`, data)
 		.then((res) => {
 			dispatch({
 				type: CREATE_STATUS,
@@ -41,7 +49,7 @@ export const createStatus = (data) => (dispatch) => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response.data,
-			}),
+			})
 		);
 };
 

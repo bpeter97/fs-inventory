@@ -3,39 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
-const bodyParser = require('body-parser');
-const path = require('path');
 require('es6-object-assign').polyfill();
-
-// Require the routes
-const users = require('./routes/api/users');
-const login = require('./routes/api/login');
-const register = require('./routes/api/register');
-const notifications = require('./routes/api/notifications');
-const settings = require('./routes/api/settings');
-const systemSettings = require('./routes/api/systemSettings');
-const notes = require('./routes/api/notes');
-const status = require('./routes/api/status');
-const clients = require('./routes/api/clients');
-const requirements = require('./routes/api/requirements');
-const subsections = require('./routes/api/subsections');
-const sections = require('./routes/api/sections');
-const inspections = require('./routes/api/inspections');
-const jobs = require('./routes/api/jobs');
-const calls = require('./routes/api/calls');
-
-// middleware
-const authorization = require('./middleware/authroization');
-
-// Grab the URI for the DB.
-var db;
-if (process.env.NODE_ENV === 'production') {
-	db = process.env.PROD_DB_URI;
-	console.log('Starting server in PRODUCTION environment.');
-} else {
-	db = process.env.DEV_DB_URI;
-	console.log('Starting server in DEVELOPMENT environment.');
-}
 
 // Initialize express into a variable called app
 const app = express();
@@ -49,33 +17,6 @@ if (process.env.NODE_ENV === 'production') {
 	);
 }
 
-// Middleware for body-parser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-// Assign the routes.
-app.use('/api/login', login);
-app.use('/api/register', register);
-app.use('/api/users', authorization, users);
-app.use('/api/notifications', authorization, notifications);
-app.use('/api/settings', authorization, settings);
-app.use('/api/systemsettings', authorization, systemSettings);
-app.use('/api/notes', authorization, notes);
-app.use('/api/status', authorization, status);
-app.use('/api/clients', authorization, clients);
-app.use('/api/requirements', authorization, requirements);
-app.use('/api/subsections', authorization, subsections);
-app.use('/api/sections', authorization, sections);
-app.use('/api/inspections', authorization, inspections);
-app.use('/api/jobs', authorization, jobs);
-app.use('/api/calls', authorization, calls);
-
-// Connect to the DB.
-mongoose
-	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log('DB Connected'))
-	.catch((err) => console.error('DB Error', err));
-
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
