@@ -31,7 +31,6 @@ class Home extends React.Component {
 			notes: '',
 		};
 	}
-
 	componentDidMount() {
 		this.props.getJobs();
 		this.props.getCalls();
@@ -72,7 +71,12 @@ class Home extends React.Component {
 			notes: note,
 		});
 	}
-
+	closeNoteModal() {
+		this.setState({
+			noteModal: !this.state.noteModal,
+			notes: null,
+		});
+	}
 	deleteTheCall() {
 		this.props.deleteCall(this.state.deleteId);
 		this.setState({ deleteVerification: !this.state.deleteVerification });
@@ -520,7 +524,7 @@ class Home extends React.Component {
 						<br />
 						<button
 							className="btn btn-danger mx-3 mt-5"
-							onClick={this.handleNoteModal.bind(this)}
+							onClick={this.closeNoteModal.bind(this)}
 						>
 							Close
 						</button>

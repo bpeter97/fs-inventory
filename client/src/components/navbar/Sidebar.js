@@ -1,61 +1,64 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import "./Sidebar.css";
+import './Sidebar.css';
 
 class Sidebar extends React.Component {
+	adminOption = () => {
+		return (
+			<div>
+				{/* <!-- Divider --> */}
+				<hr className="sidebar-divider my-3" />
+				<li className="nav-item">
+					<a className="nav-link" href="/admin">
+						<i className="fas fa-unlock-alt mr-2"></i>
+						Admin
+					</a>
+				</li>
+			</div>
+		);
+	};
 
-  adminOption = () => {
-    return (
-    <div>
-      {/* <!-- Divider --> */}
-      <hr className="sidebar-divider my-3" />
-      <li className="nav-item">
-      <a className="nav-link" href="/admin">
-        <i className="fas fa-unlock-alt mr-2"></i>
-          Admin
-      </a>
-      </li>
-    </div>
-    );
-  }
+	render() {
+		const { user } = this.props.auth;
 
-  render() {
-    const { user } = this.props.auth;
+		return (
+			<ul
+				className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+				id="accordionSidebar"
+			>
+				{/* <!-- Sidebar - Brand --> */}
+				<a
+					className="sidebar-brand d-flex align-items-center justify-content-center pt-5 pb-5"
+					href="/"
+				>
+					<img
+						className="sidebar-brand-icon"
+						src="/img/logosmall.png"
+						alt=""
+					/>
+				</a>
 
-    return (
-      <ul
-        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
-      >
-        {/* <!-- Sidebar - Brand --> */}
-        <a
-          className="sidebar-brand d-flex align-items-center justify-content-center pt-5 pb-5"
-          href="/"
-        >
-          <img className="sidebar-brand-icon" src="/img/logosmall.png" alt="" />
-        </a>
+				{/* <!-- Divider --> */}
+				<hr className="sidebar-divider my-0" />
 
-        {/* <!-- Divider --> */}
-        <hr className="sidebar-divider my-0" />
+				{/* <!-- Nav Item - Dashboard --> */}
+				<li className="nav-item">
+					<Link className="nav-link" key={Math.random(10)} to="/">
+						<i className="fas fa-fw fa-tachometer-alt"></i>
+						Dashboard
+					</Link>
+				</li>
 
-        {/* <!-- Nav Item - Dashboard --> */}
-        <li className="nav-item">
-          <Link className="nav-link" key={Math.random(10)} to="/">
-            <i className="fas fa-fw fa-tachometer-alt"></i>
-            Dashboard
-          </Link>
-        </li>
+				{/* <!-- Divider --> */}
+				<hr className="sidebar-divider" />
 
-        {/* <!-- Divider --> */}
-        <hr className="sidebar-divider" />
+				{/* <!-- Heading --> */}
+				<div className="sidebar-heading">Pages</div>
 
-        {/* <!-- Heading --> */}
-        <div className="sidebar-heading">Pages</div>
-
-        {/* <!-- Nav Item --> */}
-        {/* <li className="nav-item">
+				{/* <!-- Nav Item --> */}
+				{/* <li className="nav-item">
           <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
           <i className="fas fa-fw fa-cog"></i>
             <span>Products</span>
@@ -127,53 +130,131 @@ class Sidebar extends React.Component {
           </div>
         </li> */}
 
-        <li className="nav-item">
-          {/* eslint-disable-next-line */}
-          <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee" aria-expanded="true" aria-controls="collapseEmployee">
-            <i className="fa fa-fw fa-users"></i> 
-            <span>Calls</span>
-          </a>
-          <div id="collapseEmployee" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Call Pages</h6>
-              <Link className="collapse-item" key={Math.random(10)} to="/">
-                View Call Log
-              </Link>
-              <Link className="collapse-item" key={Math.random(10)} to="/calls/new">
-                Create New Call
-              </Link>
-            </div>
-          </div>
-        </li>
+				<li className="nav-item">
+					{/* eslint-disable-next-line */}
+					<a
+						className="nav-link collapsed"
+						href="#"
+						data-toggle="collapse"
+						data-target="#collapseEmployee"
+						aria-expanded="true"
+						aria-controls="collapseEmployee"
+					>
+						<i className="fa fa-fw fa-users"></i>
+						<span>Calls</span>
+					</a>
+					<div
+						id="collapseEmployee"
+						className="collapse"
+						aria-labelledby="headingUtilities"
+						data-parent="#accordionSidebar"
+					>
+						<div className="bg-white py-2 collapse-inner rounded">
+							<h6 className="collapse-header">Call Pages</h6>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/"
+							>
+								View Call Log
+							</Link>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/calls/new"
+							>
+								Create New Call
+							</Link>
+						</div>
+					</div>
+				</li>
 
-        <li className="nav-item">
-          {/* eslint-disable-next-line */}
-          <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="true" aria-controls="collapseUsers">
-            <i className="fa fa-fw fa-user"></i> 
-            <span>Users</span>
-          </a>
-          <div id="collapseUsers" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div className="bg-white py-2 collapse-inner rounded">
-              <h6 className="collapse-header">Order Pages</h6>
-              <Link className="collapse-item" key={Math.random(10)} to="/users">
-                View Users
-              </Link>
-              <Link className="collapse-item" key={Math.random(10)} to="/users/create">
-                Create User
-              </Link>
-            </div>
-          </div>
-        </li>
-      
-        {user.type === 'Admin' ? this.adminOption() : ""}
-        
-      </ul>
-    );
-  }
+				<li className="nav-item">
+					{/* eslint-disable-next-line */}
+					<a
+						className="nav-link collapsed"
+						href="#"
+						data-toggle="collapse"
+						data-target="#collapseJobs"
+						aria-expanded="true"
+						aria-controls="collapseJobs"
+					>
+						<i className="fas fa-hard-hat"></i>
+						<span>Jobs</span>
+					</a>
+					<div
+						id="collapseJobs"
+						className="collapse"
+						aria-labelledby="headingUtilities"
+						data-parent="#accordionSidebar"
+					>
+						<div className="bg-white py-2 collapse-inner rounded">
+							<h6 className="collapse-header">Job Pages</h6>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/jobs"
+							>
+								View Jobs
+							</Link>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/jobs/new"
+							>
+								Create New Job
+							</Link>
+						</div>
+					</div>
+				</li>
+
+				<li className="nav-item">
+					{/* eslint-disable-next-line */}
+					<a
+						className="nav-link collapsed"
+						href="#"
+						data-toggle="collapse"
+						data-target="#collapseUsers"
+						aria-expanded="true"
+						aria-controls="collapseUsers"
+					>
+						<i className="fa fa-fw fa-user"></i>
+						<span>Users</span>
+					</a>
+					<div
+						id="collapseUsers"
+						className="collapse"
+						aria-labelledby="headingUtilities"
+						data-parent="#accordionSidebar"
+					>
+						<div className="bg-white py-2 collapse-inner rounded">
+							<h6 className="collapse-header">User Pages</h6>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/users"
+							>
+								View Users
+							</Link>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/users/create"
+							>
+								Create User
+							</Link>
+						</div>
+					</div>
+				</li>
+
+				{user.type === 'Admin' ? this.adminOption() : ''}
+			</ul>
+		);
+	}
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+	auth: state.auth,
 });
 
 export default connect(mapStateToProps)(Sidebar);
