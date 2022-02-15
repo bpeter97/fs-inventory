@@ -1,31 +1,32 @@
-import React, { Component } from "react";
-import store from "../redux/store";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import React, { Component } from 'react';
+import store from '../redux/store';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 // import PrivateRoute from "./../components/common/PrivateRoute"
-import { ConnectedRouter as Router } from "connected-react-router";
-import PrivateRoute from "./../components/common/PrivateRoute";
+import { ConnectedRouter as Router } from 'connected-react-router';
+import PrivateRoute from './../components/common/PrivateRoute';
 
-import jwt_decode from "jwt-decode";
-import setAuthToken from "./../utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./../redux/actions/authActions";
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './../utils/setAuthToken';
+import { setCurrentUser, logoutUser } from './../redux/actions/authActions';
 
-import Sidebar from "../components/navbar/Sidebar";
-import Topbar from "../components/navbar/Topbar";
-import Footer from "../components/footer/Footer";
-import Home from "../components/home/Home";
-import Admin from "../components/admin/Admin";
-import Login from "../components/login/Login";
-import Register from "../components/registration/Register";
-import NotFound from "../components/notfound/NotFound";
-import Notifications from "../components/notifications/Notifications";
-import Settings from "../components/settings/Settings";
-import Users from "../components/users/Users";
-import CreateUser from "../components/users/CreateUser";
-import NewCall from "../components/call/NewCall";
-import EditCall from "../components/call/EditCall";
+import Sidebar from '../components/navbar/Sidebar';
+import Topbar from '../components/navbar/Topbar';
+import Footer from '../components/footer/Footer';
+import Home from '../components/home/Home';
+import Admin from '../components/admin/Admin';
+import Login from '../components/login/Login';
+import Register from '../components/registration/Register';
+import NotFound from '../components/notfound/NotFound';
+import Notifications from '../components/notifications/Notifications';
+import Settings from '../components/settings/Settings';
+import Users from '../components/users/Users';
+import CreateUser from '../components/users/CreateUser';
+import NewCall from '../components/call/NewCall';
+import EditCall from '../components/call/EditCall';
+import NewJob from '../components/jobs/NewJob';
 
-const createHistory = require("history").createBrowserHistory;
+const createHistory = require('history').createBrowserHistory;
 
 const history = createHistory({ forceRefresh: true });
 
@@ -36,7 +37,7 @@ if (localStorage.jwtToken) {
 	const currentTime = Date.now() / 1000;
 	if (decoded.exp < currentTime) {
 		store.dispatch(logoutUser());
-		window.location.href = "/login";
+		window.location.href = '/login';
 	}
 }
 
@@ -84,6 +85,11 @@ class App extends Component {
 									exact
 									path="/calls/edit"
 									component={EditCall}
+								/>
+								<PrivateRoute
+									exact
+									path="/jobs/new"
+									component={NewJob}
 								/>
 								<PrivateRoute
 									exact

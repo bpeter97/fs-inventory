@@ -52,6 +52,14 @@ class Home extends React.Component {
 		this.props.history.push(location);
 	}
 
+	createJob(id) {
+		const location = {
+			pathname: '/jobs/new',
+			state: { id: id },
+		};
+		this.props.history.push(location);
+	}
+
 	deleteCall(id) {
 		this.setState({
 			deleteVerification: !this.state.deleteVerification,
@@ -231,7 +239,7 @@ class Home extends React.Component {
 					<div>
 						<button
 							className="btn btn-success btn-sm mx-1"
-							onClick={this.deleteCall.bind(this, value)}
+							onClick={this.createJob.bind(this, value)}
 						>
 							<i className="fas fa-exchange-alt"></i>
 						</button>

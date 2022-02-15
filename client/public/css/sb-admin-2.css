@@ -10442,6 +10442,15 @@ a:focus {
 .gbr-green {
   color: #008800 !important;
 }
+.green {
+  color: #008800 !important;
+}
+.red {
+  color: red !important;
+}
+.yellow {
+  color: #ffff66 !important;
+}
 
 .vhi-purple {
   color: #582E91 !important;
