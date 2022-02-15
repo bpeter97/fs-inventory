@@ -279,7 +279,7 @@ class NewJobForm extends React.Component {
 							class="list-group-item list-group-item-action"
 						>
 							State
-							{clientPhoneCheck ? (
+							{clientStateCheck ? (
 								<i class="fas fa-check ml-2 gbr-green"></i>
 							) : (
 								<i class="fas fa-exclamation-triangle red ml-2"></i>
