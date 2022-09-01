@@ -1,15 +1,15 @@
-import * as _ from "lodash";
-// import * as bcrypt from "bcryptjs";
-import { ObjectId } from "mongodb";
+const _ = require("lodash");
+const bcrypt = require("bcryptjs");
+const { ObjectId } = require("mongodb");
 
 // Require Models
 const User = require("../../models/User");
 
 // validation files
 const validateUserInput = require("../validation/users");
-// const validateLoginInput = require("../validation/login");
+const validateLoginInput = require("../validation/login");
 
-// @route   GET api/users/
+// @route   GET api/users/2
 // @desc    Retrieves all of the users
 // @access  Private
 exports.getUsers = (req, res) => {
@@ -88,4 +88,51 @@ exports.postUser = (req, res) => {
 				.catch((err) => console.log(err));
 		}
 	});
+};
+
+// @route   POST api/users/login
+// @desc    Retrieves all of the users
+// @access  Private
+exports.loginUser = (req, res) => {
+	// Check validation
+	const { errors, is_valid } = validateLoginInput(req.body);
+
+	// send 400 error with validation errors if not valid.
+	if (!is_valid) return res.status(400).json(errors);
+
+	// declare vars
+	var body = _.pick(req.body, ["username", "password"]);
+
+	// define universal login error
+	const login_error = "Wrong username/password combination";
+
+	console.log("User tried logging in.");
+	console.log(body);
+
+	//  find the user using provided details
+	User.findOne({ username: body.username })
+		.then((user) => {
+			// if no user found, return login error
+			if (!user) {
+				errors.login = login_error;
+				return res.status(401).json(errors);
+			}
+
+			// if user found, compare passwords
+			bcrypt.compare(body.password, user.password).then((is_match) => {
+				if (is_match) {
+					if (user.approved == true) {
+						let token = user.generateAuthToken();
+						res.json({ success: true, token });
+					} else {
+						errors.login = "Your account is not approved yet.";
+						res.status(401).json(errors);
+					}
+				} else {
+					errors.login = login_error;
+					return res.status(401).json(errors);
+				}
+			});
+		})
+		.catch((e) => res.status(400).json(e));
 };

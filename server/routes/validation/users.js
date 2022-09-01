@@ -1,5 +1,5 @@
-import isEmpty from "./is-empty";
-import validator from "validator";
+const validator = require("validator");
+const isEmpty = require("./is-empty");
 
 // This validation will be used in the register route for the back end API
 module.exports = function validateUserInput(data) {

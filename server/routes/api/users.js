@@ -17,12 +17,10 @@ router.route("/").get(helpers.getUsers).post(helpers.postUser);
 // @PATCH   Updates all or part of a single users information.
 // @DELETE  Deletes a single user from the database.
 // @access  Private
-router
-	.route("/:id")
-	.get(helpers.getUser)
-	.patch(isSelfOrAdmin, helpers.patchUser)
-	.delete(isAdmin, helpers.deleteUser);
+router.route("/:id").get(helpers.getUser);
+// .patch(isSelfOrAdmin, helpers.patchUser)
+// .delete(isAdmin, helpers.deleteUser);
 
-router.route("/activate/").post(helpers.activateUser);
+// router.route("/activate/").post(helpers.activateUser);
 
 module.exports = router;

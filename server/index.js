@@ -1,15 +1,27 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from "cors";
-import * as dotenv from "dotenv";
-dotenv.config();
+require("dotenv").config();
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+// import the routes
+const users = require("../server/routes/api/users");
+const register = require("./routes/api/register");
+const login = require("./routes/api/login");
+
+// middleware
+const authorization = require("./middleware/authorization");
 
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+// Assign the routes
+app.use("/api/register", register);
+app.use("/api/login", login);
+app.use("/api/users", authorization, users);
 
 // Set the DB variable
 var db;

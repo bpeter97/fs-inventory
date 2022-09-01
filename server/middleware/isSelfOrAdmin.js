@@ -1,5 +1,5 @@
-import * as jwt_decode from "jwt-decode";
-import { ObjectId } from "mongodb";
+const jwt_decode = require("jwt-decode");
+const { ObjectId } = require("mongodb");
 
 const isSelfOrAdmin = (req, res, next) => {
 	let errors = {
