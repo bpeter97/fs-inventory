@@ -91,7 +91,7 @@
 
 ### Built With
 
-* [![DiMongodb][Mongoose.js]][Mongo-url]
+* [![MongoDB][Mongoose.js]][Mongo-url]
 * [![React][React.js]][React-url]
 * [![Vue][Vue.js]][Vue-url]
 * [![Svelte][Svelte.dev]][Svelte-url]
@@ -226,7 +226,7 @@ Project Link: [https://github.com/bpeter97/fs-inventory](https://github.com/bpet
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
 [product-screenshot]: images/screenshot.png
-[Mongoose.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Mongoose.js]: https://img.shields.io/badge/Mongoose-3FA037?style=for-the-badge&logo=MongoDB&logoColor=white
 [Mongo-url]: https://mongodb.com/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
