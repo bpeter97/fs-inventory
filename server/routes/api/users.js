@@ -21,6 +21,6 @@ router.route("/:id").get(helpers.getUser);
 // .patch(isSelfOrAdmin, helpers.patchUser)
 // .delete(isAdmin, helpers.deleteUser);
 
-// router.route("/activate/").post(helpers.activateUser);
+router.route("/activate/").post(helpers.activateUser);
 
 module.exports = router;

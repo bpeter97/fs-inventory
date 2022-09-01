@@ -9,7 +9,7 @@ const User = require("../../models/User");
 const validateUserInput = require("../validation/users");
 const validateLoginInput = require("../validation/login");
 
-// @route   GET api/users/2
+// @route   GET api/users/
 // @desc    Retrieves all of the users
 // @access  Private
 exports.getUsers = (req, res) => {
@@ -135,4 +135,81 @@ exports.loginUser = (req, res) => {
 			});
 		})
 		.catch((e) => res.status(400).json(e));
+};
+
+// @route   POST api/user/activate
+// @desc    Activates a new user.
+// @access  Private
+exports.activateUser = (req, res) => {
+	var body = _.pick(req.body, ["_id"]);
+
+	User.findById(body._id).then((user) => {
+		if (!user) {
+			return res.status(400).json({ user: "No user found" });
+		} else {
+			user.approved = true;
+			user.save().then((user) => {
+				res.send(user);
+			});
+		}
+	});
+};
+
+// @route   DELETE api/users/:id
+// @desc    Deletes a specific user
+// @access  Private
+exports.deleteUser = (req, res) => {
+	let errors = {};
+
+	if (!ObjectId.isValid(req.params.id)) {
+		errors.user = "There was no user found.";
+		return res.status(400).json(errors);
+	}
+
+	User.findByIdAndRemove(req.params.id)
+		.then((user) => {
+			if (!user) {
+				errors.user = "Unable to find and remove the user.";
+				res.status(404).json(errors);
+			}
+
+			res.json(user);
+		})
+		.catch((e) => res.status(400).send(e));
+};
+
+// @route   PATCH api/users/:id
+// @desc    Retrieves all of the users
+// @access  Private
+exports.patchUser = (req, res) => {
+	// check for validation errors
+	var { errors, is_valid } = validateUserInput(req.body);
+
+	// send 400 error with validation errors if not valid.
+	if (!is_valid) return res.status(400).json(errors);
+
+	if (!ObjectId.isValid(req.params.id)) {
+		errors.user = "There was no user found.";
+		return res.status(400).json(errors);
+	}
+
+	var update = _.pick(req.body, [
+		"username",
+		"password",
+		"first_name",
+		"last_name",
+		"suffix",
+		"email",
+		"type",
+		"approval",
+	]);
+
+	User.findByIdAndUpdate(req.params.id, update, { new: true })
+		.then((user) => {
+			if (!user) {
+				return res.json({ error: "No user was found." });
+			}
+			res.send(user);
+		})
+		.catch((e) => res.status(404).json(e));
 };
