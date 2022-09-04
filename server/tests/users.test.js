@@ -104,4 +104,152 @@ describe("USERS", () => {
 				});
 		});
 	});
+
+	describe("GET /users/:id", () => {
+		it("should get a specific user with the provided ID", (done) => {
+			request(app)
+				.get(`/api/users/${users[0]._id}`)
+				.set("Authorization", users[0].token)
+				.expect(200)
+				.expect((res) => {
+					expect(res.body._id).to.equal(users[0]._id.toHexString());
+					expect(res.body.username).to.equal(users[0].username);
+				})
+				.end(done);
+		});
+		it("should not return a user with invalid ID", (done) => {
+			request(app)
+				.get(`/api/users/${users[0]._id}ssss`)
+				.set("Authorization", users[0].token)
+				.expect(400)
+				.expect((res) => {
+					expect(res.body.user).to.equal("There was no user found");
+					expect(res.body.username).to.not.equal(users[0].username);
+				})
+				.end(done);
+		});
+	});
+
+	describe("PATCH /users/:id", () => {
+		it("should update and return a single user", (done) => {
+			users[1].approved = true;
+
+			request(app)
+				.patch(`/api/users/${users[1]._id.toHexString()}`)
+				.set("Authorization", users[0].token)
+				.send(users[1])
+				.expect(200)
+				.expect((res) => {
+					expect(res.body.username).to.equal(users[1].username);
+					expect(res.body.approved).to.equal(true);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findById(users[1]._id.toHexString())
+						.then((user) => {
+							expect(user.approved).to.equal(true);
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+
+		it("should not update and return a user with invalid ID", (done) => {
+			request(app)
+				.patch(`/api/users/${users[1]._id}ssss`)
+				.set("Authorization", users[0].token)
+				.send(users[1])
+				.expect(400)
+				.expect((res) => {
+					expect(res.body.auth).to.equal("Invalid ID");
+				})
+				.end(done);
+		});
+
+		it("should not update and return a user with validation errors", (done) => {
+			userData = {
+				firstName: "",
+				lastName: "Peter",
+				suffix: "Sr",
+				username: "blpsr",
+				password: "thePassword",
+				email: "gbr@test.com",
+				type: "Brian",
+			};
+			request(app)
+				.patch(`/api/users/${users[1]._id}`)
+				.set("Authorization", users[0].token)
+				.send(userData)
+				.expect(400)
+				.expect((res) => {
+					expect(res.body.first_name).to.equal(
+						"First name is required"
+					);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findById(users[1]._id.toHexString())
+						.then((user) => {
+							expect(user.approved).to.equal(true);
+							expect(user.first_name).to.equal("Brian");
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+	});
+
+	describe("DELETE /users/:id", () => {
+		it("should delete and return a single user", (done) => {
+			request(app)
+				.delete(`/api/users/${users[0]._id}`)
+				.set("Authorization", users[0].token)
+				.expect(200)
+				.expect((res) => {
+					expect(res.body._id).to.equal(users[0]._id.toHexString());
+					expect(res.body.username).to.equal(users[0].username);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findById(users[0]._id.toHexString())
+						.then((user) => {
+							expect(user).to.not.be.ok;
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+		it("should not delete and return a user with invalid ID", (done) => {
+			request(app)
+				.delete(`/api/users/${users[1]._id}sss`)
+				.set("Authorization", users[0].token)
+				.expect(400)
+				.expect((res) => {
+					expect(res.body.user).to.equal("There was no user found");
+					expect(res.body.username).to.not.equal(users[1].username);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findById(users[1]._id.toHexString())
+						.then((user) => {
+							expect(user).to.be.ok;
+							expect(user.username).to.equal(users[1].username);
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+	});
 });

@@ -16,7 +16,7 @@ exports.getUsers = (req, res) => {
 	User.find({})
 		.then((users) => {
 			if (!users) {
-				return res.json({ error: "No users found." });
+				return res.json({ error: "No users found" });
 			}
 			res.send(users);
 		})
@@ -30,14 +30,14 @@ exports.getUser = (req, res) => {
 	let errors = {};
 
 	if (!ObjectId.isValid(req.params.id)) {
-		errors.user = "There was no user found.";
+		errors.user = "There was no user found";
 		return res.status(400).json(errors);
 	}
 
 	User.findById(req.params.id)
 		.then((user) => {
 			if (!user) {
-				return res.json({ error: "No user was found." });
+				return res.json({ error: "No user was found" });
 			}
 			res.send(user);
 		})
@@ -121,11 +121,11 @@ exports.loginUser = (req, res) => {
 			// if user found, compare passwords
 			bcrypt.compare(body.password, user.password).then((is_match) => {
 				if (is_match) {
-					if (user.validated == true) {
+					if (user.approved == true) {
 						let token = user.generateAuthToken();
 						res.json({ success: true, token });
 					} else {
-						errors.login = "Your account is not validated yet.";
+						errors.login = "Your account is not approved yet.";
 						res.status(401).json(errors);
 					}
 				} else {
@@ -162,7 +162,7 @@ exports.deleteUser = (req, res) => {
 	let errors = {};
 
 	if (!ObjectId.isValid(req.params.id)) {
-		errors.user = "There was no user found.";
+		errors.user = "There was no user found";
 		return res.status(400).json(errors);
 	}
 
@@ -189,7 +189,7 @@ exports.patchUser = (req, res) => {
 	if (!is_valid) return res.status(400).json(errors);
 
 	if (!ObjectId.isValid(req.params.id)) {
-		errors.user = "There was no user found.";
+		errors.user = "There was no user found";
 		return res.status(400).json(errors);
 	}
 
@@ -201,7 +201,7 @@ exports.patchUser = (req, res) => {
 		"suffix",
 		"email",
 		"type",
-		"validated",
+		"approved",
 	]);
 
 	User.findByIdAndUpdate(req.params.id, update, { new: true })
