@@ -10,7 +10,7 @@ const isSelfOrAdmin = require("../../middleware/isSelfOrAdmin");
 // @route   api/users/
 // @GET     Retrieves all of the users.
 // @access  Mixed
-router.route("/").get(helpers.getUsers).post(helpers.postUser);
+router.route("/").get(helpers.getUsers).post(isAdmin, helpers.postUser);
 
 // @route   GET api/users/:id
 // @GET     Retrieves a single users information.

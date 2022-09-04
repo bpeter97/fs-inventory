@@ -28,14 +28,6 @@ module.exports = function validateUserInput(data) {
 		errors.last_name = "Last name must be between 2 and 20 characters";
 	}
 
-	// Check to see if suffix has validation errors.
-	if (
-		!validator.isEmpty(data.last_name) &&
-		!validator.isLength(data.suffix, { min: 2, max: 4 })
-	) {
-		errors.suffix = "Suffix must be between 2 and 4";
-	}
-
 	// Check to see if username has validation errors.
 	if (validator.isEmpty(data.username)) {
 		errors.username = "Username is required";

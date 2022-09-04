@@ -36,10 +36,13 @@ if (process.env.NODE_ENV === "production") {
 // Connect to the DB.
 mongoose
 	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log("DB Connected"))
+	.then(() => console.log(""))
 	.catch((err) => console.error("DB Error", err));
 
 // Set the port
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
+
+// export app for tests.
+module.exports = { app };

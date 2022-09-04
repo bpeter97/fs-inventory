@@ -121,11 +121,11 @@ exports.loginUser = (req, res) => {
 			// if user found, compare passwords
 			bcrypt.compare(body.password, user.password).then((is_match) => {
 				if (is_match) {
-					if (user.approved == true) {
+					if (user.validated == true) {
 						let token = user.generateAuthToken();
 						res.json({ success: true, token });
 					} else {
-						errors.login = "Your account is not approved yet.";
+						errors.login = "Your account is not validated yet.";
 						res.status(401).json(errors);
 					}
 				} else {
@@ -147,7 +147,7 @@ exports.activateUser = (req, res) => {
 		if (!user) {
 			return res.status(400).json({ user: "No user found" });
 		} else {
-			user.approved = true;
+			user.validated = true;
 			user.save().then((user) => {
 				res.send(user);
 			});
@@ -201,7 +201,7 @@ exports.patchUser = (req, res) => {
 		"suffix",
 		"email",
 		"type",
-		"approval",
+		"validated",
 	]);
 
 	User.findByIdAndUpdate(req.params.id, update, { new: true })

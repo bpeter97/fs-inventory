@@ -23,6 +23,7 @@ const UserSchema = new Schema({
 	},
 	suffix: {
 		type: String,
+		required: false,
 	},
 	email: {
 		type: String,
@@ -41,7 +42,6 @@ const UserSchema = new Schema({
 	},
 	date_created: {
 		type: Date,
-		required: true,
 	},
 });
 
