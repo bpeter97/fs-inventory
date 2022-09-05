@@ -18,6 +18,16 @@ var newUser = {
 	approved: false,
 };
 
+var registerUser = {
+	first_name: "jake",
+	last_name: "smith",
+	suffix: "",
+	username: "jsithinson",
+	password: "thePassword",
+	email: "jsmithinson@test.com",
+	type: "Employee",
+};
+
 describe("USERS", () => {
 	// call beforeEach() to run functions before each test.
 	beforeEach(populateUsers);
@@ -246,6 +256,139 @@ describe("USERS", () => {
 						.then((user) => {
 							expect(user).to.be.ok;
 							expect(user.username).to.equal(users[1].username);
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+	});
+
+	describe("POST /login", () => {
+		let loginUser = {
+			username: "blpj",
+			password: "thePassword",
+		};
+
+		let loginWrongUser = {
+			username: "blpj",
+			password: "thePasswordssssss",
+		};
+
+		it("should log the user into the website", (done) => {
+			request(app)
+				.post("/api/login")
+				.send(loginUser)
+				.expect(200)
+				.expect((res) => {
+					expect(res.body.success).to.equal(true);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+					done();
+				});
+		});
+
+		it("should not log the user in with an incorrect password", (done) => {
+			request(app)
+				.post("/api/login")
+				.send(loginWrongUser)
+				.expect(401)
+				.expect((res) => {
+					expect(res.body.login).to.equal(
+						"Wrong username/password combination"
+					);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+					done();
+				});
+		});
+
+		it("should not log the user in when not approved", (done) => {
+			request(app)
+				.post("/api/login")
+				.send(users[3])
+				.expect(401)
+				.expect((res) => {
+					expect(res.body.login).to.equal(
+						"Your account is not approved yet"
+					);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+					done();
+				});
+		});
+	});
+
+	describe("POST /register", () => {
+		it("should register a new user", (done) => {
+			request(app)
+				.post("/api/register")
+				.send(registerUser)
+				.expect(200)
+				.expect((res) => {
+					expect(res.body.username).to.equal(registerUser.username);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findOne({ username: registerUser.username })
+						.then((user) => {
+							expect(user).to.be.ok;
+							expect(user.first_name).to.equal(
+								registerUser.first_name
+							);
+							expect(user.password).not.to.equal(
+								registerUser.password
+							);
+							done();
+						})
+						.catch((e) => done(e));
+				});
+		});
+		it("should not register a new user with validation errors", (done) => {
+			registerUser.email = "amessedupemail";
+			registerUser.first_name = "l";
+			registerUser.last_name = "l";
+			registerUser.username = "l";
+			registerUser.password = "l";
+			request(app)
+				.post("/api/register")
+				.set("Authorization", users[0].token)
+				.send(registerUser)
+				.expect(400)
+				.expect((res) => {
+					expect(res.body.email).to.equal("Must enter a valid email");
+					expect(res.body.first_name).to.equal(
+						"First name must be between 2 and 20 characters"
+					);
+					expect(res.body.last_name).to.equal(
+						"Last name must be between 2 and 20 characters"
+					);
+					expect(res.body.username).to.equal(
+						"Username must be between 4 and 20 characters"
+					);
+					expect(res.body.password).to.equal(
+						"Password must be more than 3 characters"
+					);
+				})
+				.end((err) => {
+					if (err) {
+						return done(err);
+					}
+
+					User.findOne({ username: newUser.username })
+						.then((user) => {
+							expect(user).to.not.be.ok;
 							done();
 						})
 						.catch((e) => done(e));

@@ -106,9 +106,6 @@ exports.loginUser = (req, res) => {
 	// define universal login error
 	const login_error = "Wrong username/password combination";
 
-	console.log("User tried logging in.");
-	console.log(body);
-
 	//  find the user using provided details
 	User.findOne({ username: body.username })
 		.then((user) => {
@@ -125,7 +122,7 @@ exports.loginUser = (req, res) => {
 						let token = user.generateAuthToken();
 						res.json({ success: true, token });
 					} else {
-						errors.login = "Your account is not approved yet.";
+						errors.login = "Your account is not approved yet";
 						res.status(401).json(errors);
 					}
 				} else {

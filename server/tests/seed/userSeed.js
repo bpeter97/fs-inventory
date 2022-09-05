@@ -54,7 +54,7 @@ var users = [
 		email: "jjohnson@test.com",
 		type: "Staff",
 		date_created: new Date(),
-		approved: true,
+		approved: false,
 	},
 ];
 
