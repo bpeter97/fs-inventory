@@ -18,6 +18,14 @@ const NotificationSchema = new Schema({
 	},
 });
 
+NotificationSchema.methods.generateNote = function (desc, user) {
+	var note = this;
+	note.description = desc;
+	note.users_read.push(user._id);
+	note.created_by = user._id;
+	return this;
+};
+
 // Export the Notification model.
 module.exports = Notification = mongoose.model(
 	"notification",

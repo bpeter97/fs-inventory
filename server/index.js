@@ -8,6 +8,7 @@ const cors = require("cors");
 const users = require("../server/routes/api/users");
 const register = require("./routes/api/register");
 const login = require("./routes/api/login");
+const warehouses = require("./routes/api/warehouses");
 
 // middleware
 const authorization = require("./middleware/authorization");
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/users", authorization, users);
+app.use("/api/warehouses", authorization, warehouses);
 
 // Set the DB variable
 var db;
