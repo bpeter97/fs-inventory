@@ -2,7 +2,7 @@ const validator = require("validator");
 const isEmpty = require("./is-empty");
 
 // this function will validate the input fields for the login page
-module.exports = function validateWarehouseInput(data) {
+module.exports = function validateProgramInput(data) {
 	// initialize errors, will be returned.
 	let errors = {};
 

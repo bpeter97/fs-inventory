@@ -9,6 +9,7 @@ const users = require("../server/routes/api/users");
 const register = require("./routes/api/register");
 const login = require("./routes/api/login");
 const warehouses = require("./routes/api/warehouses");
+const programs = require("./routes/api/programs");
 
 // middleware
 const authorization = require("./middleware/authorization");
@@ -24,6 +25,7 @@ app.use("/api/register", register);
 app.use("/api/login", login);
 app.use("/api/users", authorization, users);
 app.use("/api/warehouses", authorization, warehouses);
+app.use("/api/programs", authorization, programs);
 
 // Set the DB variable
 var db;
@@ -38,7 +40,6 @@ if (process.env.NODE_ENV === "production") {
 // Connect to the DB.
 mongoose
 	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then(() => console.log(""))
 	.catch((err) => console.error("DB Error", err));
 
 // Set the port
