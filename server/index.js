@@ -10,6 +10,7 @@ const register = require("./routes/api/register");
 const login = require("./routes/api/login");
 const warehouses = require("./routes/api/warehouses");
 const programs = require("./routes/api/programs");
+const items = require("./routes/api/items");
 
 // middleware
 const authorization = require("./middleware/authorization");
@@ -26,6 +27,7 @@ app.use("/api/login", login);
 app.use("/api/users", authorization, users);
 app.use("/api/warehouses", authorization, warehouses);
 app.use("/api/programs", authorization, programs);
+app.use("/api/items", authorization, items);
 
 // Set the DB variable
 var db;
