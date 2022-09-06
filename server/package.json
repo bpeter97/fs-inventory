@@ -6,6 +6,9 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "jest --forceExit --silent",
+    "test-users": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/users.test.js --reporter mochawesome --reporter-options reportDir=tests/reports,reportFilename=users --timeout 5000 --exit",
+    "test-warehouses": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/warehouses.test.js --reporter mochawesome --reporter-options reportDir=tests/reports,reportFilename=users --timeout 5000 --exit",
+    "test-programs": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/programs.test.js --reporter mochawesome --reporter-options reportDir=tests/reports,reportFilename=users --timeout 5000 --exit",
     "test-all": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha tests/*.test.js --reporter mochawesome --reporter-options reportDir=tests/reports,reportFilename=alltests --timeout 5000 --exit"
   },
   "author": "Brian Peter Jr. <brian.lee.peter@gmail.com>",

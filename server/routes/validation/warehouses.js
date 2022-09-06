@@ -11,7 +11,7 @@ module.exports = function validateWarehouseInput(data) {
 
 	// Check to see if name has validation errors.
 	if (validator.isEmpty(data.name)) {
-		errors.name = "Name is required.";
+		errors.name = "Name is required";
 	}
 
 	// Return errors and a property called is_valid.
