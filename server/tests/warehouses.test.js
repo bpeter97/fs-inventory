@@ -3,8 +3,13 @@ const chai = require("chai");
 var expect = chai.expect;
 
 const { app } = require("./../index");
-const { populateWarehouses, warehouses } = require("./seed/warehouseSeed");
-const { populateUsers, users } = require("./seed/userSeed");
+const {
+	populateWarehouses,
+	warehouses,
+	populateUsers,
+	users,
+} = require("./seed/dbSeed");
+6;
 
 // new warehouse obejct for post
 var newWarehouse = {

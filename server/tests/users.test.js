@@ -4,7 +4,7 @@ var expect = chai.expect;
 
 const { app } = require("./../index");
 const User = require("./../models/User");
-const { populateUsers, users } = require("./seed/userSeed");
+const { populateUsers, users } = require("./seed/dbSeed");
 
 // New user object used for the register test.
 var newUser = {
