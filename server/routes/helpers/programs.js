@@ -3,8 +3,6 @@ const { ObjectId } = require("mongodb");
 
 // require model
 const Program = require("../../models/Program");
-const Notification = require("../../models/Notification");
-const User = require("../../models/User");
 
 // middleware
 const sendNote = require("../../middleware/sendNote");
