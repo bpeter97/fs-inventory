@@ -176,7 +176,7 @@ exports.deleteUser = (req, res) => {
 };
 
 // @route   PATCH api/users/:id
-// @desc    Retrieves all of the users
+// @desc    Updates a user
 // @access  Private
 exports.patchUser = (req, res) => {
 	// check for validation errors
