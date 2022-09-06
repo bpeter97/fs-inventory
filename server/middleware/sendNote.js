@@ -1,5 +1,7 @@
 const User = require("./../models/User");
 
+const Notification = require("./../models/Notification");
+
 module.exports = function sendNote(note, userToken) {
 	User.findByToken(userToken)
 		.then((user) => {
