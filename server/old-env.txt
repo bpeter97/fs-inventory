@@ -1,0 +1,4 @@
+DEV_DB_URI=mongodb+srv://fsAdmin:Brianpeter1@rlers.j9img.mongodb.net/FSDev?retryWrites=true&w=majority
+PROD_DB_URI=null
+secretKey=kjhsdfgkh32423541dsjfd
+NODE_ENV=dev

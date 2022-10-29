@@ -1,49 +1,42 @@
 {
-  "name": "gbr-im-mern",
+  "name": "family-services-warehouse",
   "version": "1.0.0",
-  "description": "GBR Inventory Management System",
-  "main": "src/server/server.js",
+  "description": "<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->\r <a name=\"readme-top\"></a>\r <!--\r *** Thanks for checking out the Best-README-Template. If you have a suggestion\r *** that would make this better, please fork the repo and create a pull request\r *** or simply open an issue with the tag \"enhancement\".\r *** Don't forget to give the project a star!\r *** Thanks again! Now go create something AMAZING! :D\r -->",
+  "main": "index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "concurrently": "^6.2.1",
-    "dotenv": "^10.0.0",
-    "es6-object-assign": "^1.1.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.20.0",
+    "concurrently": "^7.3.0",
+    "connected-react-router": "^6.9.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "history": "^4.10.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
-    "mongodb": "^4.1.1",
-    "mongoose": "^5.8.3",
-    "multer": "^1.4.3",
-    "react-table": "^7.7.0",
-    "validator": "^13.6.0"
+    "mongoose": "^6.5.4",
+    "nodemon": "^2.0.19",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
-    "cypress": "^8.3.1",
-    "nodemon": "^2.0.12",
-    "prettier": "2.3.2"
+    "mocha": "^10.0.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "server": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build",
-    "dev": "set NODE_ENV=development && concurrently \"npm run server\" \"npm run client\"",
-    "client": "npm start --prefix client",
-    "resetdb": "node cypress/support/resetdb.js",
-    "cypress:open": "cypress open --config watchForFileChanges=false",
-    "cy:record": "cypress run --record --key 89a040d4-9c6c-43b4-87b5-43fb56fb4b87",
-    "cy:open": "cypress open --config watchForFileChanges=false --browser chrome",
-    "prettier": "prettier --write **/*.{ts,js,css,html}"
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js",
+    "client": "cd client && npm run start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bpeter97/gbr-im.git"
+    "url": "git+https://github.com/bpeter97/fs-inventory.git"
   },
-  "author": "Brian L. Peter Jr",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bpeter97/gbr-im/issues"
+    "url": "https://github.com/bpeter97/fs-inventory/issues"
   },
-  "homepage": "https://github.com/bpeter97/gbr-im#readme"
+  "homepage": "https://github.com/bpeter97/fs-inventory#readme"
 }

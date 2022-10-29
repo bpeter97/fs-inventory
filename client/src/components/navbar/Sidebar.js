@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import './Sidebar.css';
+import "./Sidebar.css";
 
 class Sidebar extends React.Component {
 	adminOption = () => {
@@ -34,14 +34,14 @@ class Sidebar extends React.Component {
 					href="/"
 				>
 					<img
-						className="sidebar-brand-icon"
-						src="/img/logosmall.png"
+						className="sidebar-brand-icon mt-2"
+						src="/img/logo.jpg"
 						alt=""
 					/>
 				</a>
 
 				{/* <!-- Divider --> */}
-				<hr className="sidebar-divider my-0" />
+				<hr className="sidebar-divider my-0 mt-3" />
 
 				{/* <!-- Nav Item - Dashboard --> */}
 				<li className="nav-item">
@@ -247,7 +247,7 @@ class Sidebar extends React.Component {
 					</div>
 				</li>
 
-				{user.type === 'Admin' ? this.adminOption() : ''}
+				{user.type === "Admin" ? this.adminOption() : ""}
 			</ul>
 		);
 	}

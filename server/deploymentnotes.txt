@@ -1,0 +1,2 @@
+Change script to node index.js for the server.
+Create a .Procfile in the server (web: npm run start).

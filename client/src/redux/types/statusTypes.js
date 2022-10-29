@@ -1,3 +1,0 @@
-export const GET_STATUSES = "GET_STATUSES";
-export const CREATE_STATUS = "CREATE_STATUS";
-export const STATUS_LOADING = "STATUS_LOADING";

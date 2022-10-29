@@ -11332,14 +11332,14 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("/img/logo.png");
+  background: url("/img/logo.jpg");
   background-position: center;
   background-size: 80%;
   background-repeat: no-repeat;
 }
 
 .bg-register-image {
-  background: url("/img/gbrregister.jpg");
+  background: url("/img/logo.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -11759,3 +11759,7 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.fs-purple {
+	color: #6f42c1
+};
