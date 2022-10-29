@@ -40,7 +40,7 @@ class App extends Component {
 		return (
 			<Provider store={store}>
 				<Router history={history}>
-					<div className="row">
+					<div className="d-flex flex-row">
 						<Sidebar />
 
 						{/* <!-- Content Wrapper --> */}
