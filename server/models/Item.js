@@ -19,13 +19,18 @@ const ItemSchema = new Schema({
 		type: Boolean,
 		required: true,
 	},
+	assigned: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 	value: {
 		type: Number,
 		required: false,
 	},
 	location: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	quantity: {
 		type: Number,
@@ -42,7 +47,7 @@ const ItemSchema = new Schema({
 	},
 	warehouse: {
 		type: Schema.Types.ObjectId,
-		required: true,
+		required: false,
 		ref: "Warehouse",
 	},
 });
