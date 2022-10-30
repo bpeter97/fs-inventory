@@ -1,9 +1,11 @@
 import React from "react";
 
+import "./Breadcrumb.css";
+
 const Breadcrumb = ({ crumbs }) => {
 	return (
 		<div>
-			<ol id="body-breadcrumb" className="breadcrumb body mb-4 mr-auto">
+			<ol id="body-breadcrumb" className="breadcrumb body mr-auto">
 				{crumbs.map((crumb) => {
 					if (crumb.link) {
 						return (

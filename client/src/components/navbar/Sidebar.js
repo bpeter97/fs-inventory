@@ -11,10 +11,34 @@ class Sidebar extends React.Component {
 				{/* <!-- Divider --> */}
 				<hr className="sidebar-divider my-3" />
 				<li className="nav-item">
-					<a className="nav-link" href="/admin">
+					{/* eslint-disable-next-line */}
+					<a
+						className="nav-link collapsed"
+						href="#"
+						data-toggle="collapse"
+						data-target="#collapseAdmin"
+						aria-expanded="true"
+						aria-controls="collapseAdmin"
+					>
 						<i className="fas fa-unlock-alt mr-2"></i>
-						Admin
+						<span>Admin</span>
 					</a>
+					<div
+						id="collapseAdmin"
+						className="collapse"
+						aria-labelledby="headingUtilities"
+						data-parent="#accordionSidebar"
+					>
+						<div className="bg-white py-2 collapse-inner rounded">
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/programs"
+							>
+								Programs
+							</Link>
+						</div>
+					</div>
 				</li>
 			</div>
 		);

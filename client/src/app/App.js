@@ -14,6 +14,7 @@ import Sidebar from "../components/navbar/Sidebar";
 import Topbar from "../components/navbar/Topbar";
 import Footer from "../components/footer/Footer";
 import Home from "../components/home/Home";
+import Program from "../components/programs/Programs";
 import Login from "../components/login/Login";
 // import Register from '../components/registration/Register';
 import NotFound from "../components/notfound/NotFound";
@@ -58,6 +59,11 @@ class App extends Component {
 										exact
 										path="/login"
 										component={Login}
+									/>
+									<PrivateRoute
+										exact
+										path="/programs"
+										component={Program}
 									/>
 									{/* <Route
 				exact

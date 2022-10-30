@@ -1,0 +1,10 @@
+.breadcrumb.body {
+	border: none !important;
+	font-style: italic;
+	font-size: 14px !important;
+	padding-left: 0 !important;
+}
+
+.breadcrumb-link {
+	font-size: 14px !important;
+}
