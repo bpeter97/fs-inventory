@@ -1,4 +1,5 @@
 import axios from "axios";
+import getApiUri from "../../middleware/getApiUri";
 
 // import types
 import {
@@ -9,18 +10,10 @@ import {
 
 import { GET_ERRORS } from "./../types/errorTypes";
 
-var url;
-
-if (process.env.NODE_ENV === "production") {
-	url = "https://vhi-jm.herokuapp.com/api";
-} else {
-	url = "http://localhost:5000/api";
-}
-
 export const getNotifications = () => (dispatch) => {
 	dispatch(setNotificationsLoading());
 	axios
-		.get(`${url}/notifications`)
+		.get(`${getApiUri()}/notifications`)
 		.then((res) => {
 			dispatch({
 				type: GET_NOTIFICATIONS,
@@ -42,7 +35,7 @@ export const getNotifications = () => (dispatch) => {
 export const markNotificationsRead = () => (dispatch) => {
 	dispatch(setNotificationsLoading());
 	axios
-		.patch(`${url}/notifications/read/`)
+		.patch(`${getApiUri()}/notifications/read/`)
 		.then((res) => {
 			dispatch({
 				type: MARK_NOTIFICATION_READ,

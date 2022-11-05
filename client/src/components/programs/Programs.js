@@ -4,8 +4,14 @@ import { Button, Modal } from "react-bootstrap";
 import Breadcrumb from "./../common/Breadcrumb";
 import Spinner from "./../common/Spinner";
 import Table from "./../common/Table";
+import TextFieldGroup from "./../forms/TextFieldGroup";
 
-import { getPrograms } from "../../redux/actions/programActions";
+import {
+	getPrograms,
+	postProgram,
+	deleteProgram,
+	updateProgram,
+} from "../../redux/actions/programActions";
 
 import "./Programs.css";
 
@@ -17,6 +23,8 @@ class Program extends React.Component {
 			programModal: false,
 			deleteCheck: false,
 			programId: null,
+			programName: "",
+			createProgramModalShow: false,
 		};
 	}
 
@@ -24,17 +32,33 @@ class Program extends React.Component {
 		this.props.getPrograms();
 	}
 
-	editProgram(id) {
+	onChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
+	editProgramModal = (id) => {
+		var program = this.props.programs.list.find(
+			(element) => element._id === id
+		);
+
 		this.setState({
-			programModal: !this.state.programModal,
+			programName: program.name,
 			programId: id,
+			programModal: !this.state.programModal,
 		});
-	}
+	};
 
 	closeProgram() {
 		this.setState({
 			programModal: !this.state.programModal,
 			programId: null,
+		});
+	}
+
+	createProgramModal() {
+		this.setState({
+			createProgramModalShow: !this.state.createProgramModalShow,
+			programName: null,
 		});
 	}
 
@@ -52,13 +76,32 @@ class Program extends React.Component {
 		});
 	}
 
-	deleteProgram() {
-		console.log(this.state.programId);
+	deleteProgramModal() {
+		this.props.deleteProgram(this.state.programId);
 		this.setState({
 			deleteCheck: !this.state.deleteCheck,
 			programId: null,
 		});
+		setTimeout(() => {
+			this.props.history.push("/programs");
+		}, 1000);
 	}
+
+	onEditSubmit = (e) => {
+		e.preventDefault();
+
+		this.props.updateProgram(this.state.programId, {
+			name: this.state.programName,
+		});
+		this.props.history.push("/programs");
+	};
+
+	onNewSubmit = (e) => {
+		e.preventDefault();
+
+		this.props.postProgram({ name: this.state.programName });
+		this.props.history.push("/programs");
+	};
 
 	render() {
 		const programs = this.props.programs;
@@ -89,7 +132,7 @@ class Program extends React.Component {
 					<div>
 						<button
 							className="btn btn-warning btn-sm mx-1"
-							onClick={this.editProgram.bind(this, value)}
+							onClick={this.editProgramModal.bind(this, value)}
 						>
 							<i className="fas fa-pen-square"></i>
 						</button>
@@ -115,13 +158,12 @@ class Program extends React.Component {
 							</h1>
 						</div>
 						<div className="d-flex col justify-content-end">
-							<a
-								href="/"
+							<button
 								className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+								onClick={this.createProgramModal.bind(this)}
 							>
-								<i className="fas fa-download fa-sm text-white-50"></i>{" "}
 								New Program
-							</a>
+							</button>
 						</div>
 					</div>
 
@@ -150,15 +192,29 @@ class Program extends React.Component {
 					>
 						<Modal.Header
 							closeButton
-							onClick={() => this.closeDeleteCheckModal()}
+							onClick={() => this.closeProgram()}
 						>
 							<Modal.Title>Edit Program</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							Form Goes Here: {this.state.programId}
-							{/* <CreateCallForm
-								history={this.props.history}
-							/> */}
+							<form className="user" onSubmit={this.onEditSubmit}>
+								<TextFieldGroup
+									placeholder="Type name here..."
+									name="programName"
+									type="text"
+									label="Program Name"
+									value={this.state.programName}
+									onChange={this.onChange}
+									divClass="pb-2"
+								/>
+								<div className="text-center w-100 mt-5 mb-3">
+									<input
+										type="submit"
+										className="btn btn-primary btn-user w-50"
+										value="Save"
+									/>
+								</div>
+							</form>
 						</Modal.Body>
 					</Modal>
 
@@ -177,9 +233,9 @@ class Program extends React.Component {
 							<br />
 							<button
 								className="btn btn-success mr-3 mt-5"
-								onClick={this.deleteProgram.bind(this)}
+								onClick={this.deleteProgramModal.bind(this)}
 							>
-								Delete The Call
+								Delete The Program
 							</button>
 							<button
 								className="btn btn-danger mx-3 mt-5"
@@ -187,6 +243,38 @@ class Program extends React.Component {
 							>
 								Cancel
 							</button>
+						</Modal.Body>
+					</Modal>
+
+					<Modal
+						show={this.state.createProgramModalShow}
+						dialogClassName="modal-lg"
+					>
+						<Modal.Header
+							closeButton
+							onClick={() => this.createProgramModal()}
+						>
+							<Modal.Title>Create Program</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<form className="user" onSubmit={this.onNewSubmit}>
+								<TextFieldGroup
+									placeholder="Type name here..."
+									name="programName"
+									type="text"
+									label="Program Name"
+									value={this.state.programName}
+									onChange={this.onChange}
+									divClass="pb-2"
+								/>
+								<div className="text-center w-100 mt-5 mb-3">
+									<input
+										type="submit"
+										className="btn btn-primary btn-user w-50"
+										value="Create"
+									/>
+								</div>
+							</form>
 						</Modal.Body>
 					</Modal>
 				</div>
@@ -199,4 +287,9 @@ const mapStateToProps = (state) => ({
 	programs: state.programs,
 });
 
-export default connect(mapStateToProps, { getPrograms })(Program);
+export default connect(mapStateToProps, {
+	getPrograms,
+	postProgram,
+	deleteProgram,
+	updateProgram,
+})(Program);
