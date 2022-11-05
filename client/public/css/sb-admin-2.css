@@ -11763,3 +11763,7 @@ body.sidebar-toggled footer.sticky-footer {
 .fs-purple {
 	color: #6f42c1
 };
+
+.edit-btn {
+  color: white !important;
+}

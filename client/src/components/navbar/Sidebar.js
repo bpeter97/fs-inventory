@@ -37,6 +37,13 @@ class Sidebar extends React.Component {
 							>
 								Programs
 							</Link>
+							<Link
+								className="collapse-item"
+								key={Math.random(10)}
+								to="/warehouses"
+							>
+								Warehouses
+							</Link>
 						</div>
 					</div>
 				</li>

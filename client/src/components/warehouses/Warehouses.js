@@ -7,104 +7,104 @@ import Table from "./../common/Table";
 import TextFieldGroup from "./../forms/TextFieldGroup";
 
 import {
-	getPrograms,
-	postProgram,
-	deleteProgram,
-	updateProgram,
-} from "../../redux/actions/programActions";
+	getWarehouses,
+	postWarehouse,
+	deleteWarehouse,
+	updateWarehouse,
+} from "../../redux/actions/warehouseActions";
 
-import "./Programs.css";
+import "./Warehouses.css";
 
-class Program extends React.Component {
+class Warehouse extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			programModal: false,
+			warehouseModal: false,
 			deleteCheck: false,
-			programId: null,
-			programName: "",
-			createProgramModalShow: false,
+			warehouseId: null,
+			warehouseName: "",
+			createWarehouseModalShow: false,
 		};
 	}
 
 	componentDidMount() {
-		this.props.getPrograms();
+		this.props.getWarehouses();
 	}
 
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
 	};
 
-	editProgramModal = (id) => {
-		var program = this.props.programs.list.find(
+	editWarehouseModal = (id) => {
+		var warehouse = this.props.warehouses.list.find(
 			(element) => element._id === id
 		);
 
 		this.setState({
-			programName: program.name,
-			programId: id,
-			programModal: !this.state.programModal,
+			warehouseName: warehouse.name,
+			warehouseId: id,
+			warehouseModal: !this.state.warehouseModal,
 		});
 	};
 
-	closeProgram() {
+	closeWarehouse() {
 		this.setState({
-			programModal: !this.state.programModal,
-			programId: null,
+			warehouseModal: !this.state.warehouseModal,
+			warehouseId: null,
 		});
 	}
 
-	createProgramModal() {
+	createWarehouseModal() {
 		this.setState({
-			createProgramModalShow: !this.state.createProgramModalShow,
-			programName: null,
+			createWarehouseModalShow: !this.state.createWarehouseModalShow,
+			warehouseName: null,
 		});
 	}
 
 	deleteCheckModal(id) {
 		this.setState({
 			deleteCheck: !this.state.deleteCheck,
-			programId: id,
+			warehouseId: id,
 		});
 	}
 
 	closeDeleteCheckModal(id) {
 		this.setState({
 			deleteCheck: !this.state.deleteCheck,
-			programId: null,
+			warehouseId: null,
 		});
 	}
 
-	deleteProgramModal() {
-		this.props.deleteProgram(this.state.programId);
+	deleteWarehouseModal() {
+		this.props.deleteWarehouse(this.state.warehouseId);
 		this.setState({
 			deleteCheck: !this.state.deleteCheck,
-			programId: null,
+			warehouseId: null,
 		});
 		setTimeout(() => {
-			this.props.history.push("/programs");
+			this.props.history.push("/warehouses");
 		}, 1000);
 	}
 
 	onEditSubmit = (e) => {
 		e.preventDefault();
-
-		this.props.updateProgram(this.state.programId, {
-			name: this.state.programName,
+		//sadad
+		this.props.updateWarehouse(this.state.warehouseId, {
+			name: this.state.warehouseName,
 		});
-		this.props.history.push("/programs");
+		this.props.history.push("/warehouses");
 	};
 
 	onNewSubmit = (e) => {
 		e.preventDefault();
 
-		this.props.postProgram({ name: this.state.programName });
-		this.props.history.push("/programs");
+		this.props.postWarehouse({ name: this.state.warehouseName });
+		this.props.history.push("/warehouses");
 	};
 
 	render() {
-		const programs = this.props.programs;
+		const warehouses = this.props.warehouses;
 
 		var crumbs = [
 			{
@@ -112,14 +112,18 @@ class Program extends React.Component {
 				link: "/",
 			},
 			{
-				title: "Programs",
-				link: "/programs",
+				title: "Admin",
+				link: "#",
+			},
+			{
+				title: "Warehouses",
+				link: "/warehouses",
 			},
 		];
 
 		var columns = [
 			{
-				Header: "Program Name",
+				Header: "Warehouse Name",
 				accessor: "name",
 				width: 250,
 			},
@@ -132,7 +136,7 @@ class Program extends React.Component {
 					<div>
 						<button
 							className="btn btn-warning btn-sm mx-1 edit-btn"
-							onClick={this.editProgramModal.bind(this, value)}
+							onClick={this.editWarehouseModal.bind(this, value)}
 						>
 							<i className="fas fa-pen-square"></i>
 						</button>
@@ -152,7 +156,9 @@ class Program extends React.Component {
 				<div className="container-fluid">
 					<div className="d-sm-flex align-items-center justify-content-between">
 						<div className="col">
-							<h1 className="h3 mb-0 text-gray-800">Programs</h1>
+							<h1 className="h3 mb-0 text-gray-800">
+								Warehouses
+							</h1>
 							<h1 className="h3 mb-0 text-gray-800">
 								<Breadcrumb crumbs={crumbs} />
 							</h1>
@@ -160,9 +166,9 @@ class Program extends React.Component {
 						<div className="d-flex col justify-content-end">
 							<button
 								className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-								onClick={this.createProgramModal.bind(this)}
+								onClick={this.createWarehouseModal.bind(this)}
 							>
-								New Program
+								New Warehouses
 							</button>
 						</div>
 					</div>
@@ -171,13 +177,13 @@ class Program extends React.Component {
 						<div className="col-12">
 							<div className="card shadow mb-4">
 								<div className="card-body">
-									{this.props.programs.loading ? (
+									{this.props.warehouses.loading ? (
 										<Spinner />
 									) : (
 										<div className="table-responsive">
 											<Table
 												columns={columns}
-												data={programs.list}
+												data={warehouses.list}
 											/>
 										</div>
 									)}
@@ -187,23 +193,23 @@ class Program extends React.Component {
 					</div>
 
 					<Modal
-						show={this.state.programModal}
+						show={this.state.warehouseModal}
 						dialogClassName="modal-lg"
 					>
 						<Modal.Header
 							closeButton
-							onClick={() => this.closeProgram()}
+							onClick={() => this.closeWarehouse()}
 						>
-							<Modal.Title>Edit Program</Modal.Title>
+							<Modal.Title>Edit Warehouse</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
 							<form className="user" onSubmit={this.onEditSubmit}>
 								<TextFieldGroup
 									placeholder="Type name here..."
-									name="programName"
+									name="warehouseName"
 									type="text"
-									label="Program Name"
-									value={this.state.programName}
+									label="Warehouse Name"
+									value={this.state.warehouseName}
 									onChange={this.onChange}
 									divClass="pb-2"
 								/>
@@ -226,16 +232,16 @@ class Program extends React.Component {
 							closeButton
 							onClick={() => this.deleteCheckModal()}
 						>
-							<Modal.Title>Delete Program</Modal.Title>
+							<Modal.Title>Delete Warehouse</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							Are you sure you would like to delete the program?
+							Are you sure you would like to delete the warehouse?
 							<br />
 							<button
 								className="btn btn-success mr-3 mt-5"
-								onClick={this.deleteProgramModal.bind(this)}
+								onClick={this.deleteWarehouseModal.bind(this)}
 							>
-								Delete The Program
+								Delete The Warehouse
 							</button>
 							<button
 								className="btn btn-danger mx-3 mt-5"
@@ -247,23 +253,23 @@ class Program extends React.Component {
 					</Modal>
 
 					<Modal
-						show={this.state.createProgramModalShow}
+						show={this.state.createWarehouseModalShow}
 						dialogClassName="modal-lg"
 					>
 						<Modal.Header
 							closeButton
-							onClick={() => this.createProgramModal()}
+							onClick={() => this.createWarehouseModal()}
 						>
-							<Modal.Title>Create Program</Modal.Title>
+							<Modal.Title>Create Warehouse</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
 							<form className="user" onSubmit={this.onNewSubmit}>
 								<TextFieldGroup
 									placeholder="Type name here..."
-									name="programName"
+									name="warehouseName"
 									type="text"
-									label="Program Name"
-									value={this.state.programName}
+									label="Warehouse Name"
+									value={this.state.warehouseName}
 									onChange={this.onChange}
 									divClass="pb-2"
 								/>
@@ -284,12 +290,12 @@ class Program extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	programs: state.programs,
+	warehouses: state.warehouses,
 });
 
 export default connect(mapStateToProps, {
-	getPrograms,
-	postProgram,
-	deleteProgram,
-	updateProgram,
-})(Program);
+	getWarehouses,
+	postWarehouse,
+	deleteWarehouse,
+	updateWarehouse,
+})(Warehouse);
