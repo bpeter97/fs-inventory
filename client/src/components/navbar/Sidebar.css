@@ -18,3 +18,9 @@ a:hover {
 .nav-link {
   padding: 0.75rem 1rem !important;
 }
+
+.svg-inline--fa {
+  color: #582E91;
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}

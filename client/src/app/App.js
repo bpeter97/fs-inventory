@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-// import PrivateRoute from "./../components/common/PrivateRoute"
 import { ConnectedRouter as Router } from "connected-react-router";
 import PrivateRoute from "./../components/common/PrivateRoute";
 
@@ -21,6 +20,7 @@ import Login from "../components/login/Login";
 import NotFound from "../components/notfound/NotFound";
 // import Notifications from '../components/notifications/Notifications';
 // import Users from '../components/users/Users';
+import Items from "../components/items/Items";
 
 const createHistory = require("history").createBrowserHistory;
 
@@ -71,51 +71,56 @@ class App extends Component {
 										path="/warehouses"
 										component={Warehouse}
 									/>
+									<PrivateRoute
+										exact
+										path="/items"
+										component={Items}
+									/>
 									{/* <Route
-				exact
-				path="/register"
-				component={Register}
-			/>
-			<PrivateRoute
-				exact
-				path="/notifications"
-				component={Notifications}
-			/>
-			<PrivateRoute
-				exact
-				path="/settings"
-				component={Settings}
-			/>
-			<PrivateRoute
-				exact
-				path="/admin"
-				component={Admin}
-			/>
-			<PrivateRoute
-				exact
-				path="/calls/new"
-				component={NewCall}
-			/>
-			<PrivateRoute
-				exact
-				path="/calls/edit"
-				component={EditCall}
-			/>
-			<PrivateRoute
-				exact
-				path="/jobs/new"
-				component={NewJob}
-			/>
-			<PrivateRoute
-				exact
-				path="/users"
-				component={Users}
-			/>
-			<PrivateRoute
-				exact
-				path="/users/create"
-				component={CreateUser}
-			/> */}
+										exact
+										path="/register"
+										component={Register}
+									/>
+									<PrivateRoute
+										exact
+										path="/notifications"
+										component={Notifications}
+									/>
+									<PrivateRoute
+										exact
+										path="/settings"
+										component={Settings}
+									/>
+									<PrivateRoute
+										exact
+										path="/admin"
+										component={Admin}
+									/>
+									<PrivateRoute
+										exact
+										path="/calls/new"
+										component={NewCall}
+									/>
+									<PrivateRoute
+										exact
+										path="/calls/edit"
+										component={EditCall}
+									/>
+									<PrivateRoute
+										exact
+										path="/jobs/new"
+										component={NewJob}
+									/>
+									<PrivateRoute
+										exact
+										path="/users"
+										component={Users}
+									/>
+									<PrivateRoute
+										exact
+										path="/users/create"
+										component={CreateUser}
+									/> */}
 									<Route component={NotFound} />
 								</Switch>
 

@@ -8,9 +8,22 @@ const Warehouse = require("../../models/Warehouse");
 
 // middleware
 const sendNote = require("../../middleware/sendNote");
+const multer = require("multer");
 
 // validation files
 const validateItemInput = require("./../validation/items");
+
+// Declare file storage location
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "client/public/img/uploads");
+	},
+	filename: (req, file, cb) => {
+		cb(null, Date.now() + "-" + file.originalname);
+	},
+});
+
+const upload = multer({ storage: storage }).single("file");
 
 // @route	GET api/items/
 // @desc	Retrieves all of the items
@@ -32,44 +45,55 @@ exports.getItems = (req, res) => {
 // @desc	Creates a new item
 // @access	Private
 exports.postItem = (req, res) => {
-	// check for validation errors
-	const { errors, is_valid } = validateItemInput(req.body);
+	upload(req, res, (err) => {
+		if (err) console.log(err);
+		console.log(req.file);
+		console.log(req.body.photo);
+		console.log(req.body);
 
-	// send 400 error with validation errors if not valid.
-	if (!is_valid) return res.status(400).json(errors);
+		// check for validation errors
+		const { errors, is_valid } = validateItemInput(req.body);
 
-	var body = _.pick(req.body, [
-		"item_name",
-		"description",
-		"donation",
-		"client_access",
-		"value",
-		"location",
-		"quantity",
-		"photo",
-		"program",
-		"warehouse",
-	]);
+		// send 400 error with validation errors if not valid.
+		if (!is_valid) return res.status(400).json(errors);
 
-	new Item(body)
-		.save()
-		.then((item) => {
-			// check if it didn't save
-			if (!item) {
-				errors.item = "Unable to create the new item";
-				return res.status(400).json(errors);
-			}
+		var body = _.pick(req.body, [
+			"item_name",
+			"description",
+			"donation",
+			"client_access",
+			"value",
+			"location",
+			"quantity",
+			"photo",
+			"program",
+			"warehouse",
+		]);
 
-			// create notification
-			sendNote(
-				`A item has been created: ${item.item_name}`,
-				req.headers.authorization
-			);
+		if (req.file) {
+			body.photo = req.file.filename;
+		}
 
-			// send the item
-			res.send(item);
-		})
-		.catch((err) => console.log(err));
+		new Item(body)
+			.save()
+			.then((item) => {
+				// check if it didn't save
+				if (!item) {
+					errors.item = "Unable to create the new item";
+					return res.status(400).json(errors);
+				}
+
+				// create notification
+				sendNote(
+					`A item has been created: ${item.item_name}`,
+					req.headers.authorization
+				);
+
+				// send the item
+				res.send(item);
+			})
+			.catch((err) => console.log(err));
+	});
 };
 
 // @route	GET api/items/:id

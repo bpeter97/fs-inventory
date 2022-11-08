@@ -24,6 +24,11 @@ const ItemSchema = new Schema({
 		required: false,
 		default: false,
 	},
+	fixed_asset: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 	value: {
 		type: Number,
 		required: false,

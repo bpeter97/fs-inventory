@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBoxesStacked } from "@fortawesome/free-solid-svg-icons";
 
 import "./Sidebar.css";
 
@@ -171,8 +173,8 @@ class Sidebar extends React.Component {
 						aria-expanded="true"
 						aria-controls="collapseEmployee"
 					>
-						<i className="fa fa-fw fa-users"></i>
-						<span>Calls</span>
+						<FontAwesomeIcon icon={faBoxesStacked} />
+						<span>Items</span>
 					</a>
 					<div
 						id="collapseEmployee"
@@ -181,99 +183,21 @@ class Sidebar extends React.Component {
 						data-parent="#accordionSidebar"
 					>
 						<div className="bg-white py-2 collapse-inner rounded">
-							<h6 className="collapse-header">Call Pages</h6>
+							<h6 className="collapse-header">Items</h6>
 							<Link
 								className="collapse-item"
 								key={Math.random(10)}
-								to="/"
+								to="/items"
 							>
-								View Call Log
+								View All Items
 							</Link>
-							<Link
+							{/* <Link
 								className="collapse-item"
 								key={Math.random(10)}
 								to="/calls/new"
 							>
 								Create New Call
-							</Link>
-						</div>
-					</div>
-				</li>
-
-				<li className="nav-item">
-					{/* eslint-disable-next-line */}
-					<a
-						className="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#collapseJobs"
-						aria-expanded="true"
-						aria-controls="collapseJobs"
-					>
-						<i className="fas fa-hard-hat"></i>
-						<span>Jobs</span>
-					</a>
-					<div
-						id="collapseJobs"
-						className="collapse"
-						aria-labelledby="headingUtilities"
-						data-parent="#accordionSidebar"
-					>
-						<div className="bg-white py-2 collapse-inner rounded">
-							<h6 className="collapse-header">Job Pages</h6>
-							<Link
-								className="collapse-item"
-								key={Math.random(10)}
-								to="/jobs"
-							>
-								View Jobs
-							</Link>
-							<Link
-								className="collapse-item"
-								key={Math.random(10)}
-								to="/jobs/new"
-							>
-								Create New Job
-							</Link>
-						</div>
-					</div>
-				</li>
-
-				<li className="nav-item">
-					{/* eslint-disable-next-line */}
-					<a
-						className="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#collapseUsers"
-						aria-expanded="true"
-						aria-controls="collapseUsers"
-					>
-						<i className="fa fa-fw fa-user"></i>
-						<span>Users</span>
-					</a>
-					<div
-						id="collapseUsers"
-						className="collapse"
-						aria-labelledby="headingUtilities"
-						data-parent="#accordionSidebar"
-					>
-						<div className="bg-white py-2 collapse-inner rounded">
-							<h6 className="collapse-header">User Pages</h6>
-							<Link
-								className="collapse-item"
-								key={Math.random(10)}
-								to="/users"
-							>
-								View Users
-							</Link>
-							<Link
-								className="collapse-item"
-								key={Math.random(10)}
-								to="/users/create"
-							>
-								Create User
-							</Link>
+							</Link> */}
 						</div>
 					</div>
 				</li>

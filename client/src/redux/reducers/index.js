@@ -6,6 +6,7 @@ import notificationReducer from "./notificationReducer";
 import errorReducer from "./errorReducer";
 import programReducer from "./programReducer";
 import warehouseReducer from "./warehouseReducer";
+import itemReducer from "./itemReducer";
 
 const rootReducer = (history) =>
 	combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = (history) =>
 		notifications: notificationReducer,
 		programs: programReducer,
 		warehouses: warehouseReducer,
+		items: itemReducer,
 	});
 
 export default rootReducer;

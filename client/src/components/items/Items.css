@@ -1,0 +1,15 @@
+.table th {
+	text-align: center !important;
+}
+
+.table td {
+	vertical-align: middle !important;
+}
+
+#pictureInput {
+	text-align: center !important;
+}
+
+.form-control-file {
+	width: auto !important;
+}
