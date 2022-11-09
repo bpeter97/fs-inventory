@@ -22,6 +22,32 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+// const multer = require("multer");
+
+// Declare file storage location
+// const storage = multer.diskStorage({
+// 	destination: "./client/public/img/uploads",
+// 	filename: function (req, file, callback) {
+// 		console.log("this is the storage");
+// 		callback(
+// 			null,
+// 			file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+// 		);
+// 	},
+// });
+
+// const fileFilter = (req, file, callback) => {
+// 	let pattern = /jpg|png|svg/;
+// 	console.log("this is the filter");
+// 	if (pattern.test(path.extname(file.originalname))) {
+// 		callback(null, true);
+// 	} else {
+// 		callback("Error: not a valid file");
+// 	}
+// };
+
+// const upload = multer({ storage: storage, fileFilter });
+
 // Assign the routes
 app.use("/api/register", register);
 app.use("/api/login", login);

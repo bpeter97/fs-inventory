@@ -95,8 +95,21 @@ class Items extends React.Component {
 	onNewSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(this.state.newItem);
-		this.props.postItem(this.state.newItem);
+		var formData = new FormData();
+		formData.append("item_name", this.state.newItem.item_name);
+		formData.append("assigned", this.state.newItem.assigned);
+		formData.append("fixed_asset", this.state.newItem.fixed_asset);
+		formData.append("description", this.state.newItem.description);
+		formData.append("donation", this.state.newItem.donation);
+		formData.append("client_access", this.state.newItem.client_access);
+		formData.append("value", this.state.newItem.value);
+		formData.append("location", this.state.newItem.location);
+		formData.append("quantity", this.state.newItem.quantity);
+		formData.append("photo", this.state.newItem.photo);
+		formData.append("program", this.state.newItem.program);
+		formData.append("warehouse", this.state.newItem.warehouse);
+
+		this.props.postItem(formData);
 		this.props.history.push("/items");
 	};
 
@@ -151,11 +164,14 @@ class Items extends React.Component {
 				Cell: ({ value }) =>
 					value ? (
 						<div className="text-center">
-							<img src={`${value}`}></img>
+							<img
+								alt="description"
+								src={`/img/uploads/${value}`}
+							></img>
 						</div>
 					) : (
 						<div className="text-center">
-							<img src={`/img/noIMG.png`}></img>
+							<img alt="description" src={`/img/noIMG.png`}></img>
 						</div>
 					),
 			},
@@ -319,13 +335,15 @@ class Items extends React.Component {
 						<Modal.Title>Create Item</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<form className="user" onSubmit={this.onNewSubmit}>
+						<form
+							encType="multipart/form-data"
+							className="user"
+							onSubmit={this.onNewSubmit}
+						>
 							<ListGroup>
 								<ListGroupItem>
 									<FormGroup>
-										<Label for="newItemPhoto">
-											Item Photo
-										</Label>
+										<Label for="photo">Item Photo</Label>
 										<div
 											className="text-center"
 											id="pictureInput"
@@ -350,7 +368,6 @@ class Items extends React.Component {
 											<Input
 												type="file"
 												name="photo"
-												id="newItemPhoto"
 												divClass="mb-2 text-center"
 												onChange={
 													this.handleNewItemPhoto
