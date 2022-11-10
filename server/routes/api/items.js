@@ -44,7 +44,7 @@ router
 router
 	.route("/:id")
 	.get(helpers.getItem)
-	.patch(helpers.patchItem)
+	.patch(upload.single("photo"), helpers.patchItem)
 	.delete(helpers.deleteItem);
 
 module.exports = router;

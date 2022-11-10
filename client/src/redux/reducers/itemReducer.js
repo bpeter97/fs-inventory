@@ -1,7 +1,8 @@
-import { GET_ITEMS, ITEMS_LOADING } from "./../types/itemTypes";
+import { GET_ITEMS, ITEMS_LOADING, GET_ITEM } from "./../types/itemTypes";
 
 const initialState = {
 	list: [],
+	item: {},
 	loading: false,
 };
 
@@ -16,6 +17,12 @@ const itemReducer = function (state = initialState, action) {
 			return {
 				...state,
 				list: action.payload,
+				loading: false,
+			};
+		case GET_ITEM:
+			return {
+				...state,
+				item: action.payload,
 				loading: false,
 			};
 		default:

@@ -156,6 +156,14 @@ exports.patchItem = (req, res) => {
 		"warehouse",
 	]);
 
+	if (req.body.photo) {
+		update.photo = req.body.photo;
+	} else {
+		if (req.file) {
+			update.photo = req.file.filename;
+		}
+	}
+
 	// update the item
 	Item.findByIdAndUpdate(req.params.id, update, { new: true })
 		.then((item) => {
