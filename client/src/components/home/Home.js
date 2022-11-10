@@ -17,6 +17,10 @@ import { connect } from "react-redux";
 // import { Button, Modal } from "react-bootstrap";
 import Breadcrumb from "./../common/Breadcrumb";
 
+import { getPrograms } from "../../redux/actions/programActions";
+import { getWarehouses } from "../../redux/actions/warehouseActions";
+import { getItems } from "../../redux/actions/itemActions";
+
 import "./Home.css";
 
 class Home extends React.Component {
@@ -33,79 +37,55 @@ class Home extends React.Component {
 		};
 	}
 	componentDidMount() {
-		// this.props.getJobs();
-		// this.props.getCalls();
+		this.props.getPrograms();
+		this.props.getWarehouses();
+		this.props.getItems();
 	}
 
 	render() {
-		const itemsPerDept = [
-			{
-				name: "Admin",
-				Used: 4000,
-				Unassigned: 2400,
-				amt: 2400,
-			},
-			{
-				name: "CE",
-				Used: 3000,
-				Unassigned: 1398,
-				amt: 2210,
-			},
-			{
-				name: "IHP",
-				Used: 2000,
-				Unassigned: 9800,
-				amt: 2290,
-			},
-			{
-				name: "SHP",
-				Used: 2780,
-				Unassigned: 3908,
-				amt: 2000,
-			},
-			{
-				name: "Facilities",
-				Used: 1890,
-				Unassigned: 4800,
-				amt: 2181,
-			},
-			{
-				name: "Finance",
-				Used: 2390,
-				Unassigned: 3800,
-				amt: 2500,
-			},
-			{
-				name: "Conf. Room",
-				Used: 3490,
-				Unassigned: 4300,
-				amt: 2100,
-			},
-			{
-				name: "Barn Room",
-				Used: 1543,
-				Unassigned: 2750,
-				amt: 2100,
-			},
-			{
-				name: "Fac. Shop",
-				Used: 4600,
-				Unassigned: 2100,
-				amt: 2100,
-			},
-			{
-				name: "746 WH",
-				Used: 1600,
-				Unassigned: 4100,
-				amt: 2100,
-			},
-			{
-				name: "748 WH",
-				Used: 3490,
-				Unassigned: 4300,
-				amt: 2100,
-			},
-		];
+		const items = this.props.items;
+		const programs = this.props.programs;
+
+		const totalAssigned = items.list.filter((item) => {
+			if (item.assigned === true) {
+				return true;
+			}
+			return false;
+		}).length;
+
+		const totalUnassigned = items.list.filter((item) => {
+			if (item.assigned === false) {
+				return true;
+			}
+			return false;
+		}).length;
+
+		const percentageOfAssigned = totalAssigned / items.list.length;
+
+		const itemsPer = programs.list.map((program) => {
+			let totalCount = items.list.filter((item) => {
+				if (item.program._id === program._id) {
+					return true;
+				}
+				return false;
+			}).length;
+
+			let assignedCount = items.list.filter((item) => {
+				if (item.program._id === program._id) {
+					if (item.assigned === true) {
+						return true;
+					}
+				}
+				return false;
+			}).length;
+
+			return {
+				name: program.name,
+				Used: assignedCount,
+				Unassigned: totalCount - assignedCount,
+				amt: totalCount,
+			};
+		});
 
 		const totalItemsPerDept = [
 			{
@@ -196,10 +176,10 @@ class Home extends React.Component {
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
 											<div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												Earnings (Monthly)
+												Some cool statistic
 											</div>
 											<div className="h5 mb-0 font-weight-bold text-gray-800">
-												$40,000
+												Some great number here..
 											</div>
 										</div>
 										<div className="col-auto">
@@ -216,10 +196,10 @@ class Home extends React.Component {
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
 											<div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-												Earnings (Annual)
+												Some cool statistic
 											</div>
 											<div className="h5 mb-0 font-weight-bold text-gray-800">
-												$215,000
+												Some great number here..
 											</div>
 										</div>
 										<div className="col-auto">
@@ -236,12 +216,14 @@ class Home extends React.Component {
 									<div className="row no-gutters align-items-center">
 										<div className="col mr-2">
 											<div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-												Tasks
+												Items Assigned vs. Unassigned
 											</div>
 											<div className="row no-gutters align-items-center">
 												<div className="col-auto">
 													<div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-														50%
+														{percentageOfAssigned *
+															100}
+														%
 													</div>
 												</div>
 												<div className="col">
@@ -250,7 +232,10 @@ class Home extends React.Component {
 															className="progress-bar bg-info"
 															role="progressbar"
 															style={{
-																width: "50%",
+																width: `${
+																	percentageOfAssigned *
+																	100
+																}%`,
 															}}
 															aria-valuenow="50"
 															aria-valuemin="0"
@@ -294,7 +279,7 @@ class Home extends React.Component {
 							<div className="card shadow mb-4">
 								<div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 									<h6 className="m-0 font-weight-bold text-primary">
-										Earnings Overview
+										Program Inventory
 									</h6>
 									<div className="dropdown no-arrow">
 										<a
@@ -346,7 +331,7 @@ class Home extends React.Component {
 											<BarChart
 												// width={1000}
 												// height={500}
-												data={itemsPerDept}
+												data={itemsPer}
 												margin={{
 													top: 20,
 													right: 30,
@@ -434,7 +419,7 @@ class Home extends React.Component {
 											<BarChart
 												// width={1000}
 												// height={500}
-												data={itemsPerDept}
+												data={itemsPer}
 												margin={{
 													top: 20,
 													right: 30,
@@ -788,6 +773,14 @@ class Home extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	items: state.items,
+	warehouses: state.warehouses,
+	programs: state.programs,
+});
 
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, {
+	getItems,
+	getPrograms,
+	getWarehouses,
+})(Home);
